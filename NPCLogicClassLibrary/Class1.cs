@@ -8,9 +8,5 @@ namespace NPCLogicClassLibrary
 {
     public class Class1
     {
-        void KEK()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

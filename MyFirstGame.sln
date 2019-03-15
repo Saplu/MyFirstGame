@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstGame", "Combat\MyFirstGame.csproj", "{07E02095-28D3-4C4A-9019-94A47CFCDAA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbilityClassLibrary", "AbilityClassLibrary\AbilityClassLibrary.csproj", "{1B8188B8-8582-4107-8C0F-A0E3E24C9076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombatLogicClassLibrary", "CombatLogicClassLibrary\CombatLogicClassLibrary.csproj", "{63871ECC-B299-4F61-BFC7-77571CB3A7F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCLogicClassLibrary", "NPCLogicClassLibrary\NPCLogicClassLibrary.csproj", "{DCB7B502-194F-4BFF-AB67-529A2764BF0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionClassLibrary", "MissionClassLibrary\MissionClassLibrary.csproj", "{8BFD2F25-A6B9-42EB-8DD9-565032B6707D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterClassLibrary", "CharacterClassLibrary\CharacterClassLibrary.csproj", "{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07E02095-28D3-4C4A-9019-94A47CFCDAA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E02095-28D3-4C4A-9019-94A47CFCDAA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E02095-28D3-4C4A-9019-94A47CFCDAA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E02095-28D3-4C4A-9019-94A47CFCDAA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B8188B8-8582-4107-8C0F-A0E3E24C9076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B8188B8-8582-4107-8C0F-A0E3E24C9076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B8188B8-8582-4107-8C0F-A0E3E24C9076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B8188B8-8582-4107-8C0F-A0E3E24C9076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63871ECC-B299-4F61-BFC7-77571CB3A7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63871ECC-B299-4F61-BFC7-77571CB3A7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63871ECC-B299-4F61-BFC7-77571CB3A7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63871ECC-B299-4F61-BFC7-77571CB3A7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCB7B502-194F-4BFF-AB67-529A2764BF0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB7B502-194F-4BFF-AB67-529A2764BF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB7B502-194F-4BFF-AB67-529A2764BF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB7B502-194F-4BFF-AB67-529A2764BF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BFD2F25-A6B9-42EB-8DD9-565032B6707D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BFD2F25-A6B9-42EB-8DD9-565032B6707D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BFD2F25-A6B9-42EB-8DD9-565032B6707D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BFD2F25-A6B9-42EB-8DD9-565032B6707D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEBCB252-9F43-4C40-962E-32974B911461}
+	EndGlobalSection
+EndGlobal

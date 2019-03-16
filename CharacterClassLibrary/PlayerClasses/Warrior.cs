@@ -27,10 +27,10 @@ namespace CharacterClassLibrary.PlayerClasses
             { Enums.ItemType.Cloth, Enums.ItemType.Leather, Enums.ItemType.Mail, Enums.ItemType.Plate };
         }
 
-        private int attack(Random random)
+        private int attack()
         {
             var attack = new Attack();
-            return attack.Action(Strength, Crit, 1, 0, random);
+            return attack.Action(Strength, Crit, 1, 0);
         }
 
         public override string[] Ability1()
@@ -39,10 +39,10 @@ namespace CharacterClassLibrary.PlayerClasses
             return attack.Info();
         }
 
-        private int viciousBlow(Random random)
+        private int viciousBlow()
         {
             var vicious = new ViciousBlow();
-            return vicious.Action(Strength, 1, 0, random);
+            return vicious.Action(Strength, 1, 0);
         }
 
         public override string[] Ability2()
@@ -71,12 +71,12 @@ namespace CharacterClassLibrary.PlayerClasses
             else Health -= 1;
         }
 
-        public override int UseAbility(string id, Random random)
+        public override int UseAbility(string id)
         {
             if (id == "Attack")
-                return attack(random);
+                return attack();
             else if (id == "Vicious Blow")
-                return viciousBlow(random);
+                return viciousBlow();
             else return 1;
         }
     }

@@ -10,6 +10,6 @@ namespace CharacterClassLibrary
     public abstract class NPC : Character
     {
         public abstract void Defend(int incomingDmg);
-        public abstract int UseAbility(Random random);
+        public abstract int UseAbility();
     }
 }

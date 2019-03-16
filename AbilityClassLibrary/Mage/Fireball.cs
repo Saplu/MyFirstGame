@@ -15,10 +15,10 @@ namespace AbilityClassLibrary.Mage
             Description = "Create hot matter out of nowhere to burn your enemy.";
         }
 
-        public int Action(int spellpower, int crit, double multiplier, int increase, Random random)
+        public int Action(int spellpower, int crit, double multiplier, int increase)
         {
             var dmg = spellpower * 2;
-            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase, random);
+            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);
         }
     }
 }

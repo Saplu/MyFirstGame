@@ -36,7 +36,7 @@ namespace CharacterClassLibrary
         public abstract string[] Ability2();
         public abstract string[] Ability3();
         public abstract string[] Ability4();
-        public abstract int UseAbility(string id, Random random);
+        public abstract int UseAbility(string id);
         public abstract void Defend(int incomingDmg);
     }
 }

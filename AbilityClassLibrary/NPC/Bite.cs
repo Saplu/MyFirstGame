@@ -15,10 +15,10 @@ namespace AbilityClassLibrary.NPC
             Description = "Bites off a chunk of his enemys flesh. Tiny bit.";
         }
 
-        public int Action(int strength, int crit, double multiplier, int increase, Random random)
+        public int Action(int strength, int crit, double multiplier, int increase)
         {
             var dmg = 3 + strength;
-            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase, random);
+            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);
         }
     }
 }

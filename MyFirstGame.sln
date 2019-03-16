@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionClassLibrary", "Miss
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterClassLibrary", "CharacterClassLibrary\CharacterClassLibrary.csproj", "{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{DA291744-F047-4825-A63E-139EF62161F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{2F323D45-2668-416F-8756-02372BE8E5EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF0C105B-EA2E-410F-9F7A-E1CE08C0C35E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA291744-F047-4825-A63E-139EF62161F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA291744-F047-4825-A63E-139EF62161F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA291744-F047-4825-A63E-139EF62161F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA291744-F047-4825-A63E-139EF62161F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F323D45-2668-416F-8756-02372BE8E5EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F323D45-2668-416F-8756-02372BE8E5EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F323D45-2668-416F-8756-02372BE8E5EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F323D45-2668-416F-8756-02372BE8E5EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

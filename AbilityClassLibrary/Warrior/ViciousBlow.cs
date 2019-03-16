@@ -15,10 +15,10 @@ namespace AbilityClassLibrary.Warrior
             Description = "Devastating attack, that is quaranteed to crit.";
         }
 
-        public int Action(int strength, double multiplier, int increase, Random random)
+        public int Action(int strength, double multiplier, int increase)
         {
             var dmg = Convert.ToInt32(strength * 1.5);
-            return AttackLogic.CalculateAttackDamage(dmg, 100, 1, 0, random);
+            return AttackLogic.CalculateAttackDamage(dmg, 100, 1, 0);
         }
     }
 }

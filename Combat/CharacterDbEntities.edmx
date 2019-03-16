@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CharacterDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CharacterDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,6 +19,21 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Place" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="foe1Class" Type="int" Nullable="false" />
+          <Property Name="foe1Level" Type="int" Nullable="false" />
+          <Property Name="foe2Class" Type="int" />
+          <Property Name="foe2Level" Type="int" />
+          <Property Name="foe3Class" Type="int" />
+          <Property Name="foe3Level" Type="int" />
+          <Property Name="foe4Class" Type="int" />
+          <Property Name="foe4Level" Type="int" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -36,10 +51,10 @@
         </EntityType>
         <EntityContainer Name="CharacterDbModelStoreContainer">
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mission" EntityType="Self.Mission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CharacterDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -75,7 +90,23 @@
         <EntityContainer Name="CharacterDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Item" EntityType="Self.Item" />
           <EntitySet Name="Player" EntityType="Self.Player" />
+          <EntitySet Name="Mission" EntityType="CharacterDbModel.Mission" />
         </EntityContainer>
+        <EntityType Name="Mission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="foe1Class" Type="Int32" Nullable="false" />
+          <Property Name="foe1Level" Type="Int32" Nullable="false" />
+          <Property Name="foe2Class" Type="Int32" />
+          <Property Name="foe2Level" Type="Int32" />
+          <Property Name="foe3Class" Type="Int32" />
+          <Property Name="foe3Level" Type="Int32" />
+          <Property Name="foe4Class" Type="Int32" />
+          <Property Name="foe4Level" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -110,6 +141,22 @@
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Xp" ColumnName="Xp" />
                 <ScalarProperty Name="Class" ColumnName="Class" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mission">
+            <EntityTypeMapping TypeName="CharacterDbModel.Mission">
+              <MappingFragment StoreEntitySet="Mission">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="foe4Level" ColumnName="foe4Level" />
+                <ScalarProperty Name="foe4Class" ColumnName="foe4Class" />
+                <ScalarProperty Name="foe3Level" ColumnName="foe3Level" />
+                <ScalarProperty Name="foe3Class" ColumnName="foe3Class" />
+                <ScalarProperty Name="foe2Level" ColumnName="foe2Level" />
+                <ScalarProperty Name="foe2Class" ColumnName="foe2Class" />
+                <ScalarProperty Name="foe1Level" ColumnName="foe1Level" />
+                <ScalarProperty Name="foe1Class" ColumnName="foe1Class" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

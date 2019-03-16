@@ -80,5 +80,10 @@ namespace CharacterClassLibrary.PlayerClasses
                 return viciousBlow();
             else return 1;
         }
+
+        public override string setPic()
+        {
+            return "Pictures\\ninja.jpg";
+        }
     }
 }

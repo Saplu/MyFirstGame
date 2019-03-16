@@ -7,6 +7,7 @@
       <Diagram DiagramId="f797cb41a87348a5ac7a73d946448358" Name="Diagram1">
         <EntityTypeShape EntityType="CharacterDbModel.Item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CharacterDbModel.Player" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CharacterDbModel.Mission" Width="1.5" PointX="4.5" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

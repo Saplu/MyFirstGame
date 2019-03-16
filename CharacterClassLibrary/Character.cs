@@ -26,5 +26,12 @@ namespace CharacterClassLibrary
         public int Level { get => level; set => level = value; }
         public int MaxHealth { get => maxHealth; set => maxHealth = value; }
         public bool Alive { get => alive; set => alive = value; }
+
+        public abstract string setPic();
+
+        public override string ToString()
+        {
+            return "Health: " + health;
+        }
     }
 }

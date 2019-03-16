@@ -13,9 +13,9 @@
 &nbsp;
             <asp:ImageButton ID="enemy2ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" OnClick="enemy2ImageButton_Click" />
 &nbsp;
-            <asp:ImageButton ID="enemy3ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" Visible="False" />
+            <asp:ImageButton ID="enemy3ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" OnClick="enemy3ImageButton_Click" />
 &nbsp;
-            <asp:ImageButton ID="enemy4ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" Visible="False" />
+            <asp:ImageButton ID="enemy4ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" OnClick="enemy4ImageButton_Click" />
             <br />
             <asp:Label ID="enemy1Label" runat="server"></asp:Label>
 &nbsp;
@@ -30,9 +30,9 @@
 &nbsp;
             <asp:ImageButton ID="player2ImageButton" runat="server" Height="100px" Width="100px" OnClick="player2ImageButton_Click" />
 &nbsp;
-            <asp:ImageButton ID="player3ImageButton" runat="server" Height="100px" Width="100px" Visible="False" />
+            <asp:ImageButton ID="player3ImageButton" runat="server" Height="100px" Width="100px" OnClick="player3ImageButton_Click" />
 &nbsp;
-            <asp:ImageButton ID="player4ImageButton" runat="server" Height="100px" Width="100px" Visible="False" />
+            <asp:ImageButton ID="player4ImageButton" runat="server" Height="100px" Width="100px" OnClick="player4ImageButton_Click" />
             <br />
             <asp:Label ID="player1Label" runat="server"></asp:Label>
 &nbsp;

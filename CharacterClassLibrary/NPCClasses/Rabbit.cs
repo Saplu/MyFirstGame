@@ -49,5 +49,10 @@ namespace CharacterClassLibrary.NPCClasses
                 return kick();
             else return bite();
         }
+
+        public override string setPic()
+        {
+            return "Pictures\\Pasi.jpg";
+        }
     }
 }

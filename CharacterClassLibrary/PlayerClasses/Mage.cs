@@ -79,5 +79,10 @@ namespace CharacterClassLibrary.PlayerClasses
                 return fireWithin();
             else return 1;
         }
+
+        public override string setPic()
+        {
+            return "Pictures\\welho.jpg";
+        }
     }
 }

@@ -27,5 +27,6 @@ namespace Combat
     
         public virtual DbSet<Item> Item { get; set; }
         public virtual DbSet<Player> Player { get; set; }
+        public virtual DbSet<Mission> Mission { get; set; }
     }
 }

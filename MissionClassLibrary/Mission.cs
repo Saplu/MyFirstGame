@@ -31,6 +31,7 @@ namespace MissionClassLibrary
             {
                 case MissionList.Tutorial: return new Missions.Tutorial(players);
                 case MissionList.NextStep: return new Missions.NextStep(players);
+                case MissionList.FirstChallenge: return new Missions.FirstChallenge(players);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -52,7 +53,9 @@ namespace MissionClassLibrary
                 var dmg = enemies[enemyIndex].UseAbility();
                 var defender = enemies[enemyIndex].ChooseEnemy(players);
                 if (players[defender].Health > 0)
+                {
                     players[defender].Defend(dmg);
+                }
                 else if (CheckLoss())
                     return;
                 else PlayerDefend(enemyIndex);

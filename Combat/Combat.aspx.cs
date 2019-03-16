@@ -41,8 +41,6 @@ namespace Combat
 
                 var mission = MissionClassLibrary.Mission.Create(MissionList.NextStep, players);
 
-                ViewState.Add("Players", mission.Players);
-                ViewState.Add("Enemies", mission.Enemies);
                 ViewState.Add("ID", "");
                 ViewState.Add("Player", "");
                 ViewState.Add("Mission", mission);
@@ -63,22 +61,28 @@ namespace Combat
 
         protected void player1ImageButton_Click(object sender, ImageClickEventArgs e)
         {
-            skill1Button.Visible = true;
-            skill2Button.Visible = true;
             var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
-            skill1Button.Text = mission.Players[0].Ability1()[0];
-            skill2Button.Text = mission.Players[0].Ability2()[0];
-            ViewState["Player"] = 0;
+            if (mission.isAlive(0))
+            {
+                skill1Button.Visible = true;
+                skill2Button.Visible = true;
+                skill1Button.Text = mission.Players[0].Ability1()[0];
+                skill2Button.Text = mission.Players[0].Ability2()[0];
+                ViewState["Player"] = 0;
+            }
         }
 
         protected void player2ImageButton_Click(object sender, ImageClickEventArgs e)
         {
-            skill1Button.Visible = true;
-            skill2Button.Visible = true;
             var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
-            skill1Button.Text = mission.Players[1].Ability1()[0];
-            skill2Button.Text = mission.Players[1].Ability2()[0];
-            ViewState["Player"] = 1;
+            if (mission.isAlive(1))
+            {
+                skill1Button.Visible = true;
+                skill2Button.Visible = true;
+                skill1Button.Text = mission.Players[1].Ability1()[0];
+                skill2Button.Text = mission.Players[1].Ability2()[0];
+                ViewState["Player"] = 1;
+            }
         }
 
         protected void skill1Button_Click(object sender, EventArgs e)
@@ -100,9 +104,9 @@ namespace Combat
             var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
             mission.EnemyDefend(0, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
             enemy1Label.Text = mission.Enemies[0].Health.ToString();
-            ViewState["Enemies"] = mission.Enemies;
             ViewState["Mission"] = mission;
             attackDone();
+            victory(mission);
         }
 
         protected void enemy2ImageButton_Click(object sender, ImageClickEventArgs e)
@@ -110,9 +114,9 @@ namespace Combat
             var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
             mission.EnemyDefend(1, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
             enemy2Label.Text = mission.Enemies[1].Health.ToString();
-            ViewState["Enemies"] = mission.Enemies;
             ViewState["Mission"] = mission;
             attackDone();
+            victory(mission);
         }
 
         protected void endTurnButton_Click(object sender, EventArgs e)
@@ -129,6 +133,7 @@ namespace Combat
             player2Label.Text = mission.Players[1].Health.ToString();
             attackDone();
             turnOver(mission.Turn);
+            gameOver(mission);
         }
 
         private List<CharacterClassLibrary.Player> getStats(List<CharacterClassLibrary.Player> players)
@@ -222,6 +227,34 @@ namespace Combat
             player3ImageButton.Enabled = true;
             player4ImageButton.Enabled = true;
             turnLabel.Text = "Turn: " + turn.ToString();
+        }
+
+        private void gameOver(MissionClassLibrary.Mission mission)
+        {
+            if (mission.CheckLoss())
+            {
+                resultLabel.Text = "You lost. Pathetic.";
+                player1ImageButton.Enabled = false;
+                player2ImageButton.Enabled = false;
+                player3ImageButton.Enabled = false;
+                player4ImageButton.Enabled = false;
+                attackDone();
+                endTurnButton.Enabled = false;
+            }
+        }
+
+        private void victory(MissionClassLibrary.Mission mission)
+        {
+            if (mission.CheckWin())
+            {
+                resultLabel.Text = "Victory! Yay.";
+                player1ImageButton.Enabled = false;
+                player2ImageButton.Enabled = false;
+                player3ImageButton.Enabled = false;
+                player4ImageButton.Enabled = false;
+                attackDone();
+                endTurnButton.Enabled = false;
+            }
         }
     }
 }

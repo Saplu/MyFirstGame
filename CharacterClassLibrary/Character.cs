@@ -16,6 +16,7 @@ namespace CharacterClassLibrary
         private int spellPower;
         private int armor;
         private int level;
+        private bool alive;
 
         public int Health { get => health; set => health = value; }
         public int Strength { get => strength; set => strength = value; }
@@ -24,5 +25,6 @@ namespace CharacterClassLibrary
         public int Armor { get => armor; set => armor = value; }
         public int Level { get => level; set => level = value; }
         public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+        public bool Alive { get => alive; set => alive = value; }
     }
 }

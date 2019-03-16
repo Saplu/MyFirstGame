@@ -25,6 +25,7 @@ namespace CharacterClassLibrary.PlayerClasses
             ClassName = Enums.ClassName.Warrior;
             ItemTypes = new List<Enums.ItemType>
             { Enums.ItemType.Cloth, Enums.ItemType.Leather, Enums.ItemType.Mail, Enums.ItemType.Plate };
+            Alive = true;
         }
 
         private int attack()

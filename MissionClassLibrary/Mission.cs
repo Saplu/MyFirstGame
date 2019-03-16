@@ -37,15 +37,55 @@ namespace MissionClassLibrary
 
         public void EnemyDefend(int enemyIndex, int playerIndex, string id)
         {
-            var dmg = players[playerIndex].UseAbility(id);
-            enemies[enemyIndex].Defend(dmg);
+            if (enemies[enemyIndex].Health > 0)
+            {
+                var dmg = players[playerIndex].UseAbility(id);
+                enemies[enemyIndex].Defend(dmg);
+            }
+            else throw new Exception("Target already dead.");
         }
 
         public void PlayerDefend(int enemyIndex)
         {
-            var dmg = enemies[enemyIndex].UseAbility();
-            var defender = enemies[enemyIndex].ChooseEnemy(players);
-            players[defender].Defend(dmg);
+            if (enemies[enemyIndex].Health > 0)
+            {
+                var dmg = enemies[enemyIndex].UseAbility();
+                var defender = enemies[enemyIndex].ChooseEnemy(players);
+                if (players[defender].Health > 0)
+                    players[defender].Defend(dmg);
+                else if (CheckLoss())
+                    return;
+                else PlayerDefend(enemyIndex);
+            }
+        }
+
+        public bool isAlive(int index)
+        {
+            if (players[index].Health > 0)
+                return true;
+            else return false;
+        }
+
+        public bool CheckLoss()
+        {
+            var aliveList = new List<Player>();
+            foreach (var player in players)
+                if (player.Health > 0)
+                    aliveList.Add(player);
+            if (aliveList.Count == 0)
+                return true;
+            else return false;
+        }
+
+        public bool CheckWin()
+        {
+            var aliveList = new List<NPC>();
+            foreach (var npc in Enemies)
+                if (npc.Health > 0)
+                    aliveList.Add(npc);
+            if (aliveList.Count == 0)
+                return true;
+            else return false;
         }
     }
 }

@@ -24,6 +24,7 @@ namespace CharacterClassLibrary.PlayerClasses
             ClassName = Enums.ClassName.Mage;
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth };
+            Alive = true;
         }
 
         private int fireball()

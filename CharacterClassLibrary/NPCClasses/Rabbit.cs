@@ -20,6 +20,7 @@ namespace CharacterClassLibrary.NPCClasses
             Crit = 10;
             SpellPower = 0;
             Armor = 5 + (level * 3);
+            Alive = true;
         }
 
         private int kick()

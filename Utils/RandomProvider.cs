@@ -13,7 +13,7 @@ namespace Utils
 
         public static int GetRandom(int min, int max)
         {
-            return Context.GetRandom(min, max);
+            return Context.GetRandom(min, max + 1);
         }
     }
 }

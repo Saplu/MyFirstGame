@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using CharacterClassLibrary;
 
-namespace MissionClassLibrary
+namespace MissionClassLibrary.Missions
 {
     [Serializable]
-    public class Tutorial : Mission
+    public class NextStep : Mission
     {
-        public Tutorial(List<Player> players)
+        public NextStep(List<Player> players)
         {
-            var enemy = new CharacterClassLibrary.NPCClasses.Rabbit(1);
-            Enemies = new List<NPC>() { enemy };
+            var enemy1 = new CharacterClassLibrary.NPCClasses.Rabbit(1);
+            var enemy2 = new CharacterClassLibrary.NPCClasses.Rabbit(1);
+            Enemies = new List<NPC>() { enemy1, enemy2 };
             Players = new List<Player>();
             foreach (var player in players)
                 Players.Add(player);

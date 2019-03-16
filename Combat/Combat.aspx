@@ -11,7 +11,7 @@
         <div>
             <asp:ImageButton ID="enemy1ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" OnClick="enemy1ImageButton_Click" />
 &nbsp;
-            <asp:ImageButton ID="enemy2ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" Visible="False" />
+            <asp:ImageButton ID="enemy2ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" OnClick="enemy2ImageButton_Click" />
 &nbsp;
             <asp:ImageButton ID="enemy3ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" Visible="False" />
 &nbsp;
@@ -28,7 +28,7 @@
             <br />
             <asp:ImageButton ID="player1ImageButton" runat="server" Height="100px" Width="100px" OnClick="player1ImageButton_Click" />
 &nbsp;
-            <asp:ImageButton ID="player2ImageButton" runat="server" Height="100px" Width="100px" Visible="False" />
+            <asp:ImageButton ID="player2ImageButton" runat="server" Height="100px" Width="100px" OnClick="player2ImageButton_Click" />
 &nbsp;
             <asp:ImageButton ID="player3ImageButton" runat="server" Height="100px" Width="100px" Visible="False" />
 &nbsp;

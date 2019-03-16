@@ -11,6 +11,9 @@ namespace CharacterClassLibrary
     {
         public abstract void Defend(int incomingDmg);
         public abstract int UseAbility();
-        public abstract int ChooseEnemy();
+        public int ChooseEnemy(List<Player> players)
+        {
+            return Utils.RandomProvider.GetRandom(0, players.Count - 1);
+        }
     }
 }

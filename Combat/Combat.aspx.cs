@@ -39,19 +39,23 @@ namespace Combat
                 }
                 players = getStats(players);
 
-                var mission = new MissionClassLibrary.Tutorial(players);
+                var mission = MissionClassLibrary.Mission.Create(MissionList.NextStep, players);
 
-                ViewState.Add("Players", players);
+                ViewState.Add("Players", mission.Players);
                 ViewState.Add("Enemies", mission.Enemies);
                 ViewState.Add("ID", "");
                 ViewState.Add("Player", "");
                 ViewState.Add("Mission", mission);
 
                 player1ImageButton.ImageUrl = "Pictures\\ninja.jpg";
+                player2ImageButton.ImageUrl = "Pictures\\ninja.jpg";
                 enemy1ImageButton.ImageUrl = "Pictures\\Pasi.jpg";
+                enemy2ImageButton.ImageUrl = "Pictures\\Pasi.jpg";
 
                 player1Label.Text = players[0].Health.ToString();
+                player2Label.Text = players[1].Health.ToString();
                 enemy1Label.Text = mission.Enemies[0].Health.ToString();
+                enemy2Label.Text = mission.Enemies[1].Health.ToString();
                 turnLabel.Text = "Turn: " + mission.Turn.ToString();
             }
 
@@ -61,29 +65,39 @@ namespace Combat
         {
             skill1Button.Visible = true;
             skill2Button.Visible = true;
-            var mission = (MissionClassLibrary.Tutorial)ViewState["Mission"];
+            var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
             skill1Button.Text = mission.Players[0].Ability1()[0];
             skill2Button.Text = mission.Players[0].Ability2()[0];
             ViewState["Player"] = 0;
         }
 
+        protected void player2ImageButton_Click(object sender, ImageClickEventArgs e)
+        {
+            skill1Button.Visible = true;
+            skill2Button.Visible = true;
+            var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
+            skill1Button.Text = mission.Players[1].Ability1()[0];
+            skill2Button.Text = mission.Players[1].Ability2()[0];
+            ViewState["Player"] = 1;
+        }
+
         protected void skill1Button_Click(object sender, EventArgs e)
         {
             ViewState["ID"] = skill1Button.Text;
-            enemy1ImageButton.Enabled = true;
-            player1ImageButton.Enabled = false;
+            enableEnemies();
+            actionDone();
         }
 
         protected void skill2Button_Click(object sender, EventArgs e)
         {
             ViewState["ID"] = skill2Button.Text;
-            enemy1ImageButton.Enabled = true;
-            player1ImageButton.Enabled = false;
+            enableEnemies();
+            actionDone();
         }
 
         protected void enemy1ImageButton_Click(object sender, ImageClickEventArgs e)
         {
-            var mission = (MissionClassLibrary.Tutorial)ViewState["Mission"];
+            var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
             mission.EnemyDefend(0, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
             enemy1Label.Text = mission.Enemies[0].Health.ToString();
             ViewState["Enemies"] = mission.Enemies;
@@ -91,9 +105,19 @@ namespace Combat
             attackDone();
         }
 
+        protected void enemy2ImageButton_Click(object sender, ImageClickEventArgs e)
+        {
+            var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
+            mission.EnemyDefend(1, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+            enemy2Label.Text = mission.Enemies[1].Health.ToString();
+            ViewState["Enemies"] = mission.Enemies;
+            ViewState["Mission"] = mission;
+            attackDone();
+        }
+
         protected void endTurnButton_Click(object sender, EventArgs e)
         {
-            var mission = (MissionClassLibrary.Tutorial)ViewState["Mission"];
+            var mission = (MissionClassLibrary.Missions.NextStep)ViewState["Mission"];
 
             for (int i = 0; i < mission.Enemies.Count; i++)
             {
@@ -102,6 +126,7 @@ namespace Combat
             mission.Turn++;
             ViewState["Mission"] = mission;
             player1Label.Text = mission.Players[0].Health.ToString();
+            player2Label.Text = mission.Players[1].Health.ToString();
             attackDone();
             turnOver(mission.Turn);
         }
@@ -152,6 +177,30 @@ namespace Combat
             character.Strength = player.Strength;
             character.Xp = player.Xp;
             return character;
+        }
+
+        private void enableEnemies()
+        {
+            enemy1ImageButton.Enabled = true;
+            enemy2ImageButton.Enabled = true;
+            enemy3ImageButton.Enabled = true;
+            enemy4ImageButton.Enabled = true;
+        }
+
+        private void actionDone()
+        {
+            var index = Convert.ToInt32(ViewState["Player"]);
+            switch(index)
+            {
+                case 0: player1ImageButton.Enabled = false;
+                    break;
+                case 1: player2ImageButton.Enabled = false;
+                    break;
+                case 2: player3ImageButton.Enabled = false;
+                    break;
+                case 3: player4ImageButton.Enabled = false;
+                    break;
+            }
         }
 
         private void attackDone()

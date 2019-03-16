@@ -45,6 +45,7 @@
     <Compile Include="Enums\ClassName.cs" />
     <Compile Include="Enums\ItemPlace.cs" />
     <Compile Include="Enums\ItemType.cs" />
+    <Compile Include="Enums\MissionList.cs" />
     <Compile Include="Interfaces\CombatInterface.cs" />
     <Compile Include="Interfaces\PlayerInterface.cs" />
     <Compile Include="Item.cs" />

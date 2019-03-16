@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CharacterClassLibrary;
+using CharacterClassLibrary.Enums;
 
 namespace MissionClassLibrary
 {
@@ -24,6 +25,16 @@ namespace MissionClassLibrary
         public List<Player> Players { get => players; set => players = value; }
         public int Turn { get => turn; set => turn = value; }
 
+        public static Mission Create(MissionList missions, List<Player> players)
+        {
+            switch (missions)
+            {
+                case MissionList.Tutorial: return new Missions.Tutorial(players);
+                case MissionList.NextStep: return new Missions.NextStep(players);
+                default: throw new ArgumentOutOfRangeException();
+            }
+        }
+
         public void EnemyDefend(int enemyIndex, int playerIndex, string id)
         {
             var dmg = players[playerIndex].UseAbility(id);
@@ -33,7 +44,7 @@ namespace MissionClassLibrary
         public void PlayerDefend(int enemyIndex)
         {
             var dmg = enemies[enemyIndex].UseAbility();
-            var defender = enemies[enemyIndex].ChooseEnemy();
+            var defender = enemies[enemyIndex].ChooseEnemy(players);
             players[defender].Defend(dmg);
         }
     }

@@ -48,10 +48,5 @@ namespace CharacterClassLibrary.NPCClasses
                 return kick();
             else return bite();
         }
-
-        public override int ChooseEnemy()
-        {
-            return 0;
-        }
     }
 }

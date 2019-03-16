@@ -15,10 +15,10 @@ namespace AbilityClassLibrary.Warrior
             Description = "Fierce attack against a single target.";
         }
 
-        public int Action(int strength, int crit, double multiplier, int increase, Random random)
+        public int Action(int strength, int crit, double multiplier, int increase)
         {
             var dmg = strength * 2;
-            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase, random);
+            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Combat
     public partial class Combat : System.Web.UI.Page
     {
         CharacterDbEntities db = new CharacterDbEntities();
-        Random random = new Random();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -92,7 +91,7 @@ namespace Combat
             var player = CharacterClassLibrary.Player.Create(players[0].ClassName);
             player.Items = players[0].Items;
             getStats(player);
-            var dmg = player.UseAbility(ViewState["ID"].ToString(), random);
+            var dmg = player.UseAbility(ViewState["ID"].ToString());
             enemy.Defend(dmg);
             enemy1Label.Text = enemy.Health.ToString();
             ViewState["Enemies"] = enemies;
@@ -103,7 +102,7 @@ namespace Combat
         {
             var enemies = (List<NPC>)ViewState["Enemies"];
             var players = (List<CharacterClassLibrary.Player>)ViewState["Players"];
-            var dmg = enemies[0].UseAbility(random);
+            var dmg = enemies[0].UseAbility();
             players[0].Defend(dmg);
             player1Label.Text = players[0].Health.ToString();
             attackDone();

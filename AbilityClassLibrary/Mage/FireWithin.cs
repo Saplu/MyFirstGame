@@ -15,10 +15,10 @@ namespace AbilityClassLibrary.Mage
             Description = "Burn your target from the inside. Damage cannot be resisted";
         }
 
-        public int Action(int spellpower, int crit, double multiplier, int increase, Random random)
+        public int Action(int spellpower, int crit, double multiplier, int increase)
         {
             var dmg = 10 + spellpower;
-            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase, random);
+            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);
         }
     }
 }

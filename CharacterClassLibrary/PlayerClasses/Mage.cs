@@ -26,10 +26,10 @@ namespace CharacterClassLibrary.PlayerClasses
             ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth };
         }
 
-        private int fireball(Random random)
+        private int fireball()
         {
             var fireball = new Fireball();
-            return fireball.Action(SpellPower, Crit, 1, 0, random);
+            return fireball.Action(SpellPower, Crit, 1, 0);
         }
 
         public override string[] Ability1()
@@ -38,10 +38,10 @@ namespace CharacterClassLibrary.PlayerClasses
             return fireball.Info();
         }
 
-        private int fireWithin(Random random)
+        private int fireWithin()
         {
             var fire = new FireWithin();
-            return fire.Action(SpellPower, Crit, 1, 0, random);
+            return fire.Action(SpellPower, Crit, 1, 0);
         }
 
         public override string[] Ability2()
@@ -70,12 +70,12 @@ namespace CharacterClassLibrary.PlayerClasses
             else Health -= 1;
         }
 
-        public override int UseAbility(string id, Random random)
+        public override int UseAbility(string id)
         {
             if (id == "Fireball")
-                return fireball(random);
+                return fireball();
             else if (id == "Fire Within")
-                return fireWithin(random);
+                return fireWithin();
             else return 1;
         }
     }

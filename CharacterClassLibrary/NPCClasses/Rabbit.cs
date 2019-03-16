@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AbilityClassLibrary.NPC;
+using Utils;
 
 namespace CharacterClassLibrary.NPCClasses
 {
@@ -21,16 +22,16 @@ namespace CharacterClassLibrary.NPCClasses
             Armor = 5 + (level * 3);
         }
 
-        private int kick(Random random)
+        private int kick()
         {
             var kick = new Kick();
-            return kick.Action(Strength, Crit, 1, 0, random);
+            return kick.Action(Strength, Crit, 1, 0);
         }
 
-        private int bite(Random random)
+        private int bite()
         {
             var bite = new Bite();
-            return bite.Action(Strength, Crit, 1, 0, random);
+            return bite.Action(Strength, Crit, 1, 0);
         }
 
         public override void Defend(int incomingDmg)
@@ -41,11 +42,11 @@ namespace CharacterClassLibrary.NPCClasses
             else Health -= 1;
         }
 
-        public override int UseAbility(Random random)
+        public override int UseAbility()
         {
-            if (random.Next() > 50)
-                return kick(random);
-            else return bite(random);
+            if (RandomProvider.GetRandom(1, 100) > 50)
+                return kick();
+            else return bite();
         }
     }
 }

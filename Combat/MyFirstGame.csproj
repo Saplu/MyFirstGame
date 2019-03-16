@@ -164,6 +164,10 @@
       <Project>{ff0c105b-ea2e-410f-9f7a-e1ce08c0c35e}</Project>
       <Name>CharacterClassLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MissionClassLibrary\MissionClassLibrary.csproj">
+      <Project>{8bfd2f25-a6b9-42eb-8dd9-565032b6707d}</Project>
+      <Name>MissionClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

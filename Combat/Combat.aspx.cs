@@ -39,20 +39,20 @@ namespace Combat
                     }
                 }
                 players = getStats(players);
-                var pasi = new Rabbit(1);
-                var enemies = new List<NPC>();
-                enemies.Add(pasi);
+
+                var mission = new MissionClassLibrary.Tutorial(players);
 
                 ViewState.Add("Players", players);
-                ViewState.Add("Enemies", enemies);
+                ViewState.Add("Enemies", mission.Enemies);
                 ViewState.Add("ID", "");
                 ViewState.Add("Player", "");
+                ViewState.Add("Mission", mission);
 
                 player1ImageButton.ImageUrl = "Pictures\\ninja.jpg";
                 enemy1ImageButton.ImageUrl = "Pictures\\Pasi.jpg";
 
                 player1Label.Text = players[0].Health.ToString();
-                enemy1Label.Text = pasi.Health.ToString();
+                enemy1Label.Text = mission.Enemies[0].Health.ToString();
             }
 
         }
@@ -61,13 +61,10 @@ namespace Combat
         {
             skill1Button.Visible = true;
             skill2Button.Visible = true;
-            var players = (List<CharacterClassLibrary.Player>)ViewState["Players"];
-            var player = CharacterClassLibrary.Player.Create(players[0].ClassName);
-            player.Items = players[0].Items;
-            getStats(player);
-            skill1Button.Text = player.Ability1()[0];
-            skill2Button.Text = player.Ability2()[0];
-            ViewState["Player"] = player;
+            var mission = (MissionClassLibrary.Tutorial)ViewState["Mission"];
+            skill1Button.Text = mission.Players[0].Ability1()[0];
+            skill2Button.Text = mission.Players[0].Ability2()[0];
+            ViewState["Player"] = mission.Players[0];
         }
 
         protected void skill1Button_Click(object sender, EventArgs e)
@@ -86,8 +83,9 @@ namespace Combat
 
         protected void enemy1ImageButton_Click(object sender, ImageClickEventArgs e)
         {
-            var enemies = (List<NPC>)ViewState["Enemies"];
-            var enemy = enemies[0];
+            var mission = (MissionClassLibrary.Tutorial)ViewState["Mission"];
+            //var enemies = (List<NPC>)ViewState["Enemies"];
+            var enemy = mission.Enemies[0];
             var players = (List<CharacterClassLibrary.Player>)ViewState["Players"];
             var player = CharacterClassLibrary.Player.Create(players[0].ClassName);
             player.Items = players[0].Items;
@@ -95,7 +93,7 @@ namespace Combat
             var dmg = player.UseAbility(ViewState["ID"].ToString(), random);
             enemy.Defend(dmg);
             enemy1Label.Text = enemy.Health.ToString();
-            ViewState["Enemies"] = enemies;
+            ViewState["Enemies"] = mission.Enemies;
             attackDone();
         }
 

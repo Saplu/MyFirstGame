@@ -15,10 +15,10 @@ namespace AbilityClassLibrary.NPC
             Description = "Kicks the enemy with his tiny paws.";
         }
 
-        public int Action(int strength, int crit, double multiplier, int increase, Random random)
+        public int Action(int strength, int crit, double multiplier, int increase)
         {
             var dmg = 5 + Convert.ToInt32(strength * 1.2);
-            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase, random);
+            return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);
         }
     }
 }

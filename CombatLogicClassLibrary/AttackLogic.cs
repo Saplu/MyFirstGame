@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace CombatLogicClassLibrary
 {
     public static class AttackLogic
     {
-        public static int CalculateAttackDamage(int baseDmg, int crit, double multiplier, int increase, Random random)
+        public static int CalculateAttackDamage(int baseDmg, int crit, double multiplier, int increase)
         {
             var dmg = (baseDmg * Convert.ToInt32(multiplier)) + increase;
-            dmg = random.Next(Convert.ToInt32(dmg * .8), Convert.ToInt32(dmg * 1.2));
-            if (isCrit(crit, random))
+            dmg = RandomProvider.GetRandom(Convert.ToInt32(dmg * .8), Convert.ToInt32(dmg * 1.2));
+            if (isCrit(crit))
                 return dmg * 2;
             else return dmg;
         }
 
-        private static bool isCrit(int crit, Random random)
+        private static bool isCrit(int crit)
         {
-            if (crit >= random.Next(1, 100))
-                return true;
-            else return false;
+            return crit >= RandomProvider.GetRandom(1, 100);
         }
     }
 }

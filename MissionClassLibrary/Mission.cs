@@ -26,7 +26,15 @@ namespace MissionClassLibrary
 
         public void EnemyDefend(int enemyIndex, int playerIndex, string id)
         {
+            var dmg = players[playerIndex].UseAbility(id);
+            enemies[enemyIndex].Defend(dmg);
+        }
 
+        public void PlayerDefend(int enemyIndex)
+        {
+            var dmg = enemies[enemyIndex].UseAbility();
+            var defender = enemies[enemyIndex].ChooseEnemy();
+            players[defender].Defend(dmg);
         }
     }
 }

@@ -25,13 +25,15 @@ namespace CharacterClassLibrary.PlayerClasses
             ClassName = Enums.ClassName.Warrior;
             ItemTypes = new List<Enums.ItemType>
             { Enums.ItemType.Cloth, Enums.ItemType.Leather, Enums.ItemType.Mail, Enums.ItemType.Plate };
-            Alive = true;
+            Statuses = new List<CombatLogicClassLibrary.Status>();
         }
 
         private int attack()
         {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
             var attack = new Attack();
-            return attack.Action(Strength, Crit, 1, 0);
+            return attack.Action(Strength, Crit, multi, increase);
         }
 
         public override string[] Ability1()
@@ -42,8 +44,10 @@ namespace CharacterClassLibrary.PlayerClasses
 
         private int viciousBlow()
         {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
             var vicious = new ViciousBlow();
-            return vicious.Action(Strength, 1, 0);
+            return vicious.Action(Strength, multi, increase);
         }
 
         public override string[] Ability2()
@@ -52,10 +56,18 @@ namespace CharacterClassLibrary.PlayerClasses
             return vicious.Info();
         }
 
+        private int battleCry()
+        {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
+            var cry = new BattleCry();
+            return cry.Action(Strength, Crit, multi, increase);
+        }
+
         public override string[] Ability3()
         {
-            var attack = new Attack();
-            return attack.Info();
+            var cry = new BattleCry();
+            return cry.Info();
         }
 
         public override string[] Ability4()
@@ -72,18 +84,44 @@ namespace CharacterClassLibrary.PlayerClasses
             else Health -= 1;
         }
 
-        public override int UseAbility(string id)
+        public override int UseAbility(string id, int enemyCount)
         {
             if (id == "Attack")
                 return attack();
             else if (id == "Vicious Blow")
                 return viciousBlow();
+            else if (id == "Battle Cry")
+                return battleCry();
+            else return 1;
+        }
+
+        public override int GetTargets(string id)
+        {
+            if (id == "Attack")
+                return 1;
+            else if (id == "Vicious Blow")
+                return 1;
+            else if (id == "Battle Cry")
+                return 4;
             else return 1;
         }
 
         public override string setPic()
         {
             return "Pictures\\ninja.jpg";
+        }
+
+        public override List<int> setStatusTargets(string id)
+        {
+            var list = new List<int>();
+            if (id == "Battle Cry")
+            {
+                list.Add(1);
+                list.Add(2);
+                list.Add(3);
+                list.Add(4);
+            }
+            return list;
         }
     }
 }

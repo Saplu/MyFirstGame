@@ -13,11 +13,18 @@ namespace MissionClassLibrary.Missions
         public NextStep(List<Player> players)
         {
             var enemy1 = new CharacterClassLibrary.NPCClasses.Rabbit(1);
+            enemy1.Position = 5;
             var enemy2 = new CharacterClassLibrary.NPCClasses.Rabbit(1);
+            enemy2.Position = 6;
             Enemies = new List<NPC>() { enemy1, enemy2 };
             Players = new List<Player>();
             foreach (var player in players)
                 Players.Add(player);
+            foreach (var player in Players)
+            {
+                var numb = Players.IndexOf(player);
+                player.Position = numb + 1;
+            }
             Turn = 1;
         }
     }

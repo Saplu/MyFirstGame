@@ -48,9 +48,9 @@
 &nbsp;
             <asp:Button ID="skill2Button" runat="server" Visible="False" OnClick="skill2Button_Click" />
 &nbsp;
-            <asp:Button ID="skill3Button" runat="server" Visible="False" />
+            <asp:Button ID="skill3Button" runat="server" Visible="False" OnClick="skill3Button_Click" />
 &nbsp;
-            <asp:Button ID="skill4Button" runat="server" Visible="False" />
+            <asp:Button ID="skill4Button" runat="server" Visible="False" OnClick="skill4Button_Click" />
             <br />
             <br />
             <br />

@@ -17,9 +17,20 @@ namespace MissionClassLibrary.Missions
             var enemy3 = new CharacterClassLibrary.NPCClasses.Rabbit(2);
             var enemy4 = new CharacterClassLibrary.NPCClasses.Rabbit(2);
             Enemies = new List<NPC>() { enemy1, enemy2, enemy3, enemy4 };
+            foreach (var enemy in Enemies)
+            {
+                var numb = Enemies.IndexOf(enemy);
+                enemy.Position = numb + 5;
+            }
+
             Players = new List<Player>();
             foreach (var player in players)
                 Players.Add(player);
+            foreach (var player in Players)
+            {
+                var numb = Players.IndexOf(player);
+                player.Position = numb + 1;
+            }
             Turn = 1;
         }
     }

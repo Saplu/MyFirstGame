@@ -48,6 +48,7 @@
     <Compile Include="NPC\Kick.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Warrior\Attack.cs" />
+    <Compile Include="Warrior\BattleCry.cs" />
     <Compile Include="Warrior\ViciousBlow.cs" />
   </ItemGroup>
   <ItemGroup />

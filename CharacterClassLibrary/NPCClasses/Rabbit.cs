@@ -20,7 +20,7 @@ namespace CharacterClassLibrary.NPCClasses
             Crit = 10;
             SpellPower = 0;
             Armor = 5 + (level * 3);
-            Alive = true;
+            Statuses = new List<CombatLogicClassLibrary.Status>();
         }
 
         private int kick()
@@ -53,6 +53,12 @@ namespace CharacterClassLibrary.NPCClasses
         public override string setPic()
         {
             return "Pictures\\Pasi.jpg";
+        }
+
+        public override List<int> setStatusTargets(string id)
+        {
+            var list = new List<int>();
+            return list;
         }
     }
 }

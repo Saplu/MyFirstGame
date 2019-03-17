@@ -13,10 +13,16 @@ namespace MissionClassLibrary.Missions
         public Tutorial(List<Player> players)
         {
             var enemy = new CharacterClassLibrary.NPCClasses.Rabbit(1);
+            enemy.Position = 5;
             Enemies = new List<NPC>() { enemy };
             Players = new List<Player>();
             foreach (var player in players)
                 Players.Add(player);
+            foreach (var player in Players)
+            {
+                var numb = Players.IndexOf(player);
+                player.Position = numb + 1;
+            }
             Turn = 1;
         }
     }

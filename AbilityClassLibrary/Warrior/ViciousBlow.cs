@@ -18,7 +18,7 @@ namespace AbilityClassLibrary.Warrior
         public int Action(int strength, double multiplier, int increase)
         {
             var dmg = Convert.ToInt32(strength * 1.5);
-            return AttackLogic.CalculateAttackDamage(dmg, 100, 1, 0);
+            return AttackLogic.CalculateAttackDamage(dmg, 100, multiplier, increase);
         }
     }
 }

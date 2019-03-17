@@ -24,13 +24,15 @@ namespace CharacterClassLibrary.PlayerClasses
             ClassName = Enums.ClassName.Mage;
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth };
-            Alive = true;
+            Statuses = new List<CombatLogicClassLibrary.Status>();
         }
 
         private int fireball()
         {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
             var fireball = new Fireball();
-            return fireball.Action(SpellPower, Crit, 1, 0);
+            return fireball.Action(SpellPower, Crit, multi, increase);
         }
 
         public override string[] Ability1()
@@ -41,8 +43,10 @@ namespace CharacterClassLibrary.PlayerClasses
 
         private int fireWithin()
         {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
             var fire = new FireWithin();
-            return fire.Action(SpellPower, Crit, 1, 0);
+            return fire.Action(SpellPower, Crit, multi, increase);
         }
 
         public override string[] Ability2()
@@ -71,7 +75,7 @@ namespace CharacterClassLibrary.PlayerClasses
             else Health -= 1;
         }
 
-        public override int UseAbility(string id)
+        public override int UseAbility(string id, int enemyCount)
         {
             if (id == "Fireball")
                 return fireball();
@@ -80,9 +84,24 @@ namespace CharacterClassLibrary.PlayerClasses
             else return 1;
         }
 
+        public override int GetTargets(string id)
+        {
+            if (id == "Fireball")
+                return 1;
+            else if (id == "Fire Within")
+                return 1;
+            else return 1;
+        }
+
         public override string setPic()
         {
             return "Pictures\\welho.jpg";
+        }
+
+        public override List<int> setStatusTargets(string id)
+        {
+            var list = new List<int>();
+            return list;
         }
     }
 }

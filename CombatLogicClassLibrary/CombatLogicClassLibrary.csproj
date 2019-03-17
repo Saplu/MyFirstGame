@@ -43,6 +43,10 @@
   <ItemGroup>
     <Compile Include="AttackLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="StatusEnums.cs" />
+    <Compile Include="Statuses\AttackDmgModifier.cs" />
+    <Compile Include="Statuses\AttackDmgMultiplier.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">

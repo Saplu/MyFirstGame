@@ -75,14 +75,24 @@ namespace Combat
         {
             ViewState["ID"] = skill1Button.Text;
             enableEnemies();
-            actionDone();
         }
 
         protected void skill2Button_Click(object sender, EventArgs e)
         {
             ViewState["ID"] = skill2Button.Text;
             enableEnemies();
-            actionDone();
+        }
+
+        protected void skill3Button_Click(object sender, EventArgs e)
+        {
+            ViewState["ID"] = skill3Button.Text;
+            enableEnemies();
+        }
+
+        protected void skill4Button_Click(object sender, EventArgs e)
+        {
+            ViewState["ID"] = skill4Button.Text;
+            enableEnemies();
         }
 
         protected void enemy1ImageButton_Click(object sender, ImageClickEventArgs e)
@@ -91,9 +101,11 @@ namespace Combat
             {
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(0, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
-                enemy1Label.Text = mission.Enemies[0].ToString();
+                mission.EnemyDefend(5, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                setLabels();
                 ViewState["Mission"] = mission;
+                actionDone();
                 attackDone();
                 victory(mission);
             }
@@ -107,9 +119,11 @@ namespace Combat
             {
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(1, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
-                enemy2Label.Text = mission.Enemies[1].ToString();
+                mission.EnemyDefend(6, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                setLabels();
                 ViewState["Mission"] = mission;
+                actionDone();
                 attackDone();
                 victory(mission);
             }
@@ -123,9 +137,11 @@ namespace Combat
             {
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(2, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
-                enemy3Label.Text = mission.Enemies[2].ToString();
+                mission.EnemyDefend(7, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                setLabels();
                 ViewState["Mission"] = mission;
+                actionDone();
                 attackDone();
                 victory(mission);
             }
@@ -139,9 +155,11 @@ namespace Combat
             {
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(3, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
-                enemy4Label.Text = mission.Enemies[3].ToString();
+                mission.EnemyDefend(8, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                setLabels();
                 ViewState["Mission"] = mission;
+                actionDone();
                 attackDone();
                 victory(mission);
             }
@@ -158,12 +176,13 @@ namespace Combat
                 mission.PlayerDefend(i);
             }
             mission.Turn++;
-            ViewState["Mission"] = mission;
             player1Label.Text = mission.Players[0].ToString();
             player2Label.Text = mission.Players[1].ToString();
             player3Label.Text = mission.Players[2].ToString();
             player4Label.Text = mission.Players[3].ToString();
             attackDone();
+            mission.modifyLength();
+            ViewState["Mission"] = mission;
             turnOver(mission.Turn);
             gameOver(mission);
         }
@@ -181,13 +200,13 @@ namespace Combat
             var index = Convert.ToInt32(ViewState["Player"]);
             switch(index)
             {
-                case 0: player1ImageButton.Enabled = false;
+                case 1: player1ImageButton.Enabled = false;
                     break;
-                case 1: player2ImageButton.Enabled = false;
+                case 2: player2ImageButton.Enabled = false;
                     break;
-                case 2: player3ImageButton.Enabled = false;
+                case 3: player3ImageButton.Enabled = false;
                     break;
-                case 3: player4ImageButton.Enabled = false;
+                case 4: player4ImageButton.Enabled = false;
                     break;
             }
         }
@@ -246,11 +265,17 @@ namespace Combat
             var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
             skill1Button.Visible = true;
             skill2Button.Visible = true;
+            skill3Button.Visible = true;
+            skill4Button.Visible = true;
             skill1Button.Text = mission.Players[index].Ability1()[0];
             skill2Button.Text = mission.Players[index].Ability2()[0];
+            skill3Button.Text = mission.Players[index].Ability3()[0];
+            skill4Button.Text = mission.Players[index].Ability4()[0];
             skill1Button.ToolTip = mission.Players[index].Ability1()[1];
             skill2Button.ToolTip = mission.Players[index].Ability2()[1];
-            ViewState["Player"] = index;
+            skill3Button.ToolTip = mission.Players[index].Ability3()[1];
+            skill4Button.ToolTip = mission.Players[index].Ability4()[1];
+            ViewState["Player"] = index + 1;
         }
 
         private void setPictures()

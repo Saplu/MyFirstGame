@@ -62,6 +62,10 @@
       <Project>{1b8188b8-8582-4107-8c0f-a0e3e24c9076}</Project>
       <Name>AbilityClassLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CombatLogicClassLibrary\CombatLogicClassLibrary.csproj">
+      <Project>{63871ecc-b299-4f61-bfc7-77571cb3a7f2}</Project>
+      <Name>CombatLogicClassLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{2f323d45-2668-416f-8756-02372be8e5ec}</Project>
       <Name>Utils</Name>

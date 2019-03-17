@@ -10,9 +10,11 @@ namespace AbilityClassLibrary
     {
         private string name;
         private string description;
+        private List<int> targets;
 
         public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
+        public List<int> Targets { get => targets; set => targets = value; }
 
         public string[] Info()
         {

@@ -52,10 +52,6 @@
       <Project>{ff0c105b-ea2e-410f-9f7a-e1ce08c0c35e}</Project>
       <Name>CharacterClassLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CombatLogicClassLibrary\CombatLogicClassLibrary.csproj">
-      <Project>{63871ecc-b299-4f61-bfc7-77571cb3a7f2}</Project>
-      <Name>CombatLogicClassLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

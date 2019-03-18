@@ -84,7 +84,7 @@ namespace CharacterClassLibrary.PlayerClasses
             else Health -= 1;
         }
 
-        public override int UseAbility(string id, int enemyCount)
+        public override int UseAbility(string id)
         {
             if (id == "Attack")
                 return attack();

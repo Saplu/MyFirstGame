@@ -32,15 +32,40 @@ namespace CharacterClassLibrary
 
         public abstract string setPic();
         public abstract List<int> setStatusTargets(string id);
+        public abstract int GetTargets(string id);
+        public abstract int UseAbility(string id);
 
         public override string ToString()
         {
             return "Health: " + health;
         }
 
-        public void setStatus()
+        public void ModifyStatusLength()
         {
+            var keepList = new List<Status>();
+            foreach (var status in Statuses)
+            {
+                status.Duration--;
+                if (status.Duration > 0)
+                {
+                    keepList.Add(status);
+                }
+            }
+            Statuses = keepList;
+        }
 
+        public void SetStatuses(string id, List<Player> players, List<NPC> enemies)
+        {
+            var targetList = setStatusTargets(id);
+            if (targetList.Count > 0)
+            {
+                var status = Status.Create(id);
+                foreach (var thing in targetList)
+                {
+                    var target = players.Find(x => x.Position == thing);
+                    target.Statuses.Add(status);
+                }
+            }
         }
 
         protected double getAttackMultiplier()

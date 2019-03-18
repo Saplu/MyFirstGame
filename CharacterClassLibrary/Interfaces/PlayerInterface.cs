@@ -12,6 +12,6 @@ namespace CharacterClassLibrary.Interfaces
         string[] Ability2();
         string[] Ability3();
         string[] Ability4();
-        int UseAbility(string id, int count);
+        int UseAbility(string id);
     }
 }

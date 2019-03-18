@@ -25,14 +25,18 @@ namespace CharacterClassLibrary.NPCClasses
 
         private int kick()
         {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
             var kick = new Kick();
-            return kick.Action(Strength, Crit, 1, 0);
+            return kick.Action(Strength, Crit, multi, increase);
         }
 
         private int bite()
         {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
             var bite = new Bite();
-            return bite.Action(Strength, Crit, 1, 0);
+            return bite.Action(Strength, Crit, multi, increase);
         }
 
         public override void Defend(int incomingDmg)
@@ -43,11 +47,29 @@ namespace CharacterClassLibrary.NPCClasses
             else Health -= 1;
         }
 
-        public override int UseAbility()
+        public override string ChooseAbility()
         {
             if (RandomProvider.GetRandom(1, 100) > 50)
+                return "Kick";
+            else return "Bite";
+        }
+
+        public override int GetTargets(string id)
+        {
+            if (id == "Kick")
+                return 1;
+            else if (id == "Bite")
+                return 1;
+            else return 1;
+        }
+
+        public override int UseAbility(string id)
+        {
+            if (id == "Kick")
                 return kick();
-            else return bite();
+            else if (id == "Bite")
+                return bite();
+            else return 1;
         }
 
         public override string setPic()

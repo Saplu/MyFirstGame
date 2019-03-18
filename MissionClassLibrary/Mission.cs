@@ -5,19 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using CharacterClassLibrary;
 using CharacterClassLibrary.Enums;
-using CombatLogicClassLibrary;
 
 namespace MissionClassLibrary
 {
     [Serializable]
     public abstract class Mission
     {
-        /*
-        Kaikki taisteluun osallistuvat tyypit. Kaksi partya me vs te.
-        Kaikki komennot joita taisteluun liittyy.
-        StatusEffectJutut. Stun yms mitä mietittiin. Käsittely vuoron alussa ja lopussa.
-        */
-
         private List<NPC> enemies;
         private List<Player> players;
         private int turn;
@@ -47,7 +40,7 @@ namespace MissionClassLibrary
                 {
                     if (enemies[target - 5].Health > 0)
                     {
-                        var dmg = players[playerIndex - 1].UseAbility(id, enemyCount);
+                        var dmg = players[playerIndex - 1].UseAbility(id);
                         enemies[target - 5].Defend(dmg);
                     }
                 }
@@ -55,25 +48,13 @@ namespace MissionClassLibrary
             else throw new Exception("Target already dead.");
         }
 
-        public void SetStatuses(int playerIndex, string id)
-        {
-            var targetList = players[playerIndex - 1].setStatusTargets(id);
-            if (targetList.Count > 0)
-            {
-                var status = Status.Create(id);
-                foreach (var thing in targetList)
-                {
-                    var target = players.Find(x => x.Position == thing);
-                    target.Statuses.Add(status);
-                }
-            }
-        }
-
         public void PlayerDefend(int enemyIndex)
         {
             if (enemies[enemyIndex].Health > 0)
             {
-                var dmg = enemies[enemyIndex].UseAbility();
+                var id = enemies[enemyIndex].ChooseAbility();
+                var targetCount = enemies[enemyIndex].GetTargets(id);
+                var dmg = enemies[enemyIndex].UseAbility(id);
                 var defender = enemies[enemyIndex].ChooseEnemy(players);
                 if (players[defender].Health > 0)
                 {
@@ -83,6 +64,11 @@ namespace MissionClassLibrary
                     return;
                 else PlayerDefend(enemyIndex);
             }
+        }
+
+        public void SetStatuses(int playerIndex, string id)
+        {
+            Players[playerIndex - 1].SetStatuses(id, players, enemies);
         }
 
         public bool isAlive(int index)
@@ -118,16 +104,11 @@ namespace MissionClassLibrary
         {
             foreach (var player in Players)
             {
-                var keepList = new List<Status>();
-                foreach (var status in player.Statuses)
-                {
-                    status.Duration--;
-                    if (status.Duration > 0)
-                    {
-                        keepList.Add(status);
-                    }
-                }
-                player.Statuses = keepList;
+                player.ModifyStatusLength();
+            }
+            foreach (var enemy in Enemies)
+            {
+                enemy.ModifyStatusLength();
             }
         }
 

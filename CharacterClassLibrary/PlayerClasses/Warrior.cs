@@ -26,6 +26,7 @@ namespace CharacterClassLibrary.PlayerClasses
             ItemTypes = new List<Enums.ItemType>
             { Enums.ItemType.Cloth, Enums.ItemType.Leather, Enums.ItemType.Mail, Enums.ItemType.Plate };
             Statuses = new List<CombatLogicClassLibrary.Status>();
+            Cooldowns = new int[4] { 0, 0, 0, 5 };
         }
 
         private int attack()
@@ -33,6 +34,7 @@ namespace CharacterClassLibrary.PlayerClasses
             var multi = getAttackMultiplier();
             var increase = getAttackModifier();
             var attack = new Attack();
+            Cooldowns[0] = attack.Cooldown;
             return attack.Action(Strength, Crit, multi, increase);
         }
 
@@ -47,6 +49,7 @@ namespace CharacterClassLibrary.PlayerClasses
             var multi = getAttackMultiplier();
             var increase = getAttackModifier();
             var vicious = new ViciousBlow();
+            Cooldowns[1] = vicious.Cooldown;
             return vicious.Action(Strength, multi, increase);
         }
 
@@ -61,6 +64,7 @@ namespace CharacterClassLibrary.PlayerClasses
             var multi = getAttackMultiplier();
             var increase = getAttackModifier();
             var cry = new BattleCry();
+            Cooldowns[2] = cry.Cooldown;
             return cry.Action(Strength, Crit, multi, increase);
         }
 

@@ -33,6 +33,8 @@ namespace Combat
                 setLabels();
             }
 
+            checkStuns();
+
         }
 
         protected void player1ImageButton_Click(object sender, ImageClickEventArgs e)
@@ -41,6 +43,7 @@ namespace Combat
             if (mission.isAlive(0))
             {
                 displaySkills(0);
+                skillOnCooldown(0);
             }
         }
 
@@ -50,6 +53,7 @@ namespace Combat
             if (mission.isAlive(1))
             {
                 displaySkills(1);
+                skillOnCooldown(1);
             }
         }
 
@@ -59,6 +63,7 @@ namespace Combat
             if (mission.isAlive(2))
             {
                 displaySkills(2);
+                skillOnCooldown(2);
             }
         }
 
@@ -68,6 +73,7 @@ namespace Combat
             if (mission.isAlive(3))
             {
                 displaySkills(3);
+                skillOnCooldown(3);
             }
         }
 
@@ -181,10 +187,27 @@ namespace Combat
             player3Label.Text = mission.Players[2].ToString();
             player4Label.Text = mission.Players[3].ToString();
             attackDone();
-            mission.modifyLength();
+            mission.ModifyLength();
             ViewState["Mission"] = mission;
             turnOver(mission.Turn);
             gameOver(mission);
+        }
+
+        protected void endButton_Click(object sender, EventArgs e)
+        {
+            var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
+            var survivors = new List<string>();
+            var party = new List<string>();
+            foreach (var player in mission.Players)
+            {
+                party.Add(player.Name);
+                if (player.Health > 0)
+                    survivors.Add(player.Name);
+            }
+            Context.Items.Add("Survivors", survivors);
+            Context.Items.Add("Party", party);
+            Context.Items.Add("Mission", ViewState["Mission"]);
+            Server.Transfer("VictoryPage.aspx");
         }
 
         private void enableEnemies()
@@ -257,6 +280,7 @@ namespace Combat
                 player4ImageButton.Enabled = false;
                 attackDone();
                 endTurnButton.Enabled = false;
+                endButton.Visible = true;
             }
         }
 
@@ -275,7 +299,41 @@ namespace Combat
             skill2Button.ToolTip = mission.Players[index].Ability2()[1];
             skill3Button.ToolTip = mission.Players[index].Ability3()[1];
             skill4Button.ToolTip = mission.Players[index].Ability4()[1];
+            skill1Button.BorderColor = System.Drawing.Color.White;
+            skill2Button.BorderColor = System.Drawing.Color.White;
+            skill3Button.BorderColor = System.Drawing.Color.White;
+            skill4Button.BorderColor = System.Drawing.Color.White;
+            skill1Button.Enabled = true;
+            skill2Button.Enabled = true;
+            skill3Button.Enabled = true;
+            skill4Button.Enabled = true;
             ViewState["Player"] = index + 1;
+        }
+
+        private void skillOnCooldown(int index)
+        {
+            var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
+            var cdarr = mission.CheckCooldowns(index);
+            if (cdarr[0] > 0)
+            {
+                skill1Button.BorderColor = System.Drawing.Color.Red;
+                skill1Button.Enabled = false;
+            }
+            if (cdarr[1] > 0)
+            {
+                skill2Button.BorderColor = System.Drawing.Color.Red;
+                skill2Button.Enabled = false;
+            }
+            if (cdarr[2] > 0)
+            {
+                skill3Button.BorderColor = System.Drawing.Color.Red;
+                skill3Button.Enabled = false;
+            }
+            if (cdarr[3] > 0)
+            {
+                skill4Button.BorderColor = System.Drawing.Color.Red;
+                skill4Button.Enabled = false;
+            }
         }
 
         private void setPictures()
@@ -287,8 +345,11 @@ namespace Combat
             if (playerExists(2)) player3ImageButton.ImageUrl = mission.Players[2].setPic();
             if (playerExists(3)) player4ImageButton.ImageUrl = mission.Players[3].setPic();
             if (enemyExists(1)) enemy2ImageButton.ImageUrl = mission.Enemies[1].setPic();
+            else enemy2ImageButton.Visible = false;
             if (enemyExists(2)) enemy3ImageButton.ImageUrl = mission.Enemies[2].setPic();
+            else enemy3ImageButton.Visible = false;
             if (enemyExists(3)) enemy4ImageButton.ImageUrl = mission.Enemies[3].setPic();
+            else enemy4ImageButton.Visible = false;
         }
 
         private void setLabels()
@@ -319,6 +380,55 @@ namespace Combat
             if (mission.Enemies.ElementAtOrDefault(index) != null)
                 return true;
             else return false;
+        }
+
+        private void checkStuns()
+        {
+            var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
+            if (mission.Players[0].isStunned())
+            {
+                player1ImageButton.BorderColor = System.Drawing.Color.Red;
+                player1ImageButton.Enabled = false;
+            }
+            else player1ImageButton.BorderColor = System.Drawing.Color.White;
+            if (mission.Players[1].isStunned())
+            {
+                player2ImageButton.BorderColor = System.Drawing.Color.Red;
+                player2ImageButton.Enabled = false;
+            }
+            else player2ImageButton.BorderColor = System.Drawing.Color.White;
+            if (mission.Players[2].isStunned())
+            {
+                player3ImageButton.BorderColor = System.Drawing.Color.Red;
+                player3ImageButton.Enabled = false;
+            }
+            else player3ImageButton.BorderColor = System.Drawing.Color.White;
+            if (mission.Players[3].isStunned())
+            {
+                player4ImageButton.BorderColor = System.Drawing.Color.Red;
+                player4ImageButton.Enabled = false;
+            }
+            else player4ImageButton.BorderColor = System.Drawing.Color.White;
+            if (mission.Enemies[0].isStunned())
+            {
+                enemy1ImageButton.BorderColor = System.Drawing.Color.Red;
+            }
+            else enemy1ImageButton.BorderColor = System.Drawing.Color.White;
+            if (mission.Enemies.Count >= 2 && mission.Enemies[1].isStunned())
+            {
+                enemy2ImageButton.BorderColor = System.Drawing.Color.Red;
+            }
+            else enemy2ImageButton.BorderColor = System.Drawing.Color.White;
+            if (mission.Enemies.Count >= 3 && mission.Enemies[2].isStunned())
+            {
+                enemy3ImageButton.BorderColor = System.Drawing.Color.Red;
+            }
+            else enemy3ImageButton.BorderColor = System.Drawing.Color.White;
+            if (mission.Enemies.Count >= 4 && mission.Enemies[3].isStunned())
+            {
+                enemy4ImageButton.BorderColor = System.Drawing.Color.Red;
+            }
+            else enemy4ImageButton.BorderColor = System.Drawing.Color.White;
         }
     }
 }

@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace CharacterClassLibrary.Enums
 {
-    public enum ItemPlace { MainHand, OffHand, Head, Chest, Hands, Legs, Feet }
+    public enum ItemPlace { MainHand, OffHand, Head, Chest, Hands, Legs, Feet, Shield, OffHandWeapon }
 }

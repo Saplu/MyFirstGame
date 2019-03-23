@@ -13,9 +13,10 @@ namespace AbilityClassLibrary.Mage
         {
             Name = "Fire Within";
             Description = "Burn your target from the inside. Damage cannot be resisted";
+            Cooldown = 3;
         }
 
-        public int Action(int spellpower, int crit, double multiplier, int increase)
+        public int Action(int spellpower, double crit, double multiplier, int increase)
         {
             var dmg = 10 + spellpower;
             return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);

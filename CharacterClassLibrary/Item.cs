@@ -12,7 +12,7 @@ namespace CharacterClassLibrary
     {
         private int health;
         private int strength;
-        private int crit;
+        private double crit;
         private int spellpower;
         private int armor;
         private string name;
@@ -23,7 +23,7 @@ namespace CharacterClassLibrary
 
         public int Health { get => health; set => health = value; }
         public int Strength { get => strength; set => strength = value; }
-        public int Crit { get => crit; set => crit = value; }
+        public double Crit { get => crit; set => crit = value; }
         public int Spellpower { get => spellpower; set => spellpower = value; }
         public int Armor { get => armor; set => armor = value; }
         public string Name { get => name; set => name = value; }
@@ -45,6 +45,11 @@ namespace CharacterClassLibrary
             ItemType = itemtype;
             ItemPlace = itemplace;
             Owner = owner;
+        }
+
+        public Item(int level)
+        {
+            Level = level;
         }
     }
 }

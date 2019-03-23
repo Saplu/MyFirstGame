@@ -32,25 +32,29 @@ namespace MissionClassLibrary
 
         public void EnemyDefend(int enemyIndex, int playerIndex, string id, int enemyCount)
         {
-            var targetCount = players[playerIndex - 1].GetTargets(id);
-            var targets = setTargets(enemyIndex, targetCount);
-            if (enemies[enemyIndex - 5].Health > 0)
+            if (players[playerIndex - 1].isStunned() == false)
             {
-                foreach (var target in targets)
+                var targetCount = players[playerIndex - 1].GetTargets(id);
+                var targets = setTargets(enemyIndex, targetCount);
+                if (enemies[enemyIndex - 5].Health > 0)
                 {
-                    if (enemies[target - 5].Health > 0)
+                    foreach (var target in targets)
                     {
-                        var dmg = players[playerIndex - 1].UseAbility(id);
-                        enemies[target - 5].Defend(dmg);
+                        if (enemies[target - 5].Health > 0)
+                        {
+                            var dmg = players[playerIndex - 1].UseAbility(id);
+                            enemies[target - 5].Defend(dmg);
+                        }
                     }
                 }
+                else throw new Exception("Target already dead.");
             }
-            else throw new Exception("Target already dead.");
+            else throw new Exception("You are stunned and cannot attack.");
         }
 
         public void PlayerDefend(int enemyIndex)
         {
-            if (enemies[enemyIndex].Health > 0)
+            if (enemies[enemyIndex].Health > 0 && enemies[enemyIndex].isStunned() == false)
             {
                 var id = enemies[enemyIndex].ChooseAbility();
                 var targetCount = enemies[enemyIndex].GetTargets(id);
@@ -100,11 +104,12 @@ namespace MissionClassLibrary
             else return false;
         }
 
-        public void modifyLength()
+        public void ModifyLength()
         {
             foreach (var player in Players)
             {
                 player.ModifyStatusLength();
+                player.ModifyCooldownLength();
             }
             foreach (var enemy in Enemies)
             {
@@ -112,15 +117,34 @@ namespace MissionClassLibrary
             }
         }
 
+        public int[] CheckCooldowns(int index)
+        {
+            var cdarr = Players[index].Cooldowns;
+            return cdarr;
+        }
+
+        public int CalculateXp()
+        {
+            var playerLevel = 0;
+            var enemyLevel = 0;
+            var value = Enemies.Count * 5;
+            foreach (var player in Players)
+                playerLevel += player.Level;
+            foreach (var enemy in Enemies)
+                enemyLevel += enemy.Level;
+            value += enemyLevel - playerLevel;
+            return value;
+        }
+
         private List<int> setTargets(int index, int targets)
         {
             var result = new List<int>();
 
-            if (targets == 1)
+            if (targets == 1 || Enemies.Count == 1)
                 result.Add(index);
-            else if (targets == 2)
+            else if (targets == 2 || Enemies.Count == 2)
                 result = setTwoTargets(index);
-            else if (targets == 3)
+            else if (targets == 3 || Enemies.Count == 3)
                 result = setThreeTargets(index);
             else if (targets == 4)
                 result = setFourTargets(index);
@@ -131,12 +155,12 @@ namespace MissionClassLibrary
         private List<int> setTwoTargets(int index)
         {
             var result = new List<int>();
-            if (index == 1 || index == 2 || index == 3 || index == 5 || index == 6 || index == 7)
+            if (index == 1 || index == 2 || index == 3 || index == 5)
             {
                 result.Add(index);
                 result.Add(index + 1);
             }
-            else if (index == 4 || index == 8)
+            else if (index == 4 || index == 6 || index == 7 || index == 8)
             {
                 result.Add(index);
                 result.Add(index - 1);
@@ -147,7 +171,7 @@ namespace MissionClassLibrary
         private List<int> setThreeTargets(int index)
         {
             var result = new List<int>();
-            if (index == 1 || index == 2 || index == 5 || index == 6)
+            if (index == 1 || index == 2 || index == 5)
             {
                 result.Add(index);
                 result.Add(index + 1);
@@ -158,6 +182,12 @@ namespace MissionClassLibrary
                 result.Add(index);
                 result.Add(index - 1);
                 result.Add(index - 2);
+            }
+            else if (index == 6)
+            {
+                result.Add(index);
+                result.Add(index + 1);
+                result.Add(index - 1);
             }
             return result;
         }

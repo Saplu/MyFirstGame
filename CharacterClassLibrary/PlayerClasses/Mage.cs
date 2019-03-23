@@ -25,6 +25,7 @@ namespace CharacterClassLibrary.PlayerClasses
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth };
             Statuses = new List<CombatLogicClassLibrary.Status>();
+            Cooldowns = new int[4] { 0, 0, 0, 5 };
         }
 
         private int fireball()
@@ -32,6 +33,7 @@ namespace CharacterClassLibrary.PlayerClasses
             var multi = getAttackMultiplier();
             var increase = getAttackModifier();
             var fireball = new Fireball();
+            Cooldowns[0] = fireball.Cooldown;
             return fireball.Action(SpellPower, Crit, multi, increase);
         }
 
@@ -46,6 +48,7 @@ namespace CharacterClassLibrary.PlayerClasses
             var multi = getAttackMultiplier();
             var increase = getAttackModifier();
             var fire = new FireWithin();
+            Cooldowns[1] = fire.Cooldown;
             return fire.Action(SpellPower, Crit, multi, increase);
         }
 

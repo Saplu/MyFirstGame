@@ -13,7 +13,7 @@ namespace CharacterClassLibrary
         private int health;
         private int maxHealth;
         private int strength;
-        private int crit;
+        private double crit;
         private int spellPower;
         private int armor;
         private int level;
@@ -22,7 +22,7 @@ namespace CharacterClassLibrary
 
         public int Health { get => health; set => health = value; }
         public int Strength { get => strength; set => strength = value; }
-        public int Crit { get => crit; set => crit = value; }
+        public double Crit { get => crit; set => crit = value; }
         public int SpellPower { get => spellPower; set => spellPower = value; }
         public int Armor { get => armor; set => armor = value; }
         public int Level { get => level; set => level = value; }
@@ -66,6 +66,15 @@ namespace CharacterClassLibrary
                     target.Statuses.Add(status);
                 }
             }
+        }
+
+        public bool isStunned()
+        {
+            foreach (var status in statuses)
+            {
+                if (status is CombatLogicClassLibrary.Statuses.Stun) return true;
+            }
+            return false;
         }
 
         protected double getAttackMultiplier()

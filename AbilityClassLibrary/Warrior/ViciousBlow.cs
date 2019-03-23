@@ -13,6 +13,7 @@ namespace AbilityClassLibrary.Warrior
         {
             Name = "Vicious Blow";
             Description = "Devastating attack, that is quaranteed to crit.";
+            Cooldown = 2;
         }
 
         public int Action(int strength, double multiplier, int increase)

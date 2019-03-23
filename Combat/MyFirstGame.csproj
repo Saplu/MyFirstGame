@@ -95,6 +95,7 @@
     <Content Include="Pictures\ninja.jpg" />
     <Content Include="Pictures\Pasi.jpg" />
     <Content Include="Pictures\welho.jpg" />
+    <Content Include="VictoryPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,13 @@
       <DependentUpon>CharacterDbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VictoryPage.aspx.cs">
+      <DependentUpon>VictoryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VictoryPage.aspx.designer.cs">
+      <DependentUpon>VictoryPage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CharacterDbEntities.edmx">
@@ -167,6 +175,10 @@
     <ProjectReference Include="..\CharacterClassLibrary\CharacterClassLibrary.csproj">
       <Project>{ff0c105b-ea2e-410f-9f7a-e1ce08c0c35e}</Project>
       <Name>CharacterClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CombatLogicClassLibrary\CombatLogicClassLibrary.csproj">
+      <Project>{63871ecc-b299-4f61-bfc7-77571cb3a7f2}</Project>
+      <Name>CombatLogicClassLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\MissionClassLibrary\MissionClassLibrary.csproj">
       <Project>{8bfd2f25-a6b9-42eb-8dd9-565032b6707d}</Project>

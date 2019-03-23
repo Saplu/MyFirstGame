@@ -11,10 +11,12 @@ namespace AbilityClassLibrary
         private string name;
         private string description;
         private List<int> targets;
+        private int cooldown;
 
         public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
         public List<int> Targets { get => targets; set => targets = value; }
+        public int Cooldown { get => cooldown; set => cooldown = value; }
 
         public string[] Info()
         {

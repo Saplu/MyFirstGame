@@ -15,12 +15,14 @@ namespace CharacterClassLibrary
         private Enums.ClassName className;
         private List<Item> items;
         private List<ItemType> itemTypes;
+        private int[] cooldowns;
 
         public int Xp { get => xp; set => xp = value; }
         public string Name { get => name; set => name = value; }
         public ClassName ClassName { get => className; set => className = value; }
         public List<Item> Items { get => items; set => items = value; }
         public List<ItemType> ItemTypes { get => itemTypes; set => itemTypes = value; }
+        public int[] Cooldowns { get => cooldowns; set => cooldowns = value; }
 
         public static Player Create(ClassName className)
         {
@@ -37,5 +39,17 @@ namespace CharacterClassLibrary
         public abstract string[] Ability3();
         public abstract string[] Ability4();
         public abstract void Defend(int incomingDmg);
+
+        public void ModifyCooldownLength()
+        {
+            var newcd = new int[4];
+            for (int i = 0; i < 4; i++)
+            {
+                cooldowns[i]--;
+                if (cooldowns[i] > 0)
+                    newcd[i] = cooldowns[i];
+            }
+            Cooldowns = newcd;
+        }
     }
 }

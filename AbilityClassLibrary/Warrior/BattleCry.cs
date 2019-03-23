@@ -13,9 +13,10 @@ namespace AbilityClassLibrary.Warrior
         {
             Name = "Battle Cry";
             Description = "Deals light damage to every enemy and increases damage of all party members by 20% for this turn.";
+            Cooldown = 2;
         }
 
-        public int Action(int strength, int crit, double multiplier, int increase)
+        public int Action(int strength, double crit, double multiplier, int increase)
         {
             var dmg = Convert.ToInt32(strength / 2);            
             return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);

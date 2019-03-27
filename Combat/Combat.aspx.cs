@@ -13,8 +13,6 @@ namespace Combat
 {
     public partial class Combat : System.Web.UI.Page
     {
-        CharacterDbEntities db = new CharacterDbEntities();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -32,9 +30,7 @@ namespace Combat
                 setPictures();
                 setLabels();
             }
-
             checkStuns();
-
         }
 
         protected void player1ImageButton_Click(object sender, ImageClickEventArgs e)
@@ -108,7 +104,7 @@ namespace Combat
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
                 mission.EnemyDefend(5, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 5);
                 setLabels();
                 ViewState["Mission"] = mission;
                 actionDone();
@@ -126,7 +122,7 @@ namespace Combat
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
                 mission.EnemyDefend(6, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 6);
                 setLabels();
                 ViewState["Mission"] = mission;
                 actionDone();
@@ -144,7 +140,7 @@ namespace Combat
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
                 mission.EnemyDefend(7, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 7);
                 setLabels();
                 ViewState["Mission"] = mission;
                 actionDone();
@@ -162,7 +158,7 @@ namespace Combat
                 resultLabel.Text = "";
                 var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
                 mission.EnemyDefend(8, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 8);
                 setLabels();
                 ViewState["Mission"] = mission;
                 actionDone();
@@ -188,6 +184,7 @@ namespace Combat
             player4Label.Text = mission.Players[3].ToString();
             attackDone();
             mission.ModifyLength();
+            setLabels();
             ViewState["Mission"] = mission;
             turnOver(mission.Turn);
             gameOver(mission);

@@ -19,11 +19,12 @@ namespace CombatLogicClassLibrary
         public List<int> Targets { get => targets; set => targets = value; }
         public double Effect { get => effect; set => effect = value; }
 
-        public static Status Create(string id)
+        public static Status Create(string id, List<int> targets, double effect)
         {
             switch (id)
             {
-                case "Battle Cry": return new Statuses.AttackDmgMultiplier(1, new List<int>() { 1, 2, 3, 4 }, 1.2);
+                case "Battle Cry": return new Statuses.AttackDmgMultiplier(1, targets, effect);
+                case "Lava Field": return new Statuses.DoT(1, targets, Convert.ToInt32(effect));
                 default: return null;
             }
         }

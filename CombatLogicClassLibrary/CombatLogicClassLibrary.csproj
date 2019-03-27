@@ -47,6 +47,7 @@
     <Compile Include="StatusEnums.cs" />
     <Compile Include="Statuses\AttackDmgModifier.cs" />
     <Compile Include="Statuses\AttackDmgMultiplier.cs" />
+    <Compile Include="Statuses\DoT.cs" />
     <Compile Include="Statuses\Stun.cs" />
   </ItemGroup>
   <ItemGroup>

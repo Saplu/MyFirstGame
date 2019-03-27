@@ -26,6 +26,7 @@ namespace MissionClassLibrary.Missions
                 player.Position = numb + 1;
             }
             Turn = 1;
+            Level = 1;
         }
     }
 }

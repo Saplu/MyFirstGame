@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace CombatLogicClassLibrary
 {
-    public enum StatusEnums { Stun, AttackDmgMultiplier, AttackDmgModifier, TakenDmgMultiplier, TakenDmgModifier, Taunt}
+    public enum StatusEnums { Stun, AttackDmgMultiplier, AttackDmgModifier, TakenDmgMultiplier, TakenDmgModifier, Taunt, DoT}
 }

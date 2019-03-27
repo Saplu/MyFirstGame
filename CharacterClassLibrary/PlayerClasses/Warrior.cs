@@ -80,14 +80,6 @@ namespace CharacterClassLibrary.PlayerClasses
             return attack.Info();
         }
 
-        public override void Defend(int incomingDmg)
-        {
-            var dmg = incomingDmg - (Armor / 4);
-            if (dmg > 1)
-                Health -= dmg;
-            else Health -= 1;
-        }
-
         public override int UseAbility(string id)
         {
             if (id == "Attack")
@@ -115,7 +107,7 @@ namespace CharacterClassLibrary.PlayerClasses
             return "Pictures\\ninja.jpg";
         }
 
-        public override List<int> setStatusTargets(string id)
+        public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)
         {
             var list = new List<int>();
             if (id == "Battle Cry")
@@ -126,6 +118,13 @@ namespace CharacterClassLibrary.PlayerClasses
                 list.Add(4);
             }
             return list;
+        }
+
+        public override double setStatusEffect(string id)
+        {
+            if (id == "Battle Cry")
+                return 1.2;
+            else return 0;
         }
     }
 }

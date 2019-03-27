@@ -18,7 +18,7 @@ namespace Combat
         public string Owner { get; set; }
         public int Health { get; set; }
         public int Strength { get; set; }
-        public int Crit { get; set; }
+        public double Crit { get; set; }
         public int SpellPower { get; set; }
         public int Armor { get; set; }
         public string Name { get; set; }

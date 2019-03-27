@@ -31,9 +31,25 @@ namespace CharacterClassLibrary
         public List<Status> Statuses { get => statuses; set => statuses = value; }
 
         public abstract string setPic();
-        public abstract List<int> setStatusTargets(string id);
+        public abstract List<int> setStatusTargets(string id, int targetPosition, int enemyCount);
         public abstract int GetTargets(string id);
         public abstract int UseAbility(string id);
+        public abstract double setStatusEffect(string id);
+
+        public virtual void Defend(int incomingDmg)
+        {
+            var dmg = incomingDmg - (Armor / 4);
+            if (dmg > 1)
+                Health -= dmg;
+            else Health -= 1;
+        }
+
+        public virtual void TrueDmgDefend(int incomingDmg)
+        {
+            if (incomingDmg > 1)
+                Health -= incomingDmg;
+            else Health -= 1;
+        }
 
         public override string ToString()
         {
@@ -54,15 +70,18 @@ namespace CharacterClassLibrary
             Statuses = keepList;
         }
 
-        public void SetStatuses(string id, List<Player> players, List<NPC> enemies)
+        public void SetStatuses(string id, List<Player> players, List<NPC> enemies, int targetPosition)
         {
-            var targetList = setStatusTargets(id);
+            var targetList = setStatusTargets(id, targetPosition, enemies.Count);
+            var effect = setStatusEffect(id);
             if (targetList.Count > 0)
             {
-                var status = Status.Create(id);
+                var status = Status.Create(id, targetList, effect);
                 foreach (var thing in targetList)
                 {
-                    var target = players.Find(x => x.Position == thing);
+                    Character target = players.Find(x => x.Position == thing);
+                    if (target == null)
+                        target = enemies.Find(x => x.Position == thing);
                     target.Statuses.Add(status);
                 }
             }
@@ -75,6 +94,15 @@ namespace CharacterClassLibrary
                 if (status is CombatLogicClassLibrary.Statuses.Stun) return true;
             }
             return false;
+        }
+
+        public void ApplyDoT()
+        {
+            foreach (var status in Statuses)
+            {
+                if (status is CombatLogicClassLibrary.Statuses.DoT)
+                    Defend(Convert.ToInt32(status.Effect));
+            }
         }
 
         protected double getAttackMultiplier()

@@ -14,10 +14,12 @@ namespace MissionClassLibrary
         private List<NPC> enemies;
         private List<Player> players;
         private int turn;
+        private int level;
 
         public List<NPC> Enemies { get => enemies; set => enemies = value; }
         public List<Player> Players { get => players; set => players = value; }
         public int Turn { get => turn; set => turn = value; }
+        public int Level { get => level; set => level = value; }
 
         public static Mission Create(MissionList missions, List<Player> players)
         {
@@ -26,6 +28,7 @@ namespace MissionClassLibrary
                 case MissionList.Tutorial: return new Missions.Tutorial(players);
                 case MissionList.NextStep: return new Missions.NextStep(players);
                 case MissionList.FirstChallenge: return new Missions.FirstChallenge(players);
+                case MissionList.SomethingNew: return new Missions.SomethingNew(players);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -35,7 +38,8 @@ namespace MissionClassLibrary
             if (players[playerIndex - 1].isStunned() == false)
             {
                 var targetCount = players[playerIndex - 1].GetTargets(id);
-                var targets = setTargets(enemyIndex, targetCount);
+                var util = new Utils.TargetSetter();
+                var targets = util.setTargets(enemyIndex, targetCount, Enemies.Count);
                 if (enemies[enemyIndex - 5].Health > 0)
                 {
                     foreach (var target in targets)
@@ -43,7 +47,9 @@ namespace MissionClassLibrary
                         if (enemies[target - 5].Health > 0)
                         {
                             var dmg = players[playerIndex - 1].UseAbility(id);
-                            enemies[target - 5].Defend(dmg);
+                            if (Utils.TrueDamageAbilities.IsTrueDmg(id))
+                                enemies[target - 5].TrueDmgDefend(dmg);
+                            else enemies[target - 5].Defend(dmg);
                         }
                     }
                 }
@@ -59,10 +65,21 @@ namespace MissionClassLibrary
                 var id = enemies[enemyIndex].ChooseAbility();
                 var targetCount = enemies[enemyIndex].GetTargets(id);
                 var dmg = enemies[enemyIndex].UseAbility(id);
-                var defender = enemies[enemyIndex].ChooseEnemy(players);
-                if (players[defender].Health > 0)
+                var defender = enemies[enemyIndex].ChooseEnemy(players) + 1;
+                if (players[defender - 1].Health > 0)
                 {
-                    players[defender].Defend(dmg);
+                    var util = new Utils.TargetSetter();
+                    var targets = util.setTargets(defender, targetCount);
+
+                    foreach (var target in targets)
+                    {
+                        if (players[target - 1].Health > 0)
+                        {
+                            if (Utils.TrueDamageAbilities.IsTrueDmg(id))
+                                players[target - 1].TrueDmgDefend(dmg);
+                            else players[target - 1].Defend(dmg);
+                        }
+                    }
                 }
                 else if (CheckLoss())
                     return;
@@ -70,9 +87,9 @@ namespace MissionClassLibrary
             }
         }
 
-        public void SetStatuses(int playerIndex, string id)
+        public void SetStatuses(int playerIndex, string id, int targetPosition)
         {
-            Players[playerIndex - 1].SetStatuses(id, players, enemies);
+            Players[playerIndex - 1].SetStatuses(id, players, enemies, targetPosition);
         }
 
         public bool isAlive(int index)
@@ -108,11 +125,13 @@ namespace MissionClassLibrary
         {
             foreach (var player in Players)
             {
+                player.ApplyDoT();
                 player.ModifyStatusLength();
                 player.ModifyCooldownLength();
             }
             foreach (var enemy in Enemies)
             {
+                enemy.ApplyDoT();
                 enemy.ModifyStatusLength();
             }
         }
@@ -135,7 +154,7 @@ namespace MissionClassLibrary
             value += enemyLevel - playerLevel;
             return value;
         }
-
+        /*
         private List<int> setTargets(int index, int targets)
         {
             var result = new List<int>();
@@ -210,6 +229,6 @@ namespace MissionClassLibrary
                 result.Add(8);
             }
             return result;
-        }
+        }*/
     }
 }

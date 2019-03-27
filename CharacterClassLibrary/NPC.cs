@@ -9,7 +9,6 @@ namespace CharacterClassLibrary
     [Serializable]
     public abstract class NPC : Character
     {
-        public abstract void Defend(int incomingDmg);
         public abstract string ChooseAbility();
         public int ChooseEnemy(List<Player> players)
         {

@@ -23,6 +23,7 @@ namespace CharacterClassLibrary
             item.Armor = getItemArmor(item.ItemType, item.ItemPlace, level);
             var usablePower = getItemPower(item.ItemPlace, item.Level);
             spreadPower(usablePower, item, type);
+            item.Name = randomName();
 
             return item;
         }
@@ -201,6 +202,13 @@ namespace CharacterClassLibrary
                     }
                 }
             }
+        }
+
+        private string randomName()
+        {
+            var nameList = new List<string>() { "Unicorn", "Rainbow", "Marshmallow", "Sweet Bunny" };
+            var random = Utils.RandomProvider.GetRandom(0, nameList.Count - 1);
+            return nameList[random];
         }
     }
 }

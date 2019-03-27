@@ -38,7 +38,6 @@ namespace CharacterClassLibrary
         public abstract string[] Ability2();
         public abstract string[] Ability3();
         public abstract string[] Ability4();
-        public abstract void Defend(int incomingDmg);
 
         public void ModifyCooldownLength()
         {
@@ -50,6 +49,12 @@ namespace CharacterClassLibrary
                     newcd[i] = cooldowns[i];
             }
             Cooldowns = newcd;
+        }
+
+        public virtual void LevelUp()
+        {
+            Health += 20;
+            Strength += 2;
         }
     }
 }

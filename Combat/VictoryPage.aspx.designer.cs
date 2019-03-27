@@ -40,13 +40,13 @@ namespace Combat {
         protected global::System.Web.UI.WebControls.Label lootLabel;
         
         /// <summary>
-        /// RadioButtonList1 control.
+        /// playerRadioButtonList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
+        protected global::System.Web.UI.WebControls.RadioButtonList playerRadioButtonList;
         
         /// <summary>
         /// currentLabel control.

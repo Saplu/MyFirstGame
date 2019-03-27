@@ -20,13 +20,15 @@
             <br />
             <br />
             Select which player to give loot:<br />
-            <asp:RadioButtonList ID="RadioButtonList1" runat="server">
+            <asp:RadioButtonList ID="playerRadioButtonList" runat="server" AutoPostBack="True">
             </asp:RadioButtonList>
             Currently wearing:<br />
             <asp:Label ID="currentLabel" runat="server"></asp:Label>
             <br />
             <br />
             <asp:Button ID="okButton" runat="server" OnClick="okButton_Click" Text="Great!" />
+            <br />
+            <br />
         </div>
     </form>
 </body>

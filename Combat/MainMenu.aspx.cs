@@ -17,15 +17,6 @@ namespace Combat
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var rand = new RandomItemGenerator();
-            var ittem = rand.CreateItem(2);
-            var item2 = rand.CreateItem(2);
-            var item3 = rand.CreateItem(2);
-            var item4 = rand.CreateItem(2);
-            var item5 = rand.CreateItem(10);
-
-
-
             if (!Page.IsPostBack)
             {
                 var list = new List<string>();

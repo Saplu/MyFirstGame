@@ -32,7 +32,7 @@ namespace CharacterClassLibrary
         public ItemPlace ItemPlace { get => itemPlace; set => itemPlace = value; }
         public string Owner { get => owner; set => owner = value; }
 
-        public Item(int health, int strength, int crit, int spellPower, int armor, string name, int level,
+        public Item(int health, int strength, double crit, int spellPower, int armor, string name, int level,
             ItemType itemtype, ItemPlace itemplace, string owner)
         {
             Health = health;
@@ -50,6 +50,12 @@ namespace CharacterClassLibrary
         public Item(int level)
         {
             Level = level;
+        }
+
+        public override string ToString()
+        {
+            return name + "<br/>Health: " + health + "<br/>Strength: " + strength + "<br/>Spellpower: " + spellpower +
+                "<br/>Armor: " + armor + "<br/>Crit: " + crit + "<br/><br/>" + itemType.ToString() + " " + itemPlace.ToString();
         }
     }
 }

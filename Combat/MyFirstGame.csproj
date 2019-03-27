@@ -92,6 +92,7 @@
     <Content Include="Combat.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MainMenu.aspx" />
+    <Content Include="Pictures\Goblin.jpg" />
     <Content Include="Pictures\ninja.jpg" />
     <Content Include="Pictures\Pasi.jpg" />
     <Content Include="Pictures\welho.jpg" />

@@ -9,64 +9,64 @@ using Utils;
 namespace CharacterClassLibrary.NPCClasses
 {
     [Serializable]
-    public class Rabbit : NPC, Interfaces.CombatInterface
+    public class Goblin : NPC, Interfaces.CombatInterface
     {
-        public Rabbit(int level)
+        public Goblin(int level)
         {
             Level = level;
-            Health = 80 + (level * 25);
+            Health = 70 + (35 * level);
             MaxHealth = Health;
-            Strength = 8 + (level * 2);
+            Strength = 7 + (level * 4);
             Crit = 10;
             SpellPower = 0;
-            Armor = 5 + (level * 3);
+            Armor = level * 5;
             Statuses = new List<CombatLogicClassLibrary.Status>();
         }
 
-        private int kick()
+        private int whirlwind()
         {
             var multi = getAttackMultiplier();
             var increase = getAttackModifier();
-            var kick = new Kick();
-            return kick.Action(Strength, Crit, multi, increase);
+            var whirl = new Whirlwind();
+            return whirl.Action(Strength, Crit, multi, increase);
         }
 
-        private int bite()
+        private int execute()
         {
             var multi = getAttackMultiplier();
             var increase = getAttackModifier();
-            var bite = new Bite();
-            return bite.Action(Strength, Crit, multi, increase);
+            var exe = new Execute();
+            return exe.Action(Strength, Crit, multi, increase);
         }
-        
+
         public override string ChooseAbility()
         {
-            if (RandomProvider.GetRandom(1, 100) > 50)
-                return "Kick";
-            else return "Bite";
+            if (RandomProvider.GetRandom(1, 100) > 70)
+                return "Whirlwind";
+            else return "Execute";
         }
 
         public override int GetTargets(string id)
         {
-            if (id == "Kick")
-                return 1;
-            else if (id == "Bite")
+            if (id == "Whirlwind")
+                return 2;
+            else if (id == "Execute")
                 return 1;
             else return 1;
         }
 
         public override int UseAbility(string id)
         {
-            if (id == "Kick")
-                return kick();
-            else if (id == "Bite")
-                return bite();
+            if (id == "Whirlwind")
+                return whirlwind();
+            else if (id == "Execute")
+                return execute();
             else return 1;
         }
 
         public override string setPic()
         {
-            return "Pictures\\Pasi.jpg";
+            return "Pictures\\Goblin.jpg";
         }
 
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)

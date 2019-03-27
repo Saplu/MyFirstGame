@@ -9,5 +9,6 @@ namespace CharacterClassLibrary.Interfaces
     public interface CombatInterface
     {
         void Defend(int dmg);
+        void TrueDmgDefend(int dmg);
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="Interfaces\PlayerInterface.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="NPC.cs" />
+    <Compile Include="NPCClasses\Goblin.cs" />
     <Compile Include="NPCClasses\Rabbit.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerClasses\Mage.cs" />

@@ -30,6 +30,7 @@ namespace CharacterClassLibrary
             {
                 case ClassName.Warrior: return new PlayerClasses.Warrior("asd");
                 case ClassName.Mage: return new PlayerClasses.Mage("asd");
+                case ClassName.BloodPriest: return new PlayerClasses.BloodPriest("asd");
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -55,6 +56,13 @@ namespace CharacterClassLibrary
         {
             Health += 20;
             Strength += 2;
+        }
+
+        public virtual void RecieveHeal(int amount)
+        {
+            if (MaxHealth - Health >= amount)
+                Health += amount;
+            else Health = MaxHealth;
         }
     }
 }

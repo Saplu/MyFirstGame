@@ -25,6 +25,7 @@ namespace CombatLogicClassLibrary
             {
                 case "Battle Cry": return new Statuses.AttackDmgMultiplier(1, targets, effect);
                 case "Lava Field": return new Statuses.DoT(1, targets, Convert.ToInt32(effect));
+                case "Weaken Blood": return new Statuses.TakenDmgModifier(1, targets, Convert.ToInt32(effect));
                 default: return null;
             }
         }

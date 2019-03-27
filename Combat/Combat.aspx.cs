@@ -26,6 +26,7 @@ namespace Combat
                 ViewState.Add("ID", "");
                 ViewState.Add("Player", "");
                 ViewState.Add("Mission", mission);
+                ViewState.Add("Targets", "");
 
                 setPictures();
                 setLabels();
@@ -36,80 +37,120 @@ namespace Combat
         protected void player1ImageButton_Click(object sender, ImageClickEventArgs e)
         {
             var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-            if (mission.isAlive(0))
+            if (ViewState["Targets"].ToString() == "Heal")
             {
-                displaySkills(0);
-                skillOnCooldown(0);
+                try
+                {
+                    heal(1);
+                }
+                catch (Exception ex)
+                { resultLabel.Text = ex.Message; }
+            }
+            else
+            {
+                if (mission.isAlive(0))
+                {
+                    displaySkills(0);
+                    skillOnCooldown(0);
+                }
             }
         }
 
         protected void player2ImageButton_Click(object sender, ImageClickEventArgs e)
         {
             var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-            if (mission.isAlive(1))
+            if (ViewState["Targets"].ToString() == "Heal")
             {
-                displaySkills(1);
-                skillOnCooldown(1);
+                try
+                {
+                    heal(2);
+                }
+                catch (Exception ex)
+                { resultLabel.Text = ex.Message; }
+            }
+            else
+            {
+                if (mission.isAlive(1))
+                {
+                    displaySkills(1);
+                    skillOnCooldown(1);
+                }
             }
         }
 
         protected void player3ImageButton_Click(object sender, ImageClickEventArgs e)
         {
             var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-            if (mission.isAlive(2))
+            if (ViewState["Targets"].ToString() == "Heal")
             {
-                displaySkills(2);
-                skillOnCooldown(2);
+                try
+                {
+                    heal(3);
+                }
+                catch (Exception ex)
+                { resultLabel.Text = ex.Message; }
+            }
+            else
+            {
+                if (mission.isAlive(2))
+                {
+                    displaySkills(2);
+                    skillOnCooldown(2);
+                }
             }
         }
 
         protected void player4ImageButton_Click(object sender, ImageClickEventArgs e)
         {
             var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-            if (mission.isAlive(3))
+            if (ViewState["Targets"].ToString() == "Heal")
             {
-                displaySkills(3);
-                skillOnCooldown(3);
+                try
+                {
+                    heal(4);
+                }
+                catch (Exception ex)
+                { resultLabel.Text = ex.Message; }
+            }
+            else
+            {
+                if (mission.isAlive(3))
+                {
+                    displaySkills(3);
+                    skillOnCooldown(3);
+                }
             }
         }
 
         protected void skill1Button_Click(object sender, EventArgs e)
         {
             ViewState["ID"] = skill1Button.Text;
-            enableEnemies();
+            healOrDmg(skill1Button.Text);
         }
 
         protected void skill2Button_Click(object sender, EventArgs e)
         {
             ViewState["ID"] = skill2Button.Text;
-            enableEnemies();
+            healOrDmg(skill2Button.Text);
         }
 
         protected void skill3Button_Click(object sender, EventArgs e)
         {
             ViewState["ID"] = skill3Button.Text;
-            enableEnemies();
+            healOrDmg(skill3Button.Text);
         }
 
         protected void skill4Button_Click(object sender, EventArgs e)
         {
             ViewState["ID"] = skill4Button.Text;
-            enableEnemies();
+            healOrDmg(skill4Button.Text);
         }
 
         protected void enemy1ImageButton_Click(object sender, ImageClickEventArgs e)
         {
             try
             {
-                resultLabel.Text = "";
-                var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(5, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 5);
-                setLabels();
-                ViewState["Mission"] = mission;
-                actionDone();
-                attackDone();
-                victory(mission);
+                attack(5);
             }
             catch (Exception ex)
             { resultLabel.Text = ex.Message; }
@@ -119,15 +160,7 @@ namespace Combat
         {
             try
             {
-                resultLabel.Text = "";
-                var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(6, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 6);
-                setLabels();
-                ViewState["Mission"] = mission;
-                actionDone();
-                attackDone();
-                victory(mission);
+                attack(6);
             }
             catch (Exception ex)
             { resultLabel.Text = ex.Message; }
@@ -137,15 +170,7 @@ namespace Combat
         {
             try
             {
-                resultLabel.Text = "";
-                var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(7, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 7);
-                setLabels();
-                ViewState["Mission"] = mission;
-                actionDone();
-                attackDone();
-                victory(mission);
+                attack(7);
             }
             catch (Exception ex)
             { resultLabel.Text = ex.Message; }
@@ -155,15 +180,7 @@ namespace Combat
         {
             try
             {
-                resultLabel.Text = "";
-                var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-                mission.EnemyDefend(8, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
-                mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), 8);
-                setLabels();
-                ViewState["Mission"] = mission;
-                actionDone();
-                attackDone();
-                victory(mission);
+                attack(8);
             }
             catch (Exception ex)
             { resultLabel.Text = ex.Message; }
@@ -207,6 +224,33 @@ namespace Combat
             Server.Transfer("VictoryPage.aspx");
         }
 
+        private void heal(int player)
+        {
+            var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
+            resultLabel.Text = "";
+            mission.PlayerHeal(player, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
+            mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), player);
+            setLabels();
+            ViewState["Mission"] = mission;
+            actionDone();
+            attackDone();
+            healDone();
+            victory(mission);
+        }
+
+        private void attack(int target)
+        {
+            resultLabel.Text = "";
+            var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
+            mission.EnemyDefend(target, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
+            mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), target);
+            setLabels();
+            ViewState["Mission"] = mission;
+            actionDone();
+            attackDone();
+            victory(mission);
+        }
+
         private void enableEnemies()
         {
             enemy1ImageButton.Enabled = true;
@@ -245,13 +289,16 @@ namespace Combat
 
         private void turnOver(int turn)
         {
+            enablePlayers();
+            turnLabel.Text = "Turn: " + turn.ToString();
+        }
+        private void enablePlayers()
+        {
             player1ImageButton.Enabled = true;
             player2ImageButton.Enabled = true;
             player3ImageButton.Enabled = true;
             player4ImageButton.Enabled = true;
-            turnLabel.Text = "Turn: " + turn.ToString();
         }
-
         private void gameOver(MissionClassLibrary.Mission mission)
         {
             if (mission.CheckLoss())
@@ -426,6 +473,25 @@ namespace Combat
                 enemy4ImageButton.BorderColor = System.Drawing.Color.Red;
             }
             else enemy4ImageButton.BorderColor = System.Drawing.Color.White;
+        }
+
+        private void healOrDmg(string id)
+        {
+            if (Utils.HealAbilities.IsHeal(id))
+            {
+                enablePlayers();
+                ViewState["Targets"] = "Heal";
+            }
+            else
+            {
+                enableEnemies();
+                ViewState["Targets"] = "Dmg";
+            }
+        }
+
+        private void healDone()
+        {
+            ViewState["Targets"] = "Dmg";
         }
     }
 }

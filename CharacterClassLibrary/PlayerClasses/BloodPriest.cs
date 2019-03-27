@@ -1,0 +1,135 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AbilityClassLibrary.BloodPriest;
+
+namespace CharacterClassLibrary.PlayerClasses
+{
+    [Serializable]
+    public class BloodPriest : Player, Interfaces.CombatInterface, Interfaces.PlayerInterface
+    {
+        public BloodPriest(string name)
+        {
+            Health = 85;
+            MaxHealth = Health;
+            Strength = 5;
+            SpellPower = 20;
+            Armor = 0;
+            Level = 1;
+            Xp = 0;
+            Name = name;
+            ClassName = Enums.ClassName.BloodPriest;
+            Items = new List<Item>();
+            ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth, Enums.ItemType.Leather };
+            Statuses = new List<CombatLogicClassLibrary.Status>();
+            Cooldowns = new int[4] { 0, 0, 0, 5 };
+        }
+
+        private int lifeLeech()
+        {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
+            var leech = new LifeLeech();
+            Cooldowns[0] = leech.Cooldown;
+            RecieveHeal(leech.Action(SpellPower, Crit, multi, increase));
+            return leech.Action(SpellPower, Crit, multi, increase);
+        }
+
+        public override string[] Ability1()
+        {
+            var leech = new LifeLeech();
+            return leech.Info();
+        }
+
+        private int heal()
+        {
+            var multi = 1;
+            var increase = 0;
+            var heal = new Heal();
+            Cooldowns[1] = heal.Cooldown;
+            return heal.Action(SpellPower, Crit, multi, increase);
+        }
+
+        public override string[] Ability2()
+        {
+            var heal = new Heal();
+            return heal.Info();
+        }
+
+        private int weakenBlood()
+        {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
+            var weak = new WeakenBlood();
+            Cooldowns[2] = weak.Cooldown;
+            return weak.Action(SpellPower, Crit, multi, increase);
+        }
+
+        public override string[] Ability3()
+        {
+            var weak = new WeakenBlood();
+            return weak.Info();
+        }
+
+        public override string[] Ability4()
+        {
+            var leech = new LifeLeech();
+            return leech.Info();
+        }
+
+        public override int UseAbility(string id)
+        {
+            if (id == "Life Leech")
+                return lifeLeech();
+            if (id == "Heal")
+                return heal();
+            if (id == "Weaken Blood")
+                return weakenBlood();
+            else return 1;
+        }
+
+        public override int GetTargets(string id)
+        {
+            if (id == "Life Leech")
+                return 1;
+            if (id == "Heal")
+                return 1;
+            if (id == "Weaken Blood")
+                return 1;
+            else return 1;
+        }
+
+        public override string setPic()
+        {
+            return "Pictures\\BloodPriest.jpg";
+        }
+
+        public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)
+        {
+            var list = new List<int>();
+            if (id == "Weaken Blood")
+            {
+                var util = new Utils.TargetSetter();
+                list = util.setTargets(targetPosition, 1, enemyCount);
+            }
+            return list;
+        }
+
+        public override double setStatusEffect(string id)
+        {
+            if (id == "Weaken Blood")
+            {
+                return Convert.ToInt32(SpellPower * .4);
+            }
+            else return 0;
+        }
+
+        public override void LevelUp()
+        {
+            Health += 17;
+            SpellPower += 2;
+        }
+    }
+}

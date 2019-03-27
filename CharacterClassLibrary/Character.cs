@@ -38,7 +38,8 @@ namespace CharacterClassLibrary
 
         public virtual void Defend(int incomingDmg)
         {
-            var dmg = incomingDmg - (Armor / 4);
+            var dmg = getDefenseModifier() + incomingDmg;
+            dmg -= (armor / 4);
             if (dmg > 1)
                 Health -= dmg;
             else Health -= 1;
@@ -110,7 +111,7 @@ namespace CharacterClassLibrary
             var attackMultiplier = (double)1;
             foreach (var status in statuses)
             {
-                if (status.Name == StatusEnums.AttackDmgMultiplier)
+                if (status is CombatLogicClassLibrary.Statuses.AttackDmgMultiplier)
                     attackMultiplier += (status.Effect - 1);
             }
             return attackMultiplier;
@@ -121,10 +122,21 @@ namespace CharacterClassLibrary
             var attackModifier = 0;
             foreach (var status in statuses)
             {
-                if (status.Name == StatusEnums.AttackDmgModifier)
+                if (status is CombatLogicClassLibrary.Statuses.AttackDmgModifier)
                     attackModifier += Convert.ToInt32(status.Effect);
             }
             return attackModifier;
+        }
+
+        private int getDefenseModifier()
+        {
+            var defenseModifier = 0;
+            foreach (var status in statuses)
+            {
+                if (status is CombatLogicClassLibrary.Statuses.TakenDmgModifier)
+                    defenseModifier += Convert.ToInt32(status.Effect);
+            }
+            return defenseModifier;
         }
     }
 }

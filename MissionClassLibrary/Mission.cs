@@ -87,6 +87,25 @@ namespace MissionClassLibrary
             }
         }
 
+        public void PlayerHeal(int targetIndex, int playerIndex, string id)
+        {
+            if (players[targetIndex - 1].Health > 0)
+            {
+                var targetCount = players[playerIndex - 1].GetTargets(id);
+                var util = new Utils.TargetSetter();
+                var targets = util.setTargets(targetIndex, targetCount, Enemies.Count);
+                foreach (var player in targets)
+                {
+                    if (players[player - 1].Health > 0)
+                    {
+                        var heal = players[playerIndex - 1].UseAbility(id);
+                        players[player - 1].RecieveHeal(heal);
+                    }
+                }
+            }
+            else throw new Exception("Healing dead people won't make any good to the mankind.");
+        }
+
         public void SetStatuses(int playerIndex, string id, int targetPosition)
         {
             Players[playerIndex - 1].SetStatuses(id, players, enemies, targetPosition);

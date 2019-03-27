@@ -92,6 +92,7 @@
     <Content Include="Combat.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MainMenu.aspx" />
+    <Content Include="Pictures\BloodPriest.jpg" />
     <Content Include="Pictures\Goblin.jpg" />
     <Content Include="Pictures\ninja.jpg" />
     <Content Include="Pictures\Pasi.jpg" />
@@ -184,6 +185,10 @@
     <ProjectReference Include="..\MissionClassLibrary\MissionClassLibrary.csproj">
       <Project>{8bfd2f25-a6b9-42eb-8dd9-565032b6707d}</Project>
       <Name>MissionClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{2f323d45-2668-416f-8756-02372be8e5ec}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

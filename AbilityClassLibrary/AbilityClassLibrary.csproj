@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ability.cs" />
+    <Compile Include="BloodPriest\Heal.cs" />
+    <Compile Include="BloodPriest\LifeLeech.cs" />
+    <Compile Include="BloodPriest\WeakenBlood.cs" />
     <Compile Include="Mage\Fireball.cs" />
     <Compile Include="Mage\FireWithin.cs" />
     <Compile Include="Mage\LavaField.cs" />

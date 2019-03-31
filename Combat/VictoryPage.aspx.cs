@@ -12,7 +12,8 @@ namespace Combat
 {
     public partial class VictoryPage : System.Web.UI.Page
     {
-        CharacterDbEntities db = new CharacterDbEntities();
+        DAO.CharacterDAO dao = new DAO.CharacterDAO();
+        DAO.ItemDAO itemDAO = new DAO.ItemDAO();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,9 +24,8 @@ namespace Combat
                 ViewState.Add("Survivors", survivors);
                 var mission = (MissionClassLibrary.Mission)Context.Items["Mission"];
                 ViewState.Add("Mission", mission);
-                var dbPlayers = db.Player.ToList();
 
-                var players = getPlayers(dbPlayers, party);
+                var players = dao.GetPlayers(party);
 
                 var item = new RandomItemGenerator();
                 var reward = item.CreateItem(mission.Level);
@@ -44,35 +44,29 @@ namespace Combat
         protected void okButton_Click(object sender, EventArgs e)
         {
             var item = (CharacterClassLibrary.Item)ViewState["Loot"];
-            var dbPlayers = db.Player.ToList();
             var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
+            var xp = mission.CalculateXp();
             var tryThis = playerRadioButtonList.SelectedValue;
             var target = mission.Players.Find(x => x.Name == tryThis);
-            var items = db.Item.ToList();
+            var items = itemDAO.GetItems();
             var survivors = (List<string>)ViewState["Survivors"];
-            var xpGainers = getSurvivors(dbPlayers, survivors);
+            var xpGainers = dao.GetSurvivors(survivors);
 
             if (tryThis == "Inventory")
             {
-                modifyXp(xpGainers);
+                dao.ModifyXp(xpGainers, xp);
                 item.Owner = tryThis;
                 var reward = convertToDbItem(item);
-                var previous = items.Last().Id;
-                reward.Id = previous + 1;
-                db.Item.Add(reward);
-                db.SaveChanges();
+                itemDAO.AddNewItem(reward);
                 Server.Transfer("MainMenu.aspx");
             }
             else if (target.ItemTypes.Exists(x => x == item.ItemType))
             {
-                removeCurrentItem(item.ItemPlace, target);
-                modifyXp(xpGainers);
+                itemDAO.removeCurrentItem(Convert.ToInt32(item.ItemPlace), target.Name);
+                dao.ModifyXp(xpGainers, xp);
                 item.Owner = target.Name;
                 var reward = convertToDbItem(item);
-                var previous = items.Last().Id;
-                reward.Id = previous + 1;
-                db.Item.Add(reward);
-                db.SaveChanges();
+                itemDAO.AddNewItem(reward);
                 Server.Transfer("MainMenu.aspx");
             }
             else currentLabel.Text = "Cannot wear the armor type.";
@@ -80,61 +74,20 @@ namespace Combat
 
         private void PlayerRadioButtonList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var items = db.Item.ToList();
+            var items = itemDAO.GetItems();
             var loot = (CharacterClassLibrary.Item)ViewState["Loot"];
             if (items.Exists(x => x.Owner == playerRadioButtonList.SelectedValue && x.Place == Convert.ToInt32(loot.ItemPlace)))
             {
                 var item = items.Find(x => x.Owner == playerRadioButtonList.SelectedValue &&
                 x.Place == Convert.ToInt32(loot.ItemPlace));
-                currentLabel.Text = itemToString(item);
+                currentLabel.Text = itemDAO.itemToString(item);
             }
             else currentLabel.Text = "Nothing equipped.";
         }
-        
-        private List<Player> getSurvivors(List<Player> db, List<string> survivors)
-        {
-            var survive = new List<Player>();
-            foreach(var thing in db)
-            {
-                if (survivors.Exists(x => x == thing.Id))
-                    survive.Add(thing);
-            }
-            return survive;
-        }
-        
-        private List<Player> getPlayers(List<Player> db, List<string> players)
-        {
-            var plays = new List<Player>();
-            foreach (var thing in db)
-            {
-                if (players.Exists(x => x == thing.Id))
-                    plays.Add(thing);
-            }
-            return plays;
-        }
 
-        private void modifyXp(List<Player> gainers)
+        private DAO.Item convertToDbItem(CharacterClassLibrary.Item item)
         {
-            var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-            var xp = mission.CalculateXp();
-            foreach (var player in gainers)
-            {
-                player.Xp += xp;
-                checkForLevelup(player);
-            }            
-            db.SaveChanges();
-        }
-
-        private string itemToString(Item item)
-        {
-            var value = item.Name + "<br/>Health: " + item.Health + "<br/>Strength: " + item.Strength + 
-                "<br/>Spellpower: " + item.SpellPower + "<br/>Armor: " + item.Armor + "<br/>Crit: " + item.Crit;
-            return value;
-        }
-
-        private Item convertToDbItem(CharacterClassLibrary.Item item)
-        {
-            var dbItem = new Item();
+            var dbItem = new DAO.Item();
             dbItem.Armor = item.Armor;
             dbItem.Crit = item.Crit;
             dbItem.Health = item.Health;
@@ -146,30 +99,5 @@ namespace Combat
             dbItem.Name = item.Name;
             return dbItem;
         }
-
-        private void removeCurrentItem(ItemPlace itemPlace, CharacterClassLibrary.Player target)
-        {
-            if (db.Item.ToList().Exists(x => x.Owner == target.Name && x.Place == Convert.ToInt32(itemPlace)))
-            {
-                var item = db.Item.ToList().Find(x => x.Owner == target.Name && x.Place == Convert.ToInt32(itemPlace));
-                item.Owner = "Inventory";
-            }
-        }
-
-        private void checkForLevelup(Player player)
-        {
-            if (player.Xp >= (player.Level * 100))
-            {
-                player.Xp -= (player.Level * 100);
-                player.Level++;
-                var className = (ClassName)Enum.Parse(typeof(ClassName), player.Class.ToString());
-                var Player = CharacterClassLibrary.Player.Create(className);
-                Player.LevelUp();
-                player.Health = Player.Health;
-                player.Strength = Player.Strength;
-                player.SpellPower = Player.SpellPower;
-            }
-        }
-
     }
 }

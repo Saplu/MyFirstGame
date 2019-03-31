@@ -33,7 +33,7 @@ namespace MissionClassLibrary
             }
         }
 
-        public void EnemyDefend(int enemyIndex, int playerIndex, string id, int enemyCount)
+        public void EnemyDefend(int enemyIndex, int playerIndex, string id)
         {
             if (players[playerIndex - 1].isStunned() == false)
             {
@@ -171,7 +171,9 @@ namespace MissionClassLibrary
             foreach (var enemy in Enemies)
                 enemyLevel += enemy.Level;
             value += enemyLevel - playerLevel;
-            return value;
+            if (value > 0)
+                return value;
+            else return 0;
         }
         /*
         private List<int> setTargets(int index, int targets)

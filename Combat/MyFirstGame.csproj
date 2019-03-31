@@ -43,12 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -79,16 +73,6 @@
     <Content Include="App_Data\CharacterDb_log.ldf">
       <DependentUpon>CharacterDb.mdf</DependentUpon>
     </Content>
-    <Content Include="CharacterDbEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CharacterDbEntities.Context.cs</LastGenOutput>
-      <DependentUpon>CharacterDbEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="CharacterDbEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CharacterDbEntities.edmx</DependentUpon>
-      <LastGenOutput>CharacterDbEntities.cs</LastGenOutput>
-    </Content>
     <Content Include="Combat.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MainMenu.aspx" />
@@ -101,21 +85,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterDbEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CharacterDbEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CharacterDbEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CharacterDbEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CharacterDbEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CharacterDbEntities.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Combat.aspx.cs">
       <DependentUpon>Combat.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -126,21 +95,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Item.cs">
-      <DependentUpon>CharacterDbEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="MainMenu.aspx.cs">
       <DependentUpon>MainMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MainMenu.aspx.designer.cs">
       <DependentUpon>MainMenu.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Mission.cs">
-      <DependentUpon>CharacterDbEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Player.cs">
-      <DependentUpon>CharacterDbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VictoryPage.aspx.cs">
@@ -152,13 +112,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="CharacterDbEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CharacterDbEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="CharacterDbEntities.edmx.diagram">
-      <DependentUpon>CharacterDbEntities.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -181,6 +134,10 @@
     <ProjectReference Include="..\CombatLogicClassLibrary\CombatLogicClassLibrary.csproj">
       <Project>{63871ecc-b299-4f61-bfc7-77571cb3a7f2}</Project>
       <Name>CombatLogicClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{3bb55daf-b0ab-4e60-990f-7593ac25d5fc}</Project>
+      <Name>DAO</Name>
     </ProjectReference>
     <ProjectReference Include="..\MissionClassLibrary\MissionClassLibrary.csproj">
       <Project>{8bfd2f25-a6b9-42eb-8dd9-565032b6707d}</Project>

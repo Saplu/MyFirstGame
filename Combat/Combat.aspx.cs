@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -242,7 +241,7 @@ namespace Combat
         {
             resultLabel.Text = "";
             var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-            mission.EnemyDefend(target, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), mission.Enemies.Count);
+            mission.EnemyDefend(target, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
             mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), target);
             setLabels();
             ViewState["Mission"] = mission;

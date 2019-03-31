@@ -7,14 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Combat
+namespace DAO
 {
     using System;
     using System.Collections.Generic;
-    
+    [Serializable]
     public partial class Mission
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public int foe1Class { get; set; }
         public int foe1Level { get; set; }
         public Nullable<int> foe2Class { get; set; }
@@ -23,6 +24,5 @@ namespace Combat
         public Nullable<int> foe3Level { get; set; }
         public Nullable<int> foe4Class { get; set; }
         public Nullable<int> foe4Level { get; set; }
-        public string Name { get; set; }
     }
 }

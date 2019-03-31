@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Combat
+namespace DAO
 {
     using System;
     using System.Collections.Generic;
-    
+    [Serializable]
     public partial class Player
     {
         public string Id { get; set; }

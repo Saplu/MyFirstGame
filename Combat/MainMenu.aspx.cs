@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,14 +12,16 @@ namespace Combat
 {
     public partial class MainMenu : System.Web.UI.Page
     {
-        CharacterDbEntities db = new CharacterDbEntities();
+        DAO.CharacterDAO dao = new DAO.CharacterDAO();
+        DAO.ItemDAO itemDAO = new DAO.ItemDAO();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 var list = new List<string>();
-                foreach (var player in db.Player)
+                var players = dao.GetPlayers();
+                foreach (var player in players)
                     list.Add(player.Id);
 
                 player1DropDownList.DataSource = list;
@@ -32,9 +33,7 @@ namespace Combat
                 player4DropDownList.DataSource = list;
                 player4DropDownList.DataBind();
 
-                var missions = new List<string>();
-                foreach (var mission in db.Mission)
-                    missions.Add(mission.Name);
+                var missions = new List<string>() {"Tutorial", "NextStep", "FirstChallenge", "SomethingNew" };
 
                 fightRadioButtonList.DataSource = missions;
                 fightRadioButtonList.DataBind();
@@ -42,17 +41,18 @@ namespace Combat
                 ViewState.Add("Mission", "");
                 ViewState.Add("Players", "");
 
-                var players = new List<CharacterClassLibrary.Player>();
-                foreach (var player in db.Player)
+                var Players = new List<CharacterClassLibrary.Player>();
+                foreach (var player in players)
                 {
                     var character = CharacterClassLibrary.Player.Create((ClassName)player.Class);
                     getStats(character, player);
-                    players.Add(character);
+                    Players.Add(character);
                 }
-                
-                var items = getItems(db.Item);
 
-                foreach (var player in players)
+                var allItems = itemDAO.GetItems();
+                var items = getItems(allItems);
+
+                foreach (var player in Players)
                 {
                     foreach (var item in items)
                     {
@@ -60,8 +60,8 @@ namespace Combat
                             player.Items.Add(item);
                     }
                 }
-                players = getStats(players);
-                ViewState["Players"] = players;
+                Players = getStats(Players);
+                ViewState["Players"] = Players;
             }
         }
 
@@ -106,7 +106,7 @@ namespace Combat
             }
         }
 
-        private List<CharacterClassLibrary.Item> getItems(DbSet<Item> items)
+        private List<CharacterClassLibrary.Item> getItems(List<DAO.Item> items)
         {
             var list = new List<CharacterClassLibrary.Item>();
             foreach (var item in items)
@@ -118,7 +118,7 @@ namespace Combat
             return list;
         }
 
-        private CharacterClassLibrary.Player getStats(CharacterClassLibrary.Player character, Player player)
+        private CharacterClassLibrary.Player getStats(CharacterClassLibrary.Player character, DAO.Player player)
         {
             character.Armor = player.Armor;
             character.ClassName = (ClassName)player.Class;

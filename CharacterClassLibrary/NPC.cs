@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CombatLogicClassLibrary;
 
 namespace CharacterClassLibrary
 {
     [Serializable]
     public abstract class NPC : Character
     {
+        private Threat threat;
+
+        public Threat Threat { get => threat; set => threat = value; }
+
         public abstract string ChooseAbility();
-        public int ChooseEnemy(List<Player> players)
+
+        public int ChooseEnemy()
         {
-            return Utils.RandomProvider.GetRandom(0, players.Count - 1);
+            return Threat.ChooseEnemy();
         }
     }
 }

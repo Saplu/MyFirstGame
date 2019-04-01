@@ -11,7 +11,7 @@ namespace DAO
 {
     using System;
     using System.Collections.Generic;
-    [Serializable]
+
     public partial class Mission
     {
         public int Id { get; set; }

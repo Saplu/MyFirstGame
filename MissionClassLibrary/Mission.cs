@@ -65,7 +65,7 @@ namespace MissionClassLibrary
                 var id = enemies[enemyIndex].ChooseAbility();
                 var targetCount = enemies[enemyIndex].GetTargets(id);
                 var dmg = enemies[enemyIndex].UseAbility(id);
-                var defender = enemies[enemyIndex].ChooseEnemy(players) + 1;
+                var defender = enemies[enemyIndex].ChooseEnemy() + 1;
                 if (players[defender - 1].Health > 0)
                 {
                     var util = new Utils.TargetSetter();

@@ -21,6 +21,7 @@ namespace CharacterClassLibrary.NPCClasses
             SpellPower = 0;
             Armor = 5 + (level * 3);
             Statuses = new List<CombatLogicClassLibrary.Status>();
+            Threat = new CombatLogicClassLibrary.Threat();
         }
 
         private int kick()

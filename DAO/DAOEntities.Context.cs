@@ -15,6 +15,7 @@ namespace DAO
     
     public partial class CharacterDbEntities : DbContext
     {
+        
         public CharacterDbEntities()
             : base("name=CharacterDbEntities")
         {

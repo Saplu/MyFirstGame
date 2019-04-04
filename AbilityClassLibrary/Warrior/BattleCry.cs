@@ -21,12 +21,13 @@ namespace AbilityClassLibrary.Warrior
             var dmg = Convert.ToInt32(strength / 2);            
             return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);
         }
-
+        /*
         public Status ApplyStatus()
         {
             var list = new List<int>() { 1, 2, 3, 4 };
             var status = new CombatLogicClassLibrary.Statuses.AttackDmgMultiplier(1, list, 1.2);
             return status;
         }
+        */
     }
 }

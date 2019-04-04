@@ -44,17 +44,24 @@
     <Compile Include="Ability.cs" />
     <Compile Include="BloodPriest\Heal.cs" />
     <Compile Include="BloodPriest\LifeLeech.cs" />
+    <Compile Include="BloodPriest\Sacrifice.cs" />
     <Compile Include="BloodPriest\WeakenBlood.cs" />
     <Compile Include="Mage\Fireball.cs" />
     <Compile Include="Mage\FireWithin.cs" />
+    <Compile Include="Mage\Hellfire.cs" />
     <Compile Include="Mage\LavaField.cs" />
     <Compile Include="NPC\Bite.cs" />
     <Compile Include="NPC\Execute.cs" />
     <Compile Include="NPC\Kick.cs" />
     <Compile Include="NPC\Whirlwind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protector\ChallengingShout.cs" />
+    <Compile Include="Protector\DevastatingStrike.cs" />
+    <Compile Include="Protector\Sweep.cs" />
+    <Compile Include="Protector\TauntingBlow.cs" />
     <Compile Include="Warrior\Attack.cs" />
     <Compile Include="Warrior\BattleCry.cs" />
+    <Compile Include="Warrior\Execute.cs" />
     <Compile Include="Warrior\ViciousBlow.cs" />
   </ItemGroup>
   <ItemGroup />

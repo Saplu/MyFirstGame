@@ -24,9 +24,9 @@ namespace CharacterClassLibrary.PlayerClasses
             Name = name;
             ClassName = Enums.ClassName.Warrior;
             ItemTypes = new List<Enums.ItemType>
-            { Enums.ItemType.Cloth, Enums.ItemType.Leather, Enums.ItemType.Mail, Enums.ItemType.Plate };
+            { Enums.ItemType.Cloth, Enums.ItemType.Leather, Enums.ItemType.Mail};
             Statuses = new List<CombatLogicClassLibrary.Status>();
-            Cooldowns = new int[4] { 0, 0, 0, 5 };
+            Cooldowns = new int[4] { 0, 0, 0, 4 };
         }
 
         private int attack()
@@ -74,10 +74,19 @@ namespace CharacterClassLibrary.PlayerClasses
             return cry.Info();
         }
 
+        private int execute()
+        {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
+            var exe = new Execute();
+            Cooldowns[3] = exe.Cooldown;
+            return exe.Action(Strength, Crit, multi, increase);
+        }
+
         public override string[] Ability4()
         {
-            var attack = new Attack();
-            return attack.Info();
+            var exe = new Execute();
+            return exe.Info();
         }
 
         public override int UseAbility(string id)
@@ -88,6 +97,8 @@ namespace CharacterClassLibrary.PlayerClasses
                 return viciousBlow();
             else if (id == "Battle Cry")
                 return battleCry();
+            else if (id == "Execute")
+                return execute();
             else return 1;
         }
 
@@ -99,6 +110,8 @@ namespace CharacterClassLibrary.PlayerClasses
                 return 1;
             else if (id == "Battle Cry")
                 return 4;
+            else if (id == "Execute")
+                return 1;
             else return 1;
         }
 
@@ -120,7 +133,7 @@ namespace CharacterClassLibrary.PlayerClasses
             return list;
         }
 
-        public override double setStatusEffect(string id)
+        public override double setStatusEffect(string id, int targetPosition)
         {
             if (id == "Battle Cry")
                 return 1.2;

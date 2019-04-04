@@ -34,11 +34,12 @@ namespace CharacterClassLibrary
         public abstract List<int> setStatusTargets(string id, int targetPosition, int enemyCount);
         public abstract int GetTargets(string id);
         public abstract int UseAbility(string id);
-        public abstract double setStatusEffect(string id);
+        public abstract double setStatusEffect(string id, int targetPosition);
 
         public virtual void Defend(int incomingDmg)
         {
             var dmg = getDefenseModifier() + incomingDmg;
+            dmg = Convert.ToInt32(dmg * getDefenseMultiplier());
             dmg -= (armor / 4);
             if (dmg > 1)
                 Health -= dmg;
@@ -74,7 +75,7 @@ namespace CharacterClassLibrary
         public void SetStatuses(string id, List<Player> players, List<NPC> enemies, int targetPosition)
         {
             var targetList = setStatusTargets(id, targetPosition, enemies.Count);
-            var effect = setStatusEffect(id);
+            var effect = setStatusEffect(id, targetPosition);
             if (targetList.Count > 0)
             {
                 var status = Status.Create(id, targetList, effect);
@@ -137,6 +138,17 @@ namespace CharacterClassLibrary
                     defenseModifier += Convert.ToInt32(status.Effect);
             }
             return defenseModifier;
+        }
+
+        private double getDefenseMultiplier()
+        {
+            double multiplier = 1;
+            foreach (var status in statuses)
+            {
+                if (status is CombatLogicClassLibrary.Statuses.TakenDmgMultiplier)
+                    multiplier = multiplier * status.Effect;
+            }
+            return multiplier;
         }
     }
 }

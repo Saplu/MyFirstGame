@@ -24,7 +24,7 @@ namespace CharacterClassLibrary.PlayerClasses
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth, Enums.ItemType.Leather };
             Statuses = new List<CombatLogicClassLibrary.Status>();
-            Cooldowns = new int[4] { 0, 0, 0, 5 };
+            Cooldowns = new int[4] { 0, 0, 0, 0 };
         }
 
         private int lifeLeech()
@@ -73,10 +73,20 @@ namespace CharacterClassLibrary.PlayerClasses
             return weak.Info();
         }
 
+        private int sacrifice()
+        {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
+            var sacrifice = new Sacrifice();
+            Cooldowns[3] = sacrifice.Cooldown;
+            Health -= (Health / 10);
+            return sacrifice.Action(SpellPower, Crit, multi, increase);
+        }
+
         public override string[] Ability4()
         {
-            var leech = new LifeLeech();
-            return leech.Info();
+            var sacrifice = new Sacrifice();
+            return sacrifice.Info();
         }
 
         public override int UseAbility(string id)
@@ -87,6 +97,8 @@ namespace CharacterClassLibrary.PlayerClasses
                 return heal();
             if (id == "Weaken Blood")
                 return weakenBlood();
+            if (id == "Sacrifice")
+                return sacrifice();
             else return 1;
         }
 
@@ -97,6 +109,8 @@ namespace CharacterClassLibrary.PlayerClasses
             if (id == "Heal")
                 return 1;
             if (id == "Weaken Blood")
+                return 1;
+            if (id == "Sacrifice")
                 return 1;
             else return 1;
         }
@@ -114,14 +128,23 @@ namespace CharacterClassLibrary.PlayerClasses
                 var util = new Utils.TargetSetter();
                 list = util.setTargets(targetPosition, 1, enemyCount);
             }
+            if (id == "Sacrifice")
+            {
+                var util = new Utils.TargetSetter();
+                list = util.setTargets(targetPosition, 1);
+            }
             return list;
         }
 
-        public override double setStatusEffect(string id)
+        public override double setStatusEffect(string id, int targetPosition)
         {
             if (id == "Weaken Blood")
             {
                 return Convert.ToInt32(SpellPower * .4);
+            }
+            if (id == "Sacrifice")
+            {
+                return .7;
             }
             else return 0;
         }

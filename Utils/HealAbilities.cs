@@ -6,7 +6,7 @@ namespace Utils
 {
     public class HealAbilities
     {
-        public static List<string> abilities = new List<string>() { "Heal" };
+        public static List<string> abilities = new List<string>() { "Heal", "Sacrifice" };
 
         public static bool IsHeal(string id)
         {

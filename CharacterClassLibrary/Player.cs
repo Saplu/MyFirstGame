@@ -31,6 +31,7 @@ namespace CharacterClassLibrary
                 case ClassName.Warrior: return new PlayerClasses.Warrior("asd");
                 case ClassName.Mage: return new PlayerClasses.Mage("asd");
                 case ClassName.BloodPriest: return new PlayerClasses.BloodPriest("asd");
+                case ClassName.Protector: return new PlayerClasses.Protector("asd");
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -39,6 +40,11 @@ namespace CharacterClassLibrary
         public abstract string[] Ability2();
         public abstract string[] Ability3();
         public abstract string[] Ability4();
+
+        public virtual int GetThreat(string id)
+        {
+            return 0;
+        }
 
         public void ModifyCooldownLength()
         {

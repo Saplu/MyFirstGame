@@ -76,7 +76,7 @@ namespace CharacterClassLibrary.NPCClasses
             return list;
         }
 
-        public override double setStatusEffect(string id)
+        public override double setStatusEffect(string id, int targetPosition)
         {
             return 0;
         }

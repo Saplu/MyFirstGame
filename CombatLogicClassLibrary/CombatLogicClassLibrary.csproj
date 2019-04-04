@@ -50,6 +50,8 @@
     <Compile Include="Statuses\DoT.cs" />
     <Compile Include="Statuses\Stun.cs" />
     <Compile Include="Statuses\TakenDmgModifier.cs" />
+    <Compile Include="Statuses\TakenDmgMultiplier.cs" />
+    <Compile Include="Statuses\Taunt.cs" />
     <Compile Include="Threat.cs" />
   </ItemGroup>
   <ItemGroup>

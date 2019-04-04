@@ -47,9 +47,11 @@ namespace MissionClassLibrary
                         if (enemies[target - 5].Health > 0)
                         {
                             var dmg = players[playerIndex - 1].UseAbility(id);
+                            var threat = players[playerIndex - 1].GetThreat(id);
                             if (Utils.TrueDamageAbilities.IsTrueDmg(id))
                                 enemies[target - 5].TrueDmgDefend(dmg);
                             else enemies[target - 5].Defend(dmg);
+                            enemies[target - 5].ManageThreat(playerIndex - 1, threat);
                         }
                     }
                 }
@@ -65,7 +67,7 @@ namespace MissionClassLibrary
                 var id = enemies[enemyIndex].ChooseAbility();
                 var targetCount = enemies[enemyIndex].GetTargets(id);
                 var dmg = enemies[enemyIndex].UseAbility(id);
-                var defender = enemies[enemyIndex].ChooseEnemy() + 1;
+                var defender = enemies[enemyIndex].ChooseEnemy();
                 if (players[defender - 1].Health > 0)
                 {
                     var util = new Utils.TargetSetter();
@@ -175,81 +177,5 @@ namespace MissionClassLibrary
                 return value;
             else return 0;
         }
-        /*
-        private List<int> setTargets(int index, int targets)
-        {
-            var result = new List<int>();
-
-            if (targets == 1 || Enemies.Count == 1)
-                result.Add(index);
-            else if (targets == 2 || Enemies.Count == 2)
-                result = setTwoTargets(index);
-            else if (targets == 3 || Enemies.Count == 3)
-                result = setThreeTargets(index);
-            else if (targets == 4)
-                result = setFourTargets(index);
-
-            return result;
-        }
-
-        private List<int> setTwoTargets(int index)
-        {
-            var result = new List<int>();
-            if (index == 1 || index == 2 || index == 3 || index == 5)
-            {
-                result.Add(index);
-                result.Add(index + 1);
-            }
-            else if (index == 4 || index == 6 || index == 7 || index == 8)
-            {
-                result.Add(index);
-                result.Add(index - 1);
-            }
-            return result;
-        }
-
-        private List<int> setThreeTargets(int index)
-        {
-            var result = new List<int>();
-            if (index == 1 || index == 2 || index == 5)
-            {
-                result.Add(index);
-                result.Add(index + 1);
-                result.Add(index + 2);
-            }
-            else if (index == 3 || index == 4 || index == 7 || index == 8)
-            {
-                result.Add(index);
-                result.Add(index - 1);
-                result.Add(index - 2);
-            }
-            else if (index == 6)
-            {
-                result.Add(index);
-                result.Add(index + 1);
-                result.Add(index - 1);
-            }
-            return result;
-        }
-
-        private List<int> setFourTargets(int index)
-        {
-            var result = new List<int>();
-            if (index < 5)
-            {
-                result.Add(1);
-                result.Add(2);
-                result.Add(3);
-                result.Add(4);
-            }
-            else
-            {
-                result.Add(5);
-                result.Add(6);
-                result.Add(7);
-                result.Add(8);
-            }
-            return result;
-        }*/
     }
 }

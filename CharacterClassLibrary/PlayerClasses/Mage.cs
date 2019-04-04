@@ -25,7 +25,7 @@ namespace CharacterClassLibrary.PlayerClasses
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth };
             Statuses = new List<CombatLogicClassLibrary.Status>();
-            Cooldowns = new int[4] { 0, 0, 0, 5 };
+            Cooldowns = new int[4] { 0, 0, 0, 4 };
         }
 
         private int fireball()
@@ -73,10 +73,19 @@ namespace CharacterClassLibrary.PlayerClasses
             return lava.Info();
         }
 
+        private int hellfire()
+        {
+            var multi = getAttackMultiplier();
+            var increase = getAttackModifier();
+            var hellfire = new Hellfire();
+            Cooldowns[3] = hellfire.Cooldown;
+            return hellfire.Action(SpellPower, Crit, multi, increase);
+        }
+
         public override string[] Ability4()
         {
-            var fire = new FireWithin();
-            return fire.Info();
+            var hellfire = new Hellfire();
+            return hellfire.Info();
         }
 
         public override int UseAbility(string id)
@@ -87,6 +96,8 @@ namespace CharacterClassLibrary.PlayerClasses
                 return fireWithin();
             else if (id == "Lava Field")
                 return lavaField();
+            else if (id == "Hellfire")
+                return hellfire();
             else return 1;
         }
 
@@ -98,6 +109,8 @@ namespace CharacterClassLibrary.PlayerClasses
                 return 1;
             else if (id == "Lava Field")
                 return 3;
+            else if (id == "Hellfire")
+                return 4;
             else return 1;
         }
 
@@ -114,10 +127,15 @@ namespace CharacterClassLibrary.PlayerClasses
                 var util = new Utils.TargetSetter();
                 list = util.setTargets(targetPosition, 3, enemyCount);
             }
+            if (id == "Hellfire")
+            {
+                var util = new Utils.TargetSetter();
+                list = util.setTargets(targetPosition, 1, enemyCount);
+            }
             return list;
         }
 
-        public override double setStatusEffect(string id)
+        public override double setStatusEffect(string id, int targetPosition)
         {
             if (id == "Lava Field")
             {
@@ -125,6 +143,13 @@ namespace CharacterClassLibrary.PlayerClasses
                 var increase = getAttackModifier();
                 var lava = new LavaField();
                 return lava.Action(SpellPower, Crit, multi, increase);
+            }
+            if (id == "Hellfire")
+            {
+                var multi = getAttackMultiplier();
+                var increase = getAttackModifier();
+                var hellfire = new Hellfire();
+                return hellfire.DoT(SpellPower, Crit, multi, increase);
             }
             else return 0;
         }

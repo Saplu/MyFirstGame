@@ -62,6 +62,7 @@ namespace DAO
                     case 2: modifyBloodPriest(player); break;
                     case 3: modifyProtector(player); break;
                     case 4: modifyFairy(player); break;
+                    case 5: modifyShaman(player); break;
                 }
             }
         }
@@ -96,6 +97,13 @@ namespace DAO
         private void modifyFairy(Player player)
         {
             player.Health += 15;
+            player.SpellPower += 2;
+            db.SaveChanges();
+        }
+
+        private void modifyShaman(Player player)
+        {
+            player.Health += 18;
             player.SpellPower += 2;
             db.SaveChanges();
         }

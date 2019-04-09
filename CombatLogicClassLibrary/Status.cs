@@ -37,6 +37,8 @@ namespace CombatLogicClassLibrary
                 case "Inspire": list.Add(new Statuses.AttackDmgModifier(2, targets, Convert.ToInt32(effect)));
                     list.Add(new Statuses.AttackDmgMultiplier(2, targets, 1.15));
                     list.Add(new Statuses.TakenDmgModifier(2, targets, Convert.ToInt32(effect))); return list;
+                case "Flame Shock": list.Add(new Statuses.DoT(3, targets, Convert.ToInt32(effect))); return list;
+                case "Thunder": list.Add(new Statuses.Stun(Convert.ToInt32(effect), targets)); return list;
                 default: return null;
             }
         }

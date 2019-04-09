@@ -33,6 +33,7 @@ namespace CharacterClassLibrary
                 case ClassName.BloodPriest: return new PlayerClasses.BloodPriest("asd");
                 case ClassName.Protector: return new PlayerClasses.Protector("asd");
                 case ClassName.Fairy: return new PlayerClasses.Fairy("asd");
+                case ClassName.Shaman: return new PlayerClasses.Shaman("asd");
                 default: throw new ArgumentOutOfRangeException();
             }
         }

@@ -25,7 +25,7 @@ namespace CharacterClassLibrary.PlayerClasses
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType>() { Enums.ItemType.Cloth };
             Statuses = new List<CombatLogicClassLibrary.Status>();
-            Cooldowns = new int[4] { 0, 0, 0, 0 };
+            Cooldowns = new int[4] { 0, 0, 0, 4 };
         }
 
         private int laser()
@@ -91,7 +91,7 @@ namespace CharacterClassLibrary.PlayerClasses
             switch(id)
             {
                 case "Laser": return laser();
-                case "Bubble": return bubble();
+                case "Bubble": return 0;
                 case "Healing Words": return healingWords();
                 case "Inspire": return inspire();
                 default: return 1;

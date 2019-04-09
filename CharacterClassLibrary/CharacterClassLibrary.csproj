@@ -58,6 +58,7 @@
     <Compile Include="PlayerClasses\Fairy.cs" />
     <Compile Include="PlayerClasses\Mage.cs" />
     <Compile Include="PlayerClasses\Protector.cs" />
+    <Compile Include="PlayerClasses\Shaman.cs" />
     <Compile Include="PlayerClasses\Warrior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomItemGenerator.cs" />

@@ -30,8 +30,8 @@ namespace Combat
                 setPictures();
                 setLabels();
 
-                //var taunt = new CombatLogicClassLibrary.Statuses.Taunt(3, new List<int>(), 1);
-                //mission.Enemies[0].Statuses.Add(taunt);
+                //var taunt = new CombatLogicClassLibrary.Statuses.Shield(3, new List<int>(), 50);
+                //mission.Players[2].Statuses.Add(taunt);
 
             }
             checkStuns();

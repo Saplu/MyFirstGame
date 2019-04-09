@@ -32,6 +32,7 @@ namespace CharacterClassLibrary
                 case ClassName.Mage: return new PlayerClasses.Mage("asd");
                 case ClassName.BloodPriest: return new PlayerClasses.BloodPriest("asd");
                 case ClassName.Protector: return new PlayerClasses.Protector("asd");
+                case ClassName.Fairy: return new PlayerClasses.Fairy("asd");
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -56,19 +57,6 @@ namespace CharacterClassLibrary
                     newcd[i] = cooldowns[i];
             }
             Cooldowns = newcd;
-        }
-
-        public virtual void LevelUp()
-        {
-            Health += 20;
-            Strength += 2;
-        }
-
-        public virtual void RecieveHeal(int amount)
-        {
-            if (MaxHealth - Health >= amount)
-                Health += amount;
-            else Health = MaxHealth;
         }
     }
 }

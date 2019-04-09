@@ -60,6 +60,8 @@ namespace DAO
                     case 0: modifyWarrior(player); break;
                     case 1: modifyMage(player); break;
                     case 2: modifyBloodPriest(player); break;
+                    case 3: modifyProtector(player); break;
+                    case 4: modifyFairy(player); break;
                 }
             }
         }
@@ -81,6 +83,20 @@ namespace DAO
         {
             player.Health += 20;
             player.Strength += 2;
+            db.SaveChanges();
+        }
+
+        private void modifyProtector(Player player)
+        {
+            player.Health += 24;
+            player.Strength += 2;
+            db.SaveChanges();
+        }
+
+        private void modifyFairy(Player player)
+        {
+            player.Health += 15;
+            player.SpellPower += 2;
             db.SaveChanges();
         }
     }

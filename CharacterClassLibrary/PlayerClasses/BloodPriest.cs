@@ -24,7 +24,7 @@ namespace CharacterClassLibrary.PlayerClasses
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType> { Enums.ItemType.Cloth, Enums.ItemType.Leather };
             Statuses = new List<CombatLogicClassLibrary.Status>();
-            Cooldowns = new int[4] { 0, 0, 0, 0 };
+            Cooldowns = new int[4] { 0, 0, 0, 4 };
         }
 
         private int lifeLeech()
@@ -147,12 +147,6 @@ namespace CharacterClassLibrary.PlayerClasses
                 return .7;
             }
             else return 0;
-        }
-
-        public override void LevelUp()
-        {
-            Health += 17;
-            SpellPower += 2;
         }
     }
 }

@@ -39,11 +39,13 @@ namespace CharacterClassLibrary
         public virtual void Defend(int incomingDmg)
         {
             var dmg = getDefenseModifier() + incomingDmg;
+            dmg = armorEffect(dmg);
             dmg = Convert.ToInt32(dmg * getDefenseMultiplier());
-            dmg -= (armor / 4);
-            if (dmg > 1)
-                Health -= dmg;
-            else Health -= 1;
+            var shieldedDmg = dmg - getShield();
+            reduceShieldAmount(shieldedDmg, dmg);
+            if (shieldedDmg > 0)
+                Health -= shieldedDmg;
+            else Health -= 0;
         }
 
         public virtual void TrueDmgDefend(int incomingDmg)
@@ -51,6 +53,13 @@ namespace CharacterClassLibrary
             if (incomingDmg > 1)
                 Health -= incomingDmg;
             else Health -= 1;
+        }
+
+        public virtual void RecieveHeal(int amount)
+        {
+            if (MaxHealth - Health >= amount)
+                Health += amount;
+            else Health = MaxHealth;
         }
 
         public override string ToString()
@@ -78,13 +87,14 @@ namespace CharacterClassLibrary
             var effect = setStatusEffect(id, targetPosition);
             if (targetList.Count > 0)
             {
-                var status = Status.Create(id, targetList, effect);
+                var statuses = Status.Create(id, targetList, effect);
                 foreach (var thing in targetList)
                 {
                     Character target = players.Find(x => x.Position == thing);
                     if (target == null)
                         target = enemies.Find(x => x.Position == thing);
-                    target.Statuses.Add(status);
+                    foreach (var status in statuses)
+                        target.Statuses.Add(status);
                 }
             }
         }
@@ -104,6 +114,15 @@ namespace CharacterClassLibrary
             {
                 if (status is CombatLogicClassLibrary.Statuses.DoT)
                     Defend(Convert.ToInt32(status.Effect));
+            }
+        }
+
+        public void ApplyHoT()
+        {
+            foreach ( var status in Statuses)
+            {
+                if (status is CombatLogicClassLibrary.Statuses.HoT)
+                    RecieveHeal(Convert.ToInt32(status.Effect));
             }
         }
 
@@ -149,6 +168,50 @@ namespace CharacterClassLibrary
                     multiplier = multiplier * status.Effect;
             }
             return multiplier;
+        }
+
+        private int armorEffect(int dmg)
+        {
+            var effect = dmg - (armor / 4);
+            if (effect >= dmg * .25)
+                return effect;
+            else return Convert.ToInt32(dmg * .25);
+        }
+
+        private int getShield()
+        {
+            var shield = 0;
+            foreach (var status in statuses)
+            {
+                if (status is CombatLogicClassLibrary.Statuses.Shield)
+                    shield += Convert.ToInt32(status.Effect);
+            }
+            return shield;
+        }
+
+        private void reduceShieldAmount(int shieldedDmg, int dmg)
+        {
+            if (shieldedDmg == dmg)
+                return;
+            else
+            {
+                foreach (var status in statuses)
+                {
+                    if (status is CombatLogicClassLibrary.Statuses.Shield)
+                    {
+                        if (status.Effect > 0 && status.Effect <= dmg)
+                        {
+                            dmg -= Convert.ToInt32(status.Effect);
+                            status.Effect = 0;
+                        }
+                        else if (status.Effect > 0 && status.Effect >= dmg)
+                        {
+                            status.Effect -= dmg;
+                            dmg = 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -48,6 +48,8 @@
     <Compile Include="Statuses\AttackDmgModifier.cs" />
     <Compile Include="Statuses\AttackDmgMultiplier.cs" />
     <Compile Include="Statuses\DoT.cs" />
+    <Compile Include="Statuses\HoT.cs" />
+    <Compile Include="Statuses\Shield.cs" />
     <Compile Include="Statuses\Stun.cs" />
     <Compile Include="Statuses\TakenDmgModifier.cs" />
     <Compile Include="Statuses\TakenDmgMultiplier.cs" />

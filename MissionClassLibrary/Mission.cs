@@ -146,12 +146,14 @@ namespace MissionClassLibrary
         {
             foreach (var player in Players)
             {
+                player.ApplyHoT();
                 player.ApplyDoT();
                 player.ModifyStatusLength();
                 player.ModifyCooldownLength();
             }
             foreach (var enemy in Enemies)
             {
+                enemy.ApplyHoT();
                 enemy.ApplyDoT();
                 enemy.ModifyStatusLength();
             }

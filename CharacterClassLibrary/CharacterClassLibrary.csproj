@@ -55,6 +55,7 @@
     <Compile Include="NPCClasses\Rabbit.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerClasses\BloodPriest.cs" />
+    <Compile Include="PlayerClasses\Fairy.cs" />
     <Compile Include="PlayerClasses\Mage.cs" />
     <Compile Include="PlayerClasses\Protector.cs" />
     <Compile Include="PlayerClasses\Warrior.cs" />

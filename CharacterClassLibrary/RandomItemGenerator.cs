@@ -37,7 +37,12 @@ namespace CharacterClassLibrary
         private int chooseItemType(int type)
         {
             if (type == 0)
-                return Utils.RandomProvider.GetRandom(0, 2);
+            {
+                var rand = Utils.RandomProvider.GetRandom(0, 4);
+                if (rand == 4)
+                    return 0;
+                else return rand;
+            }
             else return Utils.RandomProvider.GetRandom(1, 3);
         }
 
@@ -176,7 +181,33 @@ namespace CharacterClassLibrary
 
         private void spreadArmorPower(int usablePower, Item item, int type)
         {
-            if (type == 0)
+            if (type == 0 && Convert.ToInt32(item.ItemType) == 3)
+            {
+                for (int i = 0; i < usablePower; i++)
+                {
+                    var value = Utils.RandomProvider.GetRandom(1, 3);
+                    switch(value)
+                    {
+                        case 1: item.Spellpower++; break;
+                        default: item.Health += 10; break;
+                    }
+                }
+            }
+
+            else if (type == 1 && Convert.ToInt32(item.ItemType) == 3)
+            {
+                for(int i = 0; i < usablePower; i++)
+                {
+                    var value = Utils.RandomProvider.GetRandom(1, 3);
+                    switch(value)
+                    {
+                        case 1: item.Strength++; break;
+                        default: item.Health += 10; break;
+                    }
+                }
+            }
+
+            else if (type == 0)
             {
                 for (int i = 0; i < usablePower; i++)
                 {
@@ -189,6 +220,7 @@ namespace CharacterClassLibrary
                     }
                 }
             }
+
             else
             {
                 for (int i = 0; i < usablePower; i++)

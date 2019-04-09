@@ -90,28 +90,26 @@ namespace CharacterClassLibrary.PlayerClasses
 
         public override int UseAbility(string id)
         {
-            if (id == "Fireball")
-                return fireball();
-            else if (id == "Fire Within")
-                return fireWithin();
-            else if (id == "Lava Field")
-                return lavaField();
-            else if (id == "Hellfire")
-                return hellfire();
-            else return 1;
+            switch (id)
+            {
+                case "Fireball": return fireball();
+                case "Fire Within": return fireWithin();
+                case "Lava Field": return lavaField();
+                case "Hellfire": return hellfire();
+                default: return 1;
+            }
         }
 
         public override int GetTargets(string id)
         {
-            if (id == "Fireball")
-                return 1;
-            else if (id == "Fire Within")
-                return 1;
-            else if (id == "Lava Field")
-                return 3;
-            else if (id == "Hellfire")
-                return 4;
-            else return 1;
+            switch (id)
+            {
+                case "Fireball": return 1;
+                case "Fire Within": return 1;
+                case "Lava Field": return 3;
+                case "Hellfire": return 4;
+                default: return 1;
+            }
         }
 
         public override string setPic()
@@ -152,12 +150,6 @@ namespace CharacterClassLibrary.PlayerClasses
                 return hellfire.DoT(SpellPower, Crit, multi, increase);
             }
             else return 0;
-        }
-
-        public override void LevelUp()
-        {
-            Health += 15;
-            SpellPower += 2;
         }
     }
 }

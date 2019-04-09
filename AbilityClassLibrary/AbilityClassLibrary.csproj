@@ -46,6 +46,10 @@
     <Compile Include="BloodPriest\LifeLeech.cs" />
     <Compile Include="BloodPriest\Sacrifice.cs" />
     <Compile Include="BloodPriest\WeakenBlood.cs" />
+    <Compile Include="Fairy\Bubble.cs" />
+    <Compile Include="Fairy\HealingWords.cs" />
+    <Compile Include="Fairy\Inspire.cs" />
+    <Compile Include="Fairy\Laser.cs" />
     <Compile Include="Mage\Fireball.cs" />
     <Compile Include="Mage\FireWithin.cs" />
     <Compile Include="Mage\Hellfire.cs" />

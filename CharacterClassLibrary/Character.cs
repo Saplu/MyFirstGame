@@ -64,7 +64,8 @@ namespace CharacterClassLibrary
 
         public override string ToString()
         {
-            return "Health: " + health;
+            var statuses = getStatuses();
+            return "Health: " + health +"/" + maxHealth + statuses;
         }
 
         public void ModifyStatusLength()
@@ -112,7 +113,9 @@ namespace CharacterClassLibrary
         {
             foreach (var status in Statuses)
             {
-                if (status is CombatLogicClassLibrary.Statuses.DoT)
+                if (status is CombatLogicClassLibrary.Statuses.Poison)
+                    TrueDmgDefend(Convert.ToInt32(status.Effect));
+                else if (status is CombatLogicClassLibrary.Statuses.DoT)
                     Defend(Convert.ToInt32(status.Effect));
             }
         }
@@ -212,6 +215,17 @@ namespace CharacterClassLibrary
                     }
                 }
             }
+        }
+
+        protected string getStatuses()
+        {
+            var value = "";
+            foreach (var status in Statuses)
+            {
+                if (!value.Contains(status.ToString()))
+                    value += status.ToString();
+            }
+            return value;
         }
     }
 }

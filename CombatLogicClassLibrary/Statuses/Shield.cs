@@ -16,5 +16,10 @@ namespace CombatLogicClassLibrary.Statuses
             Targets = targets;
             Effect = value;
         }
+
+        public override string ToString()
+        {
+            return "<br/>Shielded";
+        }
     }
 }

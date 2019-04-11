@@ -16,5 +16,10 @@ namespace CombatLogicClassLibrary.Statuses
             Targets = targets;
             Effect = dmg;
         }
+
+        public override string ToString()
+        {
+            return "<br/>DoT inc";
+        }
     }
 }

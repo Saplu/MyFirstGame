@@ -16,5 +16,10 @@ namespace CombatLogicClassLibrary.Statuses
             Targets = targets;
             Effect = heal;
         }
+
+        public override string ToString()
+        {
+            return "<br/>HoT rolling";
+        }
     }
 }

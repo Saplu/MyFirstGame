@@ -27,6 +27,7 @@ namespace MissionClassLibrary.Missions
             }
             Turn = 1;
             Level = 1;
+            ActionsTaken = new List<int>();
         }
     }
 }

@@ -17,13 +17,16 @@
 &nbsp;
             <asp:ImageButton ID="enemy4ImageButton" runat="server" Height="100px" Width="100px" Enabled="False" OnClick="enemy4ImageButton_Click" BorderColor="White" BorderWidth="5px" />
             <br />
-            <asp:Label ID="enemy1Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="enemy1Label" runat="server" Width="125px"></asp:Label></div>
 &nbsp;
-            <asp:Label ID="enemy2Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="enemy2Label" runat="server" Width="125px"></asp:Label></div>
 &nbsp;
-            <asp:Label ID="enemy3Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="enemy3Label" runat="server" Width="125px"></asp:Label></div>
 &nbsp;
-            <asp:Label ID="enemy4Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="enemy4Label" runat="server" Width="125px"></asp:Label></div>
+            <br />
+            <br />
+            <br />
             <br />
             <br />
             <asp:ImageButton ID="player1ImageButton" runat="server" Height="100px" Width="100px" OnClick="player1ImageButton_Click" BorderColor="White" BorderWidth="5px" />
@@ -34,13 +37,16 @@
 &nbsp;
             <asp:ImageButton ID="player4ImageButton" runat="server" Height="100px" Width="100px" OnClick="player4ImageButton_Click" BorderColor="White" BorderWidth="5px" />
             <br />
-            <asp:Label ID="player1Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="player1Label" runat="server" Width="125px"></asp:Label></div>
 &nbsp;
-            <asp:Label ID="player2Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="player2Label" runat="server" Width="125px"></asp:Label></div>
 &nbsp;
-            <asp:Label ID="player3Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="player3Label" runat="server" Width="125px"></asp:Label></div>
 &nbsp;
-            <asp:Label ID="player4Label" runat="server"></asp:Label>
+            <div style ="float: left;"><asp:Label ID="player4Label" runat="server" Width="125px"></asp:Label></div>
+            <br />
+            <br />
+            <br />
             <br />
             <br />
             <br />

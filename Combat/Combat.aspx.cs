@@ -198,16 +198,14 @@ namespace Combat
                 mission.PlayerDefend(i);
             }
             mission.Turn++;
-            player1Label.Text = mission.Players[0].ToString();
-            player2Label.Text = mission.Players[1].ToString();
-            player3Label.Text = mission.Players[2].ToString();
-            player4Label.Text = mission.Players[3].ToString();
             attackDone();
             mission.ModifyLength();
+            mission.ActionsTaken.Clear();
             setLabels();
             ViewState["Mission"] = mission;
             turnOver(mission.Turn);
             gameOver(mission);
+            victory(mission);
         }
 
         protected void endButton_Click(object sender, EventArgs e)
@@ -234,8 +232,11 @@ namespace Combat
             mission.PlayerHeal(player, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
             mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), player);
             setLabels();
+            checkStuns();
             ViewState["Mission"] = mission;
-            actionDone();
+            mission.ActionsTaken.Add(Convert.ToInt32(ViewState["Player"]));
+            foreach (var item in mission.ActionsTaken)
+                actionDone(item);
             attackDone();
             healDone();
             victory(mission);
@@ -248,8 +249,11 @@ namespace Combat
             mission.EnemyDefend(target, Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString());
             mission.SetStatuses(Convert.ToInt32(ViewState["Player"]), ViewState["ID"].ToString(), target);
             setLabels();
+            checkStuns();
             ViewState["Mission"] = mission;
-            actionDone();
+            mission.ActionsTaken.Add(Convert.ToInt32(ViewState["Player"]));
+            foreach (var item in mission.ActionsTaken)
+                actionDone(item);
             attackDone();
             victory(mission);
         }
@@ -262,10 +266,10 @@ namespace Combat
             enemy4ImageButton.Enabled = true;
         }
 
-        private void actionDone()
+        private void actionDone(int player)
         {
-            var index = Convert.ToInt32(ViewState["Player"]);
-            switch(index)
+            //var index = Convert.ToInt32(ViewState["Player"]);
+            switch(player)
             {
                 case 1: player1ImageButton.Enabled = false;
                     break;

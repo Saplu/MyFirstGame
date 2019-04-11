@@ -34,6 +34,7 @@ namespace CharacterClassLibrary
                 case ClassName.Protector: return new PlayerClasses.Protector("asd");
                 case ClassName.Fairy: return new PlayerClasses.Fairy("asd");
                 case ClassName.Shaman: return new PlayerClasses.Shaman("asd");
+                case ClassName.Rogue: return new PlayerClasses.Rogue("asd");
                 default: throw new ArgumentOutOfRangeException();
             }
         }

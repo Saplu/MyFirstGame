@@ -15,5 +15,10 @@ namespace CombatLogicClassLibrary.Statuses
             Duration = duration;
             Targets = targets;
         }
+
+        public override string ToString()
+        {
+            return "<br/>Stunned";
+        }
     }
 }

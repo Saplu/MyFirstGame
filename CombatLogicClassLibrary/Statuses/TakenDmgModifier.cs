@@ -15,5 +15,10 @@ namespace CombatLogicClassLibrary.Statuses
             Targets = targets;
             Effect = modifier;
         }
+
+        public override string ToString()
+        {
+            return "";
+        }
     }
 }

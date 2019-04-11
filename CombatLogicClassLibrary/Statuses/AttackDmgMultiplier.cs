@@ -17,5 +17,9 @@ namespace CombatLogicClassLibrary.Statuses
             Effect = multiplier;
         }
 
+        public override string ToString()
+        {
+            return "";
+        }
     }
 }

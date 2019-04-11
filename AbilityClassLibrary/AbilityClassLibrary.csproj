@@ -63,6 +63,10 @@
     <Compile Include="Protector\DevastatingStrike.cs" />
     <Compile Include="Protector\Sweep.cs" />
     <Compile Include="Protector\TauntingBlow.cs" />
+    <Compile Include="Rogue\BladeFlurry.cs" />
+    <Compile Include="Rogue\Jawbreaker.cs" />
+    <Compile Include="Rogue\Mutilate.cs" />
+    <Compile Include="Rogue\Stab.cs" />
     <Compile Include="Shaman\ChainLightning.cs" />
     <Compile Include="Shaman\FlameShock.cs" />
     <Compile Include="Shaman\LightningBolt.cs" />

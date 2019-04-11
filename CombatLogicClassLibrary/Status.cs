@@ -39,6 +39,12 @@ namespace CombatLogicClassLibrary
                     list.Add(new Statuses.TakenDmgModifier(2, targets, Convert.ToInt32(effect))); return list;
                 case "Flame Shock": list.Add(new Statuses.DoT(3, targets, Convert.ToInt32(effect))); return list;
                 case "Thunder": list.Add(new Statuses.Stun(Convert.ToInt32(effect), targets)); return list;
+                case "Stab": list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect))); return list;
+                case "Mutilate": list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect)));
+                    list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect))); return list;
+                case "Jawbreaker": list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect)));
+                    list.Add(new Statuses.Stun(1, targets)); return list;
+                case "Blade Flurry": list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect))); return list;
                 default: return null;
             }
         }

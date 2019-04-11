@@ -25,7 +25,7 @@ namespace CharacterClassLibrary.PlayerClasses
             Items = new List<Item>();
             ItemTypes = new List<Enums.ItemType>() { Enums.ItemType.Cloth, Enums.ItemType.Leather, Enums.ItemType.Mail };
             Statuses = new List<CombatLogicClassLibrary.Status>();
-            Cooldowns = new int[4] { 0, 0, 0, 0 };
+            Cooldowns = new int[4] { 0, 0, 0, 4 };
         }
 
         private int lightningBolt()

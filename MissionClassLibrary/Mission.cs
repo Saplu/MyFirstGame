@@ -15,11 +15,13 @@ namespace MissionClassLibrary
         private List<Player> players;
         private int turn;
         private int level;
+        private List<int> actionsTaken;
 
         public List<NPC> Enemies { get => enemies; set => enemies = value; }
         public List<Player> Players { get => players; set => players = value; }
         public int Turn { get => turn; set => turn = value; }
         public int Level { get => level; set => level = value; }
+        public List<int> ActionsTaken { get => actionsTaken; set => actionsTaken = value; }
 
         public static Mission Create(MissionList missions, List<Player> players)
         {
@@ -178,6 +180,11 @@ namespace MissionClassLibrary
             if (value > 0)
                 return value;
             else return 0;
+        }
+
+        public void ActionDone(int place)
+        {
+            ActionsTaken.Add(place);
         }
     }
 }

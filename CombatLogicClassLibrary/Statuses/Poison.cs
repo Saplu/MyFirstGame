@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 namespace CombatLogicClassLibrary.Statuses
 {
     [Serializable]
-    public class Taunt : Status
+    public class Poison : Status
     {
-        public Taunt(int duration, List<int> targets, int position)
+        public Poison(int duration, List<int> targets, int dmg)
         {
-            Name = StatusEnums.Taunt;
+            Name = StatusEnums.Poison;
             Duration = duration;
             Targets = targets;
-            Effect = position;
+            Effect = dmg;
         }
 
         public override string ToString()
         {
-            return "<br/>Taunted";
+            return "<br/>Poisoned";
         }
     }
 }

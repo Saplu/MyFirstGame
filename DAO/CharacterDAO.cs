@@ -57,54 +57,23 @@ namespace DAO
 
                 switch(info)
                 {
-                    case 0: modifyWarrior(player); break;
-                    case 1: modifyMage(player); break;
-                    case 2: modifyBloodPriest(player); break;
-                    case 3: modifyProtector(player); break;
-                    case 4: modifyFairy(player); break;
-                    case 5: modifyShaman(player); break;
+                    case 0: modifyPlayer(player, 20, 2, 0); break;
+                    case 1: modifyPlayer(player, 15, 0, 2); break;
+                    case 2: modifyPlayer(player, 17, 0, 2); break;
+                    case 3: modifyPlayer(player, 24, 2, 0); break;
+                    case 4: modifyPlayer(player, 15, 0, 2); break;
+                    case 5: modifyPlayer(player, 18, 0, 2); break;
+                    case 6: modifyPlayer(player, 17, 2, 0); break;
+                    case 7: modifyPlayer(player, 24, 0, 2); break;
                 }
             }
         }
 
-        private void modifyBloodPriest(Player player)
+        private void modifyPlayer(Player player, int health, int strength, int spellPower)
         {
-            player.Health += 17;
-            player.SpellPower += 2;
-        }
-
-        private void modifyMage(Player player)
-        {
-            player.Health += 15;
-            player.SpellPower += 2;
-            db.SaveChanges();
-        }
-
-        private void modifyWarrior(Player player)
-        {
-            player.Health += 20;
-            player.Strength += 2;
-            db.SaveChanges();
-        }
-
-        private void modifyProtector(Player player)
-        {
-            player.Health += 24;
-            player.Strength += 2;
-            db.SaveChanges();
-        }
-
-        private void modifyFairy(Player player)
-        {
-            player.Health += 15;
-            player.SpellPower += 2;
-            db.SaveChanges();
-        }
-
-        private void modifyShaman(Player player)
-        {
-            player.Health += 18;
-            player.SpellPower += 2;
+            player.Health += health;
+            player.Strength += strength;
+            player.SpellPower += spellPower;
             db.SaveChanges();
         }
     }

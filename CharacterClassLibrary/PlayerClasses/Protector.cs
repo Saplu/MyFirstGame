@@ -93,28 +93,26 @@ namespace CharacterClassLibrary.PlayerClasses
 
         public override int UseAbility(string id)
         {
-            if (id == "Taunting Blow")
-                return tauntingBlow();
-            else if (id == "Devastating Strike")
-                return devastatingStrike();
-            else if (id == "Sweep")
-                return sweep();
-            else if (id == "Challenging Shout")
-                return challengingShout();
-            else return 1;
+            switch(id)
+            {
+                case "Taunting Blow": return tauntingBlow();
+                case "Devastating Strike": return devastatingStrike();
+                case "Sweep": return sweep();
+                case "Challenging Shout": return challengingShout();
+                default: return 1;
+            }
         }
 
         public override int GetTargets(string id)
         {
-            if (id == "Taunting Blow")
-                return 1;
-            if (id == "Devastating Strike")
-                return 1;
-            else if (id == "Sweep")
-                return 4;
-            else if (id == "Challenging Shout")
-                return 4;
-            else return 1;
+            switch (id)
+            {
+                case "Taunting Blow": return 1;
+                case "Devastating Strike": return 1;
+                case "Sweep": return 4;
+                case "Challenging Shout": return 4;
+                default: return 1;
+            }
         }
 
         public override string setPic()
@@ -124,40 +122,36 @@ namespace CharacterClassLibrary.PlayerClasses
 
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)
         {
+            var util = new Utils.TargetSetter();
             var list = new List<int>();
-            if (id == "Taunting Blow")
+            switch (id)
             {
-                var util = new Utils.TargetSetter();
-                list = util.setTargets(targetPosition, 1, enemyCount);
+                case "Taunting Blow": list = util.setTargets(targetPosition, 1, enemyCount); return list;
+                case "Challenging Shout": list = util.setTargets(targetPosition, 4, enemyCount); return list;
+                default: return list;
             }
-            if (id == "Challenging Shout")
-            {
-                var util = new Utils.TargetSetter();
-                list = util.setTargets(targetPosition, 4, enemyCount);
-            }
-            return list;
         }
 
         public override double setStatusEffect(string id, int targetPosition)
         {
-            if (id == "Taunting Blow")
-                return this.Position;
-            if (id == "Challenging Shout")
-                return this.Position;
-            else return 0;
+            switch (id)
+            {
+                case "Taunting Blow": return this.Position;
+                case "Challenging Shout": return this.Position;
+                default: return 0;
+            }
         }
 
         public override int GetThreat(string id)
         {
-            if (id == "Taunting Blow")
-                return 3;
-            if (id == "Devastating Strike")
-                return 12;
-            if (id == "Sweep")
-                return 6;
-            if (id == "Challenging Shout")
-                return 6;
-            else return 0;
+            switch (id)
+            {
+                case "Taunting Blow": return 3;
+                case "Devastating Strike": return 12;
+                case "Sweep": return 6;
+                case "Challenging Shout": return 6;
+                default: return 0;
+            }
         }
     }
 }

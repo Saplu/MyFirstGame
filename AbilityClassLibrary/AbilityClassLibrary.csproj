@@ -71,6 +71,10 @@
     <Compile Include="Shaman\FlameShock.cs" />
     <Compile Include="Shaman\LightningBolt.cs" />
     <Compile Include="Shaman\Thunder.cs" />
+    <Compile Include="Templar\RighteousBane.cs" />
+    <Compile Include="Templar\HolyGround.cs" />
+    <Compile Include="Templar\HolyShock.cs" />
+    <Compile Include="Templar\SacredThrust.cs" />
     <Compile Include="Warrior\Attack.cs" />
     <Compile Include="Warrior\BattleCry.cs" />
     <Compile Include="Warrior\Execute.cs" />

@@ -13,7 +13,7 @@ namespace AbilityClassLibrary.Protector
         {
             Name = "Devastating Strike";
             Description = "An attack so scary, that it will permanently increase your threat by large amount.";
-            Cooldown = 0;
+            Cooldown = 1;
         }
 
         public int Action(int strength, double crit, double multi, int increase)

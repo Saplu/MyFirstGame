@@ -93,7 +93,7 @@ namespace CharacterClassLibrary.PlayerClasses
                 case "Laser": return laser();
                 case "Bubble": return 0;
                 case "Healing Words": return healingWords();
-                case "Inspire": return inspire();
+                case "Inspire": return 0;
                 default: return 1;
             }
         }

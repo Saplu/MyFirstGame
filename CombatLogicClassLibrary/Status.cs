@@ -45,6 +45,8 @@ namespace CombatLogicClassLibrary
                 case "Jawbreaker": list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect)));
                     list.Add(new Statuses.Stun(1, targets)); return list;
                 case "Blade Flurry": list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect))); return list;
+                case "Holy Ground": list.Add(new Statuses.DoT(3, targets, Convert.ToInt32(effect))); return list;
+                case "Righteous Bane": list.Add(new Statuses.AttackDmgMultiplier(2, targets, effect)); return list;
                 default: return null;
             }
         }

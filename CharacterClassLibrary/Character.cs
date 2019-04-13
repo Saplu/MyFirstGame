@@ -95,7 +95,7 @@ namespace CharacterClassLibrary
                     if (target == null)
                         target = enemies.Find(x => x.Position == thing);
                     foreach (var status in statuses)
-                        target.Statuses.Add(status);
+                        if (target.Health >= 0) target.Statuses.Add(status);
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace CharacterClassLibrary
             return false;
         }
 
-        public void ApplyDoT()
+        public virtual void ApplyDoT()
         {
             foreach (var status in Statuses)
             {

@@ -11,7 +11,7 @@ namespace DAO
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Item
     {
         public int Id { get; set; }
@@ -24,5 +24,6 @@ namespace DAO
         public string Name { get; set; }
         public int Type { get; set; }
         public int Place { get; set; }
+        public int SellValue { get; set; }
     }
 }

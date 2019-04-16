@@ -8,21 +8,20 @@ using CharacterClassLibrary;
 namespace MissionClassLibrary.Missions
 {
     [Serializable]
-    public class SomethingNew : Mission
+    public class TankThat : Mission
     {
-        public SomethingNew(List<Player> players)
+        public TankThat(List<Player> players)
         {
-            var enemy1 = new CharacterClassLibrary.NPCClasses.Goblin(3, 1);
-            var enemy2 = new CharacterClassLibrary.NPCClasses.Goblin(2, 1);
-            var enemy3 = new CharacterClassLibrary.NPCClasses.Rabbit(3, 1);
-            var enemy4 = new CharacterClassLibrary.NPCClasses.Rabbit(3, 1);
-            Enemies = new List<NPC>() { enemy1, enemy2, enemy3, enemy4 };
+            var Enemy1 = new CharacterClassLibrary.NPCClasses.Goblin(3, 3);
+            var Enemy2 = new CharacterClassLibrary.NPCClasses.Rabbit(3, 2);
+            var Enemy3 = new CharacterClassLibrary.NPCClasses.Rabbit(3, 0);
+            var Enemy4 = new CharacterClassLibrary.NPCClasses.Rabbit(3, 0);
+            Enemies = new List<NPC>() { Enemy1, Enemy2, Enemy3, Enemy4 };
             foreach (var enemy in Enemies)
             {
                 var numb = Enemies.IndexOf(enemy);
                 enemy.Position = numb + 5;
             }
-
             Players = new List<Player>();
             foreach (var player in players)
                 Players.Add(player);
@@ -32,7 +31,7 @@ namespace MissionClassLibrary.Missions
                 player.Position = numb + 1;
             }
             Turn = 1;
-            Level = 2;
+            Level = 3;
             ActionsTaken = new List<int>();
         }
     }

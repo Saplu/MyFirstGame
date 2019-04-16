@@ -81,7 +81,8 @@
     </Content>
     <Content Include="Combat.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="MainMenu.aspx" />
+    <Content Include="CombatMenu.aspx" />
+    <Content Include="Menu.aspx" />
     <Content Include="Pictures\BloodPriest.jpg" />
     <Content Include="Pictures\Goblin.jpg" />
     <Content Include="Pictures\keijju.jpg" />
@@ -92,6 +93,7 @@
     <Content Include="Pictures\shamaani.jpg" />
     <Content Include="Pictures\Tankki.jpg" />
     <Content Include="Pictures\welho.jpg" />
+    <Content Include="Shop.aspx" />
     <Content Include="VictoryPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -106,14 +108,28 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu.aspx.cs">
-      <DependentUpon>MainMenu.aspx</DependentUpon>
+    <Compile Include="CombatMenu.aspx.cs">
+      <DependentUpon>CombatMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MainMenu.aspx.designer.cs">
-      <DependentUpon>MainMenu.aspx</DependentUpon>
+    <Compile Include="CombatMenu.aspx.designer.cs">
+      <DependentUpon>CombatMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.aspx.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Menu.aspx.designer.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shop.aspx.cs">
+      <DependentUpon>Shop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shop.aspx.designer.cs">
+      <DependentUpon>Shop.aspx</DependentUpon>
+    </Compile>
     <Compile Include="VictoryPage.aspx.cs">
       <DependentUpon>VictoryPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -153,6 +169,10 @@
     <ProjectReference Include="..\MissionClassLibrary\MissionClassLibrary.csproj">
       <Project>{8bfd2f25-a6b9-42eb-8dd9-565032b6707d}</Project>
       <Name>MissionClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopClassLibrary\ShopClassLibrary.csproj">
+      <Project>{823ea572-99d6-48ef-b52f-8d727641a85f}</Project>
+      <Name>ShopClassLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{2f323d45-2668-416f-8756-02372be8e5ec}</Project>

@@ -11,15 +11,17 @@ namespace CharacterClassLibrary.NPCClasses
     [Serializable]
     public class Rabbit : NPC, Interfaces.CombatInterface
     {
-        public Rabbit(int level)
+        public Rabbit(int level, int type)
         {
+            Type = (Enums.NPCType)Enum.Parse(typeof(Enums.NPCType), type.ToString());
+            var multiplier = typeMultiplier();
             Level = level;
-            Health = 80 + (level * 25);
+            Health = Convert.ToInt32(multiplier * multiplier * (80 + (level * 25)));
             MaxHealth = Health;
-            Strength = 8 + (level * 2);
+            Strength = Convert.ToInt32(multiplier * (8 + (level * 2)));
             Crit = 10;
             SpellPower = 0;
-            Armor = 5 + (level * 3);
+            Armor = Convert.ToInt32(multiplier * (5 + (level * 3)));
             Statuses = new List<CombatLogicClassLibrary.Status>();
             Threat = new CombatLogicClassLibrary.Threat();
         }

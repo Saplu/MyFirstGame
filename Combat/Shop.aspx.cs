@@ -1,0 +1,92 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using DAO;
+
+namespace Combat
+{
+    public partial class Shop : System.Web.UI.Page
+    {
+        DAO.CharacterDAO dao = new DAO.CharacterDAO();
+        DAO.ItemDAO itemDAO = new DAO.ItemDAO();
+        ShopClassLibrary.Shop shop = new ShopClassLibrary.Shop();
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            moneyLabel.Text = "Current money: " + shop.Money.ToString();
+        }
+
+        protected void craftButton_Click(object sender, EventArgs e)
+        {
+            itemGridView.Visible = false;
+            exceptionLabel.Text = "";
+            confirmButton.Visible = true;
+            typeLabel.Visible = true;
+            placeLabel.Visible = true;
+            typeRadioButtonList.Visible = true;
+            placeRadioButtonList.Visible = true;
+            characterRadioButtonList.Visible = true;
+            var players = shop.Players;
+            characterRadioButtonList.DataSource = getData(players);
+            characterRadioButtonList.DataBind();
+        }
+
+        protected void sellButton_Click(object sender, EventArgs e)
+        {
+            exceptionLabel.Text = "";
+            itemGridView.Visible = true;
+            itemGridView.DataSource = shop.InventoryItems;
+            itemGridView.DataBind();
+        }
+
+        protected void confirmButton_Click(object sender, EventArgs e)
+        {
+            exceptionLabel.Text = "";
+            var gen = new CharacterClassLibrary.RandomItemGenerator();
+            try
+            {
+                var type = shop.SaleItemType(typeRadioButtonList.SelectedValue);
+                var place = shop.SaleItemPlace(placeRadioButtonList.SelectedValue);
+                if (characterRadioButtonList.SelectedValue == null)
+                    throw new Exception("No character selected");
+                type = shop.ManageType(place, type);
+                //var player = characterRadioButtonList.SelectedValue;
+                var buyer = shop.setBuyer(characterRadioButtonList.SelectedValue, type);
+                var itemType = shop.casterOrPhysical(buyer.Class);
+                var item = gen.CreateItem(buyer.Level, place, type, itemType, buyer.Id);
+                shop.ManageMoney(item);
+                shop.AddItem(item);
+            }
+            catch (Exception ex)
+            {
+                exceptionLabel.Text = ex.Message;
+            }
+        }
+
+        protected void itemGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int index = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = itemGridView.Rows[index];
+
+            var value = Convert.ToInt32(row.Cells[3].Text);
+            itemDAO.ManageMoney(value);
+            itemDAO.DeleteItem(Convert.ToInt32(row.Cells[1].Text));
+            var items = itemDAO.GetInventoryItems();
+            itemGridView.DataSource = items;
+            itemGridView.DataBind();
+        }
+
+        private List<string> getData(List<Player> list)
+        {
+            var value = new List<string>();
+            foreach (var item in list)
+            {
+                value.Add(item.Id);
+            }
+            return value;
+        }
+    }
+}

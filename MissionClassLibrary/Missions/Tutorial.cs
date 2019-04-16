@@ -12,7 +12,7 @@ namespace MissionClassLibrary.Missions
     {
         public Tutorial(List<Player> players)
         {
-            var enemy = new CharacterClassLibrary.NPCClasses.Rabbit(1);
+            var enemy = new CharacterClassLibrary.NPCClasses.Rabbit(1, 1);
             enemy.Position = 5;
             Enemies = new List<NPC>() { enemy };
             Players = new List<Player>();

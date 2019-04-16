@@ -11,18 +11,10 @@ namespace DAO
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class Mission
+    
+    public partial class Bank
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int foe1Class { get; set; }
-        public int foe1Level { get; set; }
-        public Nullable<int> foe2Class { get; set; }
-        public Nullable<int> foe2Level { get; set; }
-        public Nullable<int> foe3Class { get; set; }
-        public Nullable<int> foe3Level { get; set; }
-        public Nullable<int> foe4Class { get; set; }
-        public Nullable<int> foe4Level { get; set; }
+        public int Money { get; set; }
     }
 }

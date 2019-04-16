@@ -47,6 +47,12 @@ namespace DAO
             db.SaveChanges();
         }
 
+        public string TooltipInfo(string name)
+        {
+            var player = db.Player.ToList().Find(x => x.Id == name);
+            return info(player);
+        }
+
         private void checkForLevelup(Player player)
         {
             if (player.Xp >= (player.Level * 100))
@@ -75,6 +81,27 @@ namespace DAO
             player.Strength += strength;
             player.SpellPower += spellPower;
             db.SaveChanges();
+        }
+
+        private string info(Player player)
+        {
+            var value = "";
+            switch(player.Class)
+            {
+                case 0: value = "Warrior. Level: " + player.Level + " Tough fighter with high dmg single-target abilities."; break;
+                case 1: value = "Mage. Level: " + player.Level + " Fragile caster with both high single-target nuke and AoE."; break;
+                case 2: value = "Blood Priest. Level: " + player.Level + " Single target heals, self survival and debuffing attacks."; break;
+                case 3: value = "Protector. Level: " + player.Level + " Real bosstanker. " +
+                        "Taunt, threat abilities and permanently reduced taken dmg."; break;
+                case 4: value = "Fairy. Level: " + player.Level + " Fragile healer with HoT, shield and party buff."; break;
+                case 5: value = "Shaman. Level: " + player.Level + " Tough caster with both single target and aoe nukes. " +
+                        "More of a tank, less of a mage.";break;
+                case 6: value = "Rogue. Level: " + player.Level + " Tricky fighter. Abilities cost energy, apply poison to the target " +
+                        "and gain combo points consumed by ultimate."; break;
+                case 7: value = "Templar. Level: " + player.Level + " Magetank. Permanently reduced taken damage. " +
+                        "High threat aoe abilities, but no taunt."; break;
+            }
+            return value;
         }
     }
 }

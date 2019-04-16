@@ -20,6 +20,7 @@ namespace CharacterClassLibrary
         private ItemType itemType;
         private ItemPlace itemPlace;
         private string owner;
+        private int sellValue;
 
         public int Health { get => health; set => health = value; }
         public int Strength { get => strength; set => strength = value; }
@@ -31,6 +32,7 @@ namespace CharacterClassLibrary
         public ItemType ItemType { get => itemType; set => itemType = value; }
         public ItemPlace ItemPlace { get => itemPlace; set => itemPlace = value; }
         public string Owner { get => owner; set => owner = value; }
+        public int SellValue { get => sellValue; set => sellValue = value; }
 
         public Item(int health, int strength, double crit, int spellPower, int armor, string name, int level,
             ItemType itemtype, ItemPlace itemplace, string owner)
@@ -45,6 +47,8 @@ namespace CharacterClassLibrary
             ItemType = itemtype;
             ItemPlace = itemplace;
             Owner = owner;
+            var value = new RandomItemGenerator();
+            SellValue = value.GetItemPower(ItemPlace, Level) * 2;
         }
 
         public Item(int level)

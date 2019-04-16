@@ -58,7 +58,7 @@ namespace Combat
                 item.Owner = tryThis;
                 var reward = convertToDbItem(item);
                 itemDAO.AddNewItem(reward);
-                Server.Transfer("MainMenu.aspx");
+                Server.Transfer("Menu.aspx");
             }
             else if (target.ItemTypes.Exists(x => x == item.ItemType))
             {
@@ -67,7 +67,7 @@ namespace Combat
                 item.Owner = target.Name;
                 var reward = convertToDbItem(item);
                 itemDAO.AddNewItem(reward);
-                Server.Transfer("MainMenu.aspx");
+                Server.Transfer("Menu.aspx");
             }
             else currentLabel.Text = "Cannot wear the armor type.";
         }
@@ -97,6 +97,7 @@ namespace Combat
             dbItem.Strength = item.Strength;
             dbItem.Type = Convert.ToInt32(item.ItemType);
             dbItem.Name = item.Name;
+            dbItem.SellValue = item.SellValue;
             return dbItem;
         }
     }

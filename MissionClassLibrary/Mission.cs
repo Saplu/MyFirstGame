@@ -31,6 +31,7 @@ namespace MissionClassLibrary
                 case MissionList.NextStep: return new Missions.NextStep(players);
                 case MissionList.FirstChallenge: return new Missions.FirstChallenge(players);
                 case MissionList.SomethingNew: return new Missions.SomethingNew(players);
+                case MissionList.TankThat: return new Missions.TankThat(players);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -87,7 +88,11 @@ namespace MissionClassLibrary
                 }
                 else if (CheckLoss())
                     return;
-                else PlayerDefend(enemyIndex);
+                else
+                {
+                    enemies[enemyIndex].ManageThreat(defender - 1);
+                    PlayerDefend(enemyIndex);
+                }
             }
         }
 
@@ -175,7 +180,10 @@ namespace MissionClassLibrary
             foreach (var player in Players)
                 playerLevel += player.Level;
             foreach (var enemy in Enemies)
-                enemyLevel += enemy.Level;
+            {
+                var bonus = typeWeight(Convert.ToInt32(enemy.Type));
+                enemyLevel += enemy.Level + bonus;
+            }
             value += enemyLevel - playerLevel;
             if (value > 0)
                 return value;
@@ -185,6 +193,18 @@ namespace MissionClassLibrary
         public void ActionDone(int place)
         {
             ActionsTaken.Add(place);
+        }
+
+        private int typeWeight(int type)
+        {
+            switch (type)
+            {
+                case 0: return -1;
+                case 1: return 0;
+                case 2: return 2;
+                case 3: return 4;
+                default: return 0;
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainMenu.aspx.cs" Inherits="Combat.MainMenu" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CombatMenu.aspx.cs" Inherits="Combat.MainMenu" %>
 
 <!DOCTYPE html>
 
@@ -11,16 +11,16 @@
         <div>
             Pick your team:<br />
             <br />
-            <asp:DropDownList ID="player1DropDownList" runat="server">
+            <asp:DropDownList ID="player1DropDownList" runat="server" AutoPostBack="True">
             </asp:DropDownList>
 &nbsp;
-            <asp:DropDownList ID="player2DropDownList" runat="server">
+            <asp:DropDownList ID="player2DropDownList" runat="server" AutoPostBack="True">
             </asp:DropDownList>
             &nbsp;
-            <asp:DropDownList ID="player3DropDownList" runat="server">
+            <asp:DropDownList ID="player3DropDownList" runat="server" AutoPostBack="True">
             </asp:DropDownList>
 &nbsp;
-            <asp:DropDownList ID="player4DropDownList" runat="server">
+            <asp:DropDownList ID="player4DropDownList" runat="server" AutoPostBack="True">
             </asp:DropDownList>
             <br />
             <br />
@@ -33,7 +33,7 @@
             <asp:Button ID="okButton" runat="server" Text="GO" OnClick="okButton_Click" />
             <br />
             <br />
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
         </div>
     </form>
 </body>

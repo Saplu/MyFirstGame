@@ -11,15 +11,17 @@ namespace CharacterClassLibrary.NPCClasses
     [Serializable]
     public class Goblin : NPC, Interfaces.CombatInterface
     {
-        public Goblin(int level)
+        public Goblin(int level, int type)
         {
+            Type = (Enums.NPCType)Enum.Parse(typeof(Enums.NPCType), type.ToString());
+            var multi = typeMultiplier();
             Level = level;
-            Health = 70 + (35 * level);
+            Health = Convert.ToInt32(multi * multi * (70 + (35 * level)));
             MaxHealth = Health;
-            Strength = 7 + (level * 4);
+            Strength = Convert.ToInt32(multi * (5 + (level * 3)));
             Crit = 10;
             SpellPower = 0;
-            Armor = level * 5;
+            Armor = Convert.ToInt32(multi * (level * 5));
             Statuses = new List<CombatLogicClassLibrary.Status>();
             Threat = new CombatLogicClassLibrary.Threat();
         }

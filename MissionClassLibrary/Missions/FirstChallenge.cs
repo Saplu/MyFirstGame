@@ -12,10 +12,10 @@ namespace MissionClassLibrary.Missions
     {
         public FirstChallenge(List<Player> players)
         {
-            var enemy1 = new CharacterClassLibrary.NPCClasses.Rabbit(2);
-            var enemy2 = new CharacterClassLibrary.NPCClasses.Rabbit(2);
-            var enemy3 = new CharacterClassLibrary.NPCClasses.Rabbit(2);
-            var enemy4 = new CharacterClassLibrary.NPCClasses.Rabbit(2);
+            var enemy1 = new CharacterClassLibrary.NPCClasses.Rabbit(2, 1);
+            var enemy2 = new CharacterClassLibrary.NPCClasses.Rabbit(2, 1);
+            var enemy3 = new CharacterClassLibrary.NPCClasses.Rabbit(2, 1);
+            var enemy4 = new CharacterClassLibrary.NPCClasses.Rabbit(2, 1);
             Enemies = new List<NPC>() { enemy1, enemy2, enemy3, enemy4 };
             foreach (var enemy in Enemies)
             {

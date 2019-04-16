@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bank.cs">
+      <DependentUpon>DAOEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="CharacterDAO.cs" />
     <Compile Include="DAOEntities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -85,9 +88,6 @@
       <DependentUpon>DAOEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ItemDAO.cs" />
-    <Compile Include="Mission.cs">
-      <DependentUpon>DAOEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Player.cs">
       <DependentUpon>DAOEntities.tt</DependentUpon>
     </Compile>

@@ -33,7 +33,7 @@ namespace Combat
                 player4DropDownList.DataSource = list;
                 player4DropDownList.DataBind();
 
-                var missions = new List<string>() {"Tutorial", "NextStep", "FirstChallenge", "SomethingNew" };
+                var missions = new List<string>() {"Tutorial", "NextStep", "FirstChallenge", "SomethingNew", "TankThat" };
 
                 fightRadioButtonList.DataSource = missions;
                 fightRadioButtonList.DataBind();
@@ -63,6 +63,10 @@ namespace Combat
                 Players = getStats(Players);
                 ViewState["Players"] = Players;
             }
+            player1DropDownList.ToolTip = dao.TooltipInfo(player1DropDownList.Text);
+            player2DropDownList.ToolTip = dao.TooltipInfo(player2DropDownList.Text);
+            player3DropDownList.ToolTip = dao.TooltipInfo(player3DropDownList.Text);
+            player4DropDownList.ToolTip = dao.TooltipInfo(player4DropDownList.Text);
         }
 
         protected void okButton_Click(object sender, EventArgs e)

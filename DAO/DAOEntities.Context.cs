@@ -15,7 +15,6 @@ namespace DAO
     
     public partial class CharacterDbEntities : DbContext
     {
-        
         public CharacterDbEntities()
             : base("name=CharacterDbEntities")
         {
@@ -27,7 +26,7 @@ namespace DAO
         }
     
         public virtual DbSet<Item> Item { get; set; }
-        public virtual DbSet<Mission> Mission { get; set; }
         public virtual DbSet<Player> Player { get; set; }
+        public virtual DbSet<Bank> Bank { get; set; }
     }
 }

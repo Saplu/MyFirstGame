@@ -26,12 +26,17 @@ namespace Combat
             confirmButton.Visible = true;
             typeLabel.Visible = true;
             placeLabel.Visible = true;
-            typeRadioButtonList.Visible = true;
-            placeRadioButtonList.Visible = true;
-            characterRadioButtonList.Visible = true;
+            playerLabel.Visible = true;
+            typeDropDownList.Visible = true;
+            placeDropDownList.Visible = true;
+            characterDropDownList.Visible = true;
             var players = shop.Players;
-            characterRadioButtonList.DataSource = getData(players);
-            characterRadioButtonList.DataBind();
+            characterDropDownList.DataSource = getData(players);
+            characterDropDownList.DataBind();
+            craftButton.Visible = false;
+            sellButton.Visible = false;
+            backButton.Visible = true;
+            offerLabel.Text = getOffer();
         }
 
         protected void sellButton_Click(object sender, EventArgs e)
@@ -48,17 +53,18 @@ namespace Combat
             var gen = new CharacterClassLibrary.RandomItemGenerator();
             try
             {
-                var type = shop.SaleItemType(typeRadioButtonList.SelectedValue);
-                var place = shop.SaleItemPlace(placeRadioButtonList.SelectedValue);
-                if (characterRadioButtonList.SelectedValue == null)
+                var type = shop.SaleItemType(typeDropDownList.SelectedValue);
+                var place = shop.SaleItemPlace(placeDropDownList.SelectedValue);
+                if (characterDropDownList.SelectedValue == null)
                     throw new Exception("No character selected");
                 type = shop.ManageType(place, type);
-                //var player = characterRadioButtonList.SelectedValue;
-                var buyer = shop.setBuyer(characterRadioButtonList.SelectedValue, type);
+                var buyer = shop.setBuyer(characterDropDownList.SelectedValue, type);
                 var itemType = shop.casterOrPhysical(buyer.Class);
                 var item = gen.CreateItem(buyer.Level, place, type, itemType, buyer.Id);
                 shop.ManageMoney(item);
                 shop.AddItem(item);
+                offerLabel.Text = "Thanks for giving your money. You got:<br/>" + item.ToString();
+                labelsOff();
             }
             catch (Exception ex)
             {
@@ -87,6 +93,76 @@ namespace Combat
                 value.Add(item.Id);
             }
             return value;
+        }
+
+        protected void backButton_Click(object sender, EventArgs e)
+        {
+            labelsOff();
+        }
+
+        protected void typeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                exceptionLabel.Text = "";
+                offerLabel.Text = getOffer();
+            }
+            catch(Exception ex)
+            {
+                exceptionLabel.Text = ex.Message;
+            }
+        }
+
+        protected void placeDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                exceptionLabel.Text = "";
+                offerLabel.Text = getOffer();
+            }
+            catch (Exception ex)
+            {
+                exceptionLabel.Text = ex.Message;
+            }
+        }
+
+        protected void characterDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                exceptionLabel.Text = "";
+                offerLabel.Text = getOffer();
+            }
+            catch (Exception ex)
+            {
+                exceptionLabel.Text = ex.Message;
+            }
+        }
+
+        private string getOffer()
+        {
+            var type = shop.SaleItemType(typeDropDownList.SelectedValue);
+            var place = shop.SaleItemPlace(placeDropDownList.SelectedValue);
+            if (characterDropDownList.SelectedValue == null)
+                throw new Exception("No character selected");
+            type = shop.ManageType(place, type);
+            var buyer = shop.setBuyer(characterDropDownList.SelectedValue, type);
+
+            return shop.currentOffer(type, place, buyer);
+        }
+
+        private void labelsOff()
+        {
+            typeLabel.Visible = false;
+            placeLabel.Visible = false;
+            playerLabel.Visible = false;
+            typeDropDownList.Visible = false;
+            placeDropDownList.Visible = false;
+            characterDropDownList.Visible = false;
+            backButton.Visible = false;
+            sellButton.Visible = true;
+            craftButton.Visible = true;
+            confirmButton.Visible = false;
         }
     }
 }

@@ -40,13 +40,13 @@ namespace Combat {
         protected global::System.Web.UI.WebControls.Label typeLabel;
         
         /// <summary>
-        /// typeRadioButtonList control.
+        /// typeDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList typeRadioButtonList;
+        protected global::System.Web.UI.WebControls.DropDownList typeDropDownList;
         
         /// <summary>
         /// placeLabel control.
@@ -58,13 +58,13 @@ namespace Combat {
         protected global::System.Web.UI.WebControls.Label placeLabel;
         
         /// <summary>
-        /// placeRadioButtonList control.
+        /// placeDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList placeRadioButtonList;
+        protected global::System.Web.UI.WebControls.DropDownList placeDropDownList;
         
         /// <summary>
         /// playerLabel control.
@@ -76,13 +76,13 @@ namespace Combat {
         protected global::System.Web.UI.WebControls.Label playerLabel;
         
         /// <summary>
-        /// characterRadioButtonList control.
+        /// characterDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList characterRadioButtonList;
+        protected global::System.Web.UI.WebControls.DropDownList characterDropDownList;
         
         /// <summary>
         /// moneyLabel control.
@@ -119,6 +119,24 @@ namespace Combat {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button confirmButton;
+        
+        /// <summary>
+        /// backButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button backButton;
+        
+        /// <summary>
+        /// offerLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label offerLabel;
         
         /// <summary>
         /// exceptionLabel control.

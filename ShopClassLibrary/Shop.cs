@@ -95,6 +95,18 @@ namespace ShopClassLibrary
             itemDAO.ManageMoney(-item.SellValue * 4);
         }
 
+        public string currentOffer(int type, int place, DAO.Player buyer)
+        {
+            var typeString = offerString(type);
+            var Place = placeString(place);
+            var value = new RandomItemGenerator();
+            var placeEnum = (CharacterClassLibrary.Enums.ItemPlace)Enum.Parse(typeof(CharacterClassLibrary.Enums.ItemPlace), place.ToString());
+            var price = value.GetItemPower(placeEnum, buyer.Level) * 8;
+            var offer = "Level " + buyer.Level + " " + typeString + " " + Place + 
+                "<br/>Price: " + price + ". Don't bother bargaining, I am computer.";
+            return offer;
+        }
+
         private void typeValid(int type, DAO.Player player)
         {
             if ((player.Class == 1 || player.Class == 4) && type > 0)
@@ -119,6 +131,34 @@ namespace ShopClassLibrary
             dbItem.Name = item.Name;
             dbItem.SellValue = item.SellValue;
             return dbItem;
+        }
+
+        private string offerString(int type)
+        {
+            switch(type)
+            {
+                case 0: return "Cloth";
+                case 1: return "Leather";
+                case 2: return "Mail";
+                case 3: return "Plate";
+                default: throw new Exception("Something weird has happened. Please contact our customer support.");
+            }
+        }
+
+        private string placeString(int place)
+        {
+            switch(place)
+            {
+                case 0: return "Main Hand";
+                case 1: return "Offhand";
+                case 2: return "Helmet";
+                case 3: return "Chest";
+                case 4: return "Gloves";
+                case 5: return "Pants";
+                case 6: return "Shoes";
+                case 7: return "Shield";
+                default: throw new Exception("Something weird has happened. Please contarc our customer support.");
+            }
         }
     }
 }

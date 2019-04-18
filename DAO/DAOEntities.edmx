@@ -27,6 +27,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Place" Type="int" Nullable="false" />
           <Property Name="SellValue" Type="int" Nullable="false" />
+          <Property Name="Quality" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -66,6 +67,7 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Place" Type="Int32" Nullable="false" />
           <Property Name="SellValue" Type="Int32" Nullable="false" />
+          <Property Name="Quality" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -102,6 +104,7 @@
           <EntitySetMapping Name="Item">
             <EntityTypeMapping TypeName="CharacterDbModel.Item">
               <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
                 <ScalarProperty Name="SellValue" ColumnName="SellValue" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Owner" ColumnName="Owner" />

@@ -29,10 +29,13 @@ namespace Combat
 
                 setPictures();
                 setLabels();
-
-                //var taunt = new CombatLogicClassLibrary.Statuses.Shield(3, new List<int>(), 50);
-                //mission.Players[2].Statuses.Add(taunt);
-
+                /*
+                var rand = new RandomItemGenerator();
+                var item1 = rand.CreateItem(3, ItemQuality.Good);
+                var item2 = rand.CreateItem(3, ItemQuality.Great);
+                var item3 = rand.CreateItem(3, ItemQuality.Masterpiece);
+                var item4 = rand.CreateItem(3, ItemQuality.Poor);
+                */
             }
             checkStuns();
         }
@@ -268,7 +271,6 @@ namespace Combat
 
         private void actionDone(int player)
         {
-            //var index = Convert.ToInt32(ViewState["Player"]);
             switch(player)
             {
                 case 1: player1ImageButton.Enabled = false;

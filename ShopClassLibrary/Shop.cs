@@ -85,8 +85,8 @@ namespace ShopClassLibrary
         {
             var dbItem = convertToDbItem(item);
             ItemDAO itemDAO = new ItemDAO();
-            itemDAO.AddNewItem(dbItem);
             itemDAO.removeCurrentItem(dbItem.Place, dbItem.Owner);
+            itemDAO.AddNewItem(dbItem);
         }
 
         public void ManageMoney(CharacterClassLibrary.Item item)
@@ -101,7 +101,7 @@ namespace ShopClassLibrary
             var Place = placeString(place);
             var value = new RandomItemGenerator();
             var placeEnum = (CharacterClassLibrary.Enums.ItemPlace)Enum.Parse(typeof(CharacterClassLibrary.Enums.ItemPlace), place.ToString());
-            var price = value.GetItemPower(placeEnum, buyer.Level) * 8;
+            var price = value.GetItemPower(placeEnum, buyer.Level, CharacterClassLibrary.Enums.ItemQuality.Good) * 8;
             var offer = "Level " + buyer.Level + " " + typeString + " " + Place + 
                 "<br/>Price: " + price + ". Don't bother bargaining, I am computer.";
             return offer;

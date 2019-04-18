@@ -25,5 +25,6 @@ namespace DAO
         public int Type { get; set; }
         public int Place { get; set; }
         public int SellValue { get; set; }
+        public int Quality { get; set; }
     }
 }

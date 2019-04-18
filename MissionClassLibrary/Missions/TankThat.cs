@@ -33,6 +33,7 @@ namespace MissionClassLibrary.Missions
             Turn = 1;
             Level = 3;
             ActionsTaken = new List<int>();
+            RewardTable = new int[4] { 10, 70, 20, 0 };
         }
     }
 }

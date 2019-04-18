@@ -16,12 +16,14 @@ namespace MissionClassLibrary
         private int turn;
         private int level;
         private List<int> actionsTaken;
+        private int[] rewardTable;
 
         public List<NPC> Enemies { get => enemies; set => enemies = value; }
         public List<Player> Players { get => players; set => players = value; }
         public int Turn { get => turn; set => turn = value; }
         public int Level { get => level; set => level = value; }
         public List<int> ActionsTaken { get => actionsTaken; set => actionsTaken = value; }
+        public int[] RewardTable { get => rewardTable; set => rewardTable = value; }
 
         public static Mission Create(MissionList missions, List<Player> players)
         {
@@ -193,6 +195,18 @@ namespace MissionClassLibrary
         public void ActionDone(int place)
         {
             ActionsTaken.Add(place);
+        }
+
+        public ItemQuality RewardItemQuality()
+        {
+            var rand = Utils.RandomProvider.GetRandom(1, 100);
+            if (rand <= RewardTable[0])
+                return ItemQuality.Poor;
+            else if (rand > RewardTable[0] && rand <= RewardTable[0] + RewardTable[1])
+                return ItemQuality.Good;
+            else if (rand > RewardTable[0] + RewardTable[1] && rand <= RewardTable[0] + RewardTable[1] + RewardTable[2])
+                return ItemQuality.Great;
+            else return ItemQuality.Masterpiece;
         }
 
         private int typeWeight(int type)

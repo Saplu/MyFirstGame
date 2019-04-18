@@ -21,6 +21,7 @@ namespace CharacterClassLibrary
         private ItemPlace itemPlace;
         private string owner;
         private int sellValue;
+        private ItemQuality quality;
 
         public int Health { get => health; set => health = value; }
         public int Strength { get => strength; set => strength = value; }
@@ -33,9 +34,10 @@ namespace CharacterClassLibrary
         public ItemPlace ItemPlace { get => itemPlace; set => itemPlace = value; }
         public string Owner { get => owner; set => owner = value; }
         public int SellValue { get => sellValue; set => sellValue = value; }
+        public ItemQuality Quality { get => quality; set => quality = value; }
 
         public Item(int health, int strength, double crit, int spellPower, int armor, string name, int level,
-            ItemType itemtype, ItemPlace itemplace, string owner)
+            ItemType itemtype, ItemPlace itemplace, string owner, ItemQuality quality)
         {
             Health = health;
             Strength = strength;
@@ -47,8 +49,9 @@ namespace CharacterClassLibrary
             ItemType = itemtype;
             ItemPlace = itemplace;
             Owner = owner;
+            Quality = quality;
             var value = new RandomItemGenerator();
-            SellValue = value.GetItemPower(ItemPlace, Level) * 2;
+            SellValue = value.GetItemPower(ItemPlace, Level, Quality) * 2;
         }
 
         public Item(int level)
@@ -59,7 +62,8 @@ namespace CharacterClassLibrary
         public override string ToString()
         {
             return name + "<br/>Health: " + health + "<br/>Strength: " + strength + "<br/>Spellpower: " + spellpower +
-                "<br/>Armor: " + armor + "<br/>Crit: " + crit + "<br/><br/>" + itemType.ToString() + " " + itemPlace.ToString();
+                "<br/>Armor: " + armor + "<br/>Crit: " + crit + "<br/><br/>" + itemType.ToString() + " " + itemPlace.ToString() + 
+                " of " + Quality.ToString() + " quality.";
         }
     }
 }

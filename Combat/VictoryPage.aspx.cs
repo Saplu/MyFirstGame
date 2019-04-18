@@ -28,7 +28,8 @@ namespace Combat
                 var players = dao.GetPlayers(party);
 
                 var item = new RandomItemGenerator();
-                var reward = item.CreateItem(mission.Level);
+                var quality = mission.RewardItemQuality();
+                var reward = item.CreateItem(mission.Level, quality);
                 ViewState.Add("Loot", reward);
 
                 lootLabel.Text = reward.ToString();

@@ -21,22 +21,29 @@ namespace Combat
 
         protected void craftButton_Click(object sender, EventArgs e)
         {
-            itemGridView.Visible = false;
-            exceptionLabel.Text = "";
-            confirmButton.Visible = true;
-            typeLabel.Visible = true;
-            placeLabel.Visible = true;
-            playerLabel.Visible = true;
-            typeDropDownList.Visible = true;
-            placeDropDownList.Visible = true;
-            characterDropDownList.Visible = true;
-            var players = shop.Players;
-            characterDropDownList.DataSource = getData(players);
-            characterDropDownList.DataBind();
-            craftButton.Visible = false;
-            sellButton.Visible = false;
-            backButton.Visible = true;
-            offerLabel.Text = getOffer();
+            try
+            {
+                itemGridView.Visible = false;
+                exceptionLabel.Text = "";
+                confirmButton.Visible = true;
+                typeLabel.Visible = true;
+                placeLabel.Visible = true;
+                playerLabel.Visible = true;
+                typeDropDownList.Visible = true;
+                placeDropDownList.Visible = true;
+                characterDropDownList.Visible = true;
+                var players = shop.Players;
+                characterDropDownList.DataSource = getData(players);
+                characterDropDownList.DataBind();
+                craftButton.Visible = false;
+                sellButton.Visible = false;
+                backButton.Visible = true;
+                offerLabel.Text = getOffer();
+            }
+            catch (Exception ex)
+            {
+                exceptionLabel.Text = ex.Message;
+            }
         }
 
         protected void sellButton_Click(object sender, EventArgs e)
@@ -45,6 +52,8 @@ namespace Combat
             itemGridView.Visible = true;
             itemGridView.DataSource = shop.InventoryItems;
             itemGridView.DataBind();
+            if (shop.InventoryItems.Count() == 0)
+                exceptionLabel.Text = "No items to sell.";
         }
 
         protected void confirmButton_Click(object sender, EventArgs e)
@@ -60,7 +69,7 @@ namespace Combat
                 type = shop.ManageType(place, type);
                 var buyer = shop.setBuyer(characterDropDownList.SelectedValue, type);
                 var itemType = shop.casterOrPhysical(buyer.Class);
-                var item = gen.CreateItem(buyer.Level, place, type, itemType, buyer.Id);
+                var item = gen.CreateItem(buyer.Level, place, type, itemType, buyer.Id, CharacterClassLibrary.Enums.ItemQuality.Good);
                 shop.ManageMoney(item);
                 shop.AddItem(item);
                 offerLabel.Text = "Thanks for giving your money. You got:<br/>" + item.ToString();
@@ -98,6 +107,8 @@ namespace Combat
         protected void backButton_Click(object sender, EventArgs e)
         {
             labelsOff();
+            exceptionLabel.Text = "";
+            offerLabel.Text = "";
         }
 
         protected void typeDropDownList_SelectedIndexChanged(object sender, EventArgs e)

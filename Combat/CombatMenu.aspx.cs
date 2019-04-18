@@ -116,7 +116,7 @@ namespace Combat
             foreach (var item in items)
             {
                 var thing = new CharacterClassLibrary.Item(item.Health, item.Strength, item.Crit, item.SpellPower,
-                    item.Armor, item.Name, 1, (ItemType)item.Type, (ItemPlace)item.Place, item.Owner);
+                    item.Armor, item.Name, 1, (ItemType)item.Type, (ItemPlace)item.Place, item.Owner, (ItemQuality)item.Quality);
                 list.Add(thing);
             }
             return list;

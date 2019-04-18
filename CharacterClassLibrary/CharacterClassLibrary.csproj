@@ -45,6 +45,7 @@
     <Compile Include="Enums\ClassName.cs" />
     <Compile Include="Enums\ItemPlace.cs" />
     <Compile Include="Enums\ItemType.cs" />
+    <Compile Include="Enums\ItemQuality.cs" />
     <Compile Include="Enums\MissionList.cs" />
     <Compile Include="Enums\NPCClassName.cs" />
     <Compile Include="Enums\NPCType.cs" />

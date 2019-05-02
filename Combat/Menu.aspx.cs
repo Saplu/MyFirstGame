@@ -23,5 +23,10 @@ namespace Combat
         {
             Server.Transfer("Shop.aspx");
         }
+
+        protected void playerButton_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("NewCharacter.aspx");
+        }
     }
 }

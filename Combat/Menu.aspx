@@ -14,13 +14,11 @@
             <asp:Button ID="fightButton" runat="server" OnClick="fightButton_Click" Text="Fight" />
             <br />
             <br />
-            <asp:Button ID="playerButton" runat="server" Text="New Player" />
+            <asp:Button ID="playerButton" runat="server" Text="New Player" OnClick="playerButton_Click" />
             <br />
             <br />
             <asp:Button ID="shopButton" runat="server" OnClick="shopButton_Click" Text="Shop" />
             <br />
-            <br />
-            <asp:Button ID="exitButton" runat="server" Text="Exit" />
         </div>
     </form>
 </body>

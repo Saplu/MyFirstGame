@@ -10,7 +10,7 @@
 namespace Combat {
     
     
-    public partial class Menu {
+    public partial class NewCharacter {
         
         /// <summary>
         /// form1 control.
@@ -22,30 +22,48 @@ namespace Combat {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// fightButton control.
+        /// nameTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button fightButton;
+        protected global::System.Web.UI.WebControls.TextBox nameTextBox;
         
         /// <summary>
-        /// playerButton control.
+        /// classRadioButtonList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button playerButton;
+        protected global::System.Web.UI.WebControls.RadioButtonList classRadioButtonList;
         
         /// <summary>
-        /// shopButton control.
+        /// okButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button shopButton;
+        protected global::System.Web.UI.WebControls.Button okButton;
+        
+        /// <summary>
+        /// resultLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label resultLabel;
+        
+        /// <summary>
+        /// menuButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button menuButton;
     }
 }

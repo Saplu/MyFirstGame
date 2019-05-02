@@ -30,34 +30,6 @@ namespace ShopClassLibrary
             InventoryItems = itemDAO.GetInventoryItems();
         }
 
-        public int SaleItemType(string type)
-        {
-            switch (type)
-            {
-                case "Cloth": return 0;
-                case "Leather": return 1;
-                case "Mail": return 2;
-                case "Plate": return 3;
-                default: throw new Exception("No type selected.");
-            }
-        }
-
-        public int SaleItemPlace(string place)
-        {
-            switch (place)
-            {
-                case "MainHand": return 0;
-                case "OffHand": return 1;
-                case "Helmet": return 2;
-                case "Chest": return 3;
-                case "Hands": return 4;
-                case "Legs": return 5;
-                case "Feet": return 6;
-                case "Shield": return 7;
-                default: throw new Exception("No place selected.");
-            }
-        }
-
         public int ManageType(int place, int type)
         {
             if (place == 0 || place == 1)
@@ -95,7 +67,7 @@ namespace ShopClassLibrary
             itemDAO.ManageMoney(-item.SellValue * 4);
         }
 
-        public string currentOffer(int type, int place, DAO.Player buyer)
+        public string CurrentOffer(int type, int place, DAO.Player buyer)
         {
             var typeString = offerString(type);
             var Place = placeString(place);
@@ -105,6 +77,12 @@ namespace ShopClassLibrary
             var offer = "Level " + buyer.Level + " " + typeString + " " + Place + 
                 "<br/>Price: " + price + ". Don't bother bargaining, I am computer.";
             return offer;
+        }
+
+        public string CurrentlyWearing(string name, int place)
+        {
+            var current = new ItemDAO();
+            return current.GetCurrentItem(name, place);
         }
 
         private void typeValid(int type, DAO.Player player)

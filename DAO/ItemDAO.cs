@@ -84,5 +84,16 @@ namespace DAO
             db.Item.Remove(db.Item.ToList().Find(x => x.Id == id));
             db.SaveChanges();
         }
+
+        public string GetCurrentItem(string name, int place)
+        {
+            if (db.Item.ToList().Exists(x => x.Owner == name && x.Place == place))
+            {
+                var item = db.Item.ToList().Find(x => x.Owner == name && x.Place == place);
+                return "Currently wearing:<br/>" + itemToString(item);
+            }
+
+            else return "Partially nude atm.";
+        }
     }
 }

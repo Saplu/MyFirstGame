@@ -53,6 +53,51 @@ namespace DAO
             return info(player);
         }
 
+        public string TooltipInfo(int classValue)
+        {
+            return info(classValue);
+        }
+
+        public void NameExists(string name)
+        {
+            if (GetPlayers().Exists(x => x.Id == name))
+                throw new Exception("Name not available. Try something more unique");
+        }
+
+        public void NewPlayer(int classValue, string name)
+        {
+            var player = new Player();
+            player.Class = classValue;
+            player.Id = name;
+            var stats = setStats(classValue);
+            player.Health = stats[0];
+            player.Strength = stats[1];
+            player.SpellPower = stats[2];
+            player.Level = 1;
+            player.Xp = 0;
+            player.Crit = 0;
+            player.Armor = 0;
+            db.Player.Add(player);
+            db.SaveChanges();
+        }
+
+        private List<int> setStats(int classValue)
+        {
+            var value = new List<int>();
+            switch(classValue)
+            {
+                case 0: value = new List<int>() { 100, 10, 0}; break;
+                case 1: value = new List<int>() { 80, 5, 20}; break;
+                case 2: value = new List<int>() { 85, 5, 20}; break;
+                case 3: value = new List<int>() { 120, 8, 0}; break;
+                case 4: value = new List<int>() { 80, 5, 20}; break;
+                case 5: value = new List<int>() { 90, 5, 20}; break;
+                case 6: value = new List<int>() { 95, 10, 0}; break;
+                case 7: value = new List<int>() { 120, 5, 15}; break;
+            }
+            return value;
+        }
+
         private void checkForLevelup(Player player)
         {
             if (player.Xp >= (player.Level * 100))
@@ -100,6 +145,27 @@ namespace DAO
                         "and gain combo points consumed by ultimate."; break;
                 case 7: value = "Templar. Level: " + player.Level + " Magetank. Permanently reduced taken damage. " +
                         "High threat aoe abilities, but no taunt."; break;
+            }
+            return value;
+        }
+
+        private string info(int classValue)
+        {
+            var value = "";
+            switch (classValue)
+            {
+                case 0: value = "Warrior. Tough fighter with high dmg single-target abilities."; break;
+                case 1: value = "Mage. Fragile caster with both high single-target nuke and AoE."; break;
+                case 2: value = "Blood Priest. Single target heals, self survival and debuffing attacks."; break;
+                case 3: value = "Protector. Real bosstanker. " +
+                    "Taunt, threat abilities and permanently reduced taken dmg."; break;
+                case 4: value = "Fairy. Fragile healer with HoT, shield and party buff."; break;
+                case 5: value = "Shaman. Tough caster with both single target and aoe nukes. " +
+                    "More of a tank, less of a mage."; break;
+                case 6: value = "Rogue. Tricky fighter. Abilities cost energy, apply poison to the target " +
+                    "and gain combo points consumed by ultimate."; break;
+                case 7: value = "Templar. Magetank. Permanently reduced taken damage. " +
+                    "High threat aoe abilities, but no taunt."; break;
             }
             return value;
         }

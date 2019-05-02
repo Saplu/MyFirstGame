@@ -62,8 +62,8 @@ namespace Combat
             var gen = new CharacterClassLibrary.RandomItemGenerator();
             try
             {
-                var type = shop.SaleItemType(typeDropDownList.SelectedValue);
-                var place = shop.SaleItemPlace(placeDropDownList.SelectedValue);
+                var type = Convert.ToInt32(typeDropDownList.SelectedValue);
+                var place = Convert.ToInt32(placeDropDownList.SelectedValue);
                 if (characterDropDownList.SelectedValue == null)
                     throw new Exception("No character selected");
                 type = shop.ManageType(place, type);
@@ -130,6 +130,7 @@ namespace Combat
             {
                 exceptionLabel.Text = "";
                 offerLabel.Text = getOffer();
+                currentLabel.Text = shop.CurrentlyWearing(characterDropDownList.Text, Convert.ToInt32(placeDropDownList.SelectedValue));
             }
             catch (Exception ex)
             {
@@ -143,6 +144,7 @@ namespace Combat
             {
                 exceptionLabel.Text = "";
                 offerLabel.Text = getOffer();
+                currentLabel.Text = shop.CurrentlyWearing(characterDropDownList.Text, Convert.ToInt32(placeDropDownList.SelectedValue));
             }
             catch (Exception ex)
             {
@@ -152,14 +154,14 @@ namespace Combat
 
         private string getOffer()
         {
-            var type = shop.SaleItemType(typeDropDownList.SelectedValue);
-            var place = shop.SaleItemPlace(placeDropDownList.SelectedValue);
+            var type = Convert.ToInt32(typeDropDownList.SelectedValue);
+            var place = Convert.ToInt32(placeDropDownList.SelectedValue);
             if (characterDropDownList.SelectedValue == null)
                 throw new Exception("No character selected");
             type = shop.ManageType(place, type);
             var buyer = shop.setBuyer(characterDropDownList.SelectedValue, type);
 
-            return shop.currentOffer(type, place, buyer);
+            return shop.CurrentOffer(type, place, buyer);
         }
 
         private void labelsOff()
@@ -174,6 +176,11 @@ namespace Combat
             sellButton.Visible = true;
             craftButton.Visible = true;
             confirmButton.Visible = false;
+        }
+
+        protected void menuButton_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Menu.aspx");
         }
     }
 }

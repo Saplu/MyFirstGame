@@ -24,24 +24,24 @@
             <asp:Label ID="typeLabel" runat="server" Text="Select type:" Visible="False"></asp:Label>
             <br />
             <asp:DropDownList ID="typeDropDownList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="typeDropDownList_SelectedIndexChanged" Visible="False">
-                <asp:ListItem>Cloth</asp:ListItem>
-                <asp:ListItem>Leather</asp:ListItem>
-                <asp:ListItem>Mail</asp:ListItem>
-                <asp:ListItem>Plate</asp:ListItem>
+                <asp:ListItem Value="0">Cloth</asp:ListItem>
+                <asp:ListItem Value="1">Leather</asp:ListItem>
+                <asp:ListItem Value="2">Mail</asp:ListItem>
+                <asp:ListItem Value="3">Plate</asp:ListItem>
             </asp:DropDownList>
             <br />
             <br />
             <asp:Label ID="placeLabel" runat="server" Text="Select place:" Visible="False"></asp:Label>
             <br />
             <asp:DropDownList ID="placeDropDownList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="placeDropDownList_SelectedIndexChanged" Visible="False">
-                <asp:ListItem>Helmet</asp:ListItem>
-                <asp:ListItem>Chest</asp:ListItem>
-                <asp:ListItem>Legs</asp:ListItem>
-                <asp:ListItem>Hands</asp:ListItem>
-                <asp:ListItem>Feet</asp:ListItem>
-                <asp:ListItem>MainHand</asp:ListItem>
-                <asp:ListItem>OffHand</asp:ListItem>
-                <asp:ListItem>Shield</asp:ListItem>
+                <asp:ListItem Value="2">Helmet</asp:ListItem>
+                <asp:ListItem Value="3">Chest</asp:ListItem>
+                <asp:ListItem Value="5">Legs</asp:ListItem>
+                <asp:ListItem Value="4">Hands</asp:ListItem>
+                <asp:ListItem Value="6">Feet</asp:ListItem>
+                <asp:ListItem Value="0">MainHand</asp:ListItem>
+                <asp:ListItem Value="1">OffHand</asp:ListItem>
+                <asp:ListItem Value="7">Shield</asp:ListItem>
             </asp:DropDownList>
             <br />
             <br />
@@ -68,6 +68,10 @@
             <asp:Label ID="offerLabel" runat="server"></asp:Label>
             <br />
             <asp:Label ID="exceptionLabel" runat="server"></asp:Label>
+            <br />
+            <asp:Label ID="currentLabel" runat="server"></asp:Label>
+            <br />
+            <asp:Button ID="menuButton" runat="server" OnClick="menuButton_Click" Text="Main Menu" />
         </div>
     </form>
 </body>

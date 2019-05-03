@@ -59,7 +59,7 @@ namespace Combat
                 item.Owner = tryThis;
                 var reward = convertToDbItem(item);
                 itemDAO.AddNewItem(reward);
-                Server.Transfer("Menu.aspx");
+                forward(mission);
             }
             else if (target.ItemTypes.Exists(x => x == item.ItemType))
             {
@@ -68,9 +68,22 @@ namespace Combat
                 item.Owner = target.Name;
                 var reward = convertToDbItem(item);
                 itemDAO.AddNewItem(reward);
-                Server.Transfer("Menu.aspx");
+                forward(mission);
             }
             else currentLabel.Text = "Cannot wear the armor type.";
+        }
+
+        private void forward(Mission mission)
+        {
+            if (mission.TransferTo == "Menu")
+                Server.Transfer("Menu.aspx");
+            else
+            {
+                mission.EndOfMissionReset();
+                Context.Items.Add("MissionPlayers", mission.Players);
+                Context.Items.Add("MissionName", mission.TransferTo);
+                Server.Transfer("Combat.aspx");
+            }
         }
 
         private void PlayerRadioButtonList_SelectedIndexChanged(object sender, EventArgs e)

@@ -61,5 +61,12 @@ namespace CharacterClassLibrary
             }
             Cooldowns = newcd;
         }
+
+        public virtual void AfterCombatReset()
+        {
+            Health = MaxHealth;
+            Cooldowns = new int[4] { 0, 0, 0, 4 };
+            Statuses = new List<CombatLogicClassLibrary.Status>();
+        }
     }
 }

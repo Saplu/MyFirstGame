@@ -33,7 +33,7 @@ namespace Combat
                 player4DropDownList.DataSource = list;
                 player4DropDownList.DataBind();
 
-                var missions = new List<string>() {"Tutorial", "NextStep", "FirstChallenge", "SomethingNew", "TankThat" };
+                var missions = new List<string>() {"Tutorial", "NextStep", "FirstChallenge", "SomethingNew", "TankThat", "GettingHarder" };
 
                 fightRadioButtonList.DataSource = missions;
                 fightRadioButtonList.DataBind();

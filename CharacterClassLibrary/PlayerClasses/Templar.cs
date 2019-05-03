@@ -153,5 +153,13 @@ namespace CharacterClassLibrary.PlayerClasses
                 default: return 0;
             }
         }
+
+        public override void AfterCombatReset()
+        {
+            Health = MaxHealth;
+            Cooldowns = new int[4] { 0, 0, 0, 4 };
+            var stat = new CombatLogicClassLibrary.Statuses.TakenDmgMultiplier(Int32.MaxValue, new List<int>(), .85);
+            Statuses = new List<CombatLogicClassLibrary.Status>() { stat };
+        }
     }
 }

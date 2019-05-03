@@ -26,7 +26,7 @@
             <asp:Label ID="currentLabel" runat="server"></asp:Label>
             <br />
             <br />
-            <asp:Button ID="okButton" runat="server" OnClick="okButton_Click" Text="Great!" />
+            <asp:Button ID="okButton" runat="server" OnClick="okButton_Click" Text="Continue" />
             <br />
             <br />
         </div>

@@ -193,5 +193,14 @@ namespace CharacterClassLibrary.PlayerClasses
                 Energy = MaxEnergy;
             else Energy += after;
         }
+
+        public override void AfterCombatReset()
+        {
+            Health = MaxHealth;
+            Cooldowns = new int[4] { 0, 0, 0, 0 };
+            Energy = 100;
+            ComboPoints = 0;
+            Statuses = new List<CombatLogicClassLibrary.Status>();
+        }
     }
 }

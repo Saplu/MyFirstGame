@@ -17,6 +17,7 @@ namespace MissionClassLibrary
         private int level;
         private List<int> actionsTaken;
         private int[] rewardTable;
+        private string transferTo;
 
         public List<NPC> Enemies { get => enemies; set => enemies = value; }
         public List<Player> Players { get => players; set => players = value; }
@@ -24,6 +25,7 @@ namespace MissionClassLibrary
         public int Level { get => level; set => level = value; }
         public List<int> ActionsTaken { get => actionsTaken; set => actionsTaken = value; }
         public int[] RewardTable { get => rewardTable; set => rewardTable = value; }
+        public string TransferTo { get => transferTo; set => transferTo = value; }
 
         public static Mission Create(MissionList missions, List<Player> players)
         {
@@ -34,6 +36,7 @@ namespace MissionClassLibrary
                 case MissionList.FirstChallenge: return new Missions.FirstChallenge(players);
                 case MissionList.SomethingNew: return new Missions.SomethingNew(players);
                 case MissionList.TankThat: return new Missions.TankThat(players);
+                case MissionList.GettingHarder: return new Missions.GettingHarder(players);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -207,6 +210,14 @@ namespace MissionClassLibrary
             else if (rand > RewardTable[0] + RewardTable[1] && rand <= RewardTable[0] + RewardTable[1] + RewardTable[2])
                 return ItemQuality.Great;
             else return ItemQuality.Masterpiece;
+        }
+
+        public void EndOfMissionReset()
+        {
+            foreach(var player in Players)
+            {
+                player.AfterCombatReset();
+            }
         }
 
         private int typeWeight(int type)

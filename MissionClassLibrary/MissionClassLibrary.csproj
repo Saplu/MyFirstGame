@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Mission.cs" />
     <Compile Include="Missions\FirstChallenge.cs" />
+    <Compile Include="Missions\GettingHarder.cs" />
     <Compile Include="Missions\NextStep.cs" />
     <Compile Include="Missions\SomethingNew.cs" />
     <Compile Include="Missions\TankThat.cs" />

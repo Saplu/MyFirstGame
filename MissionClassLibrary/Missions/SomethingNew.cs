@@ -35,6 +35,7 @@ namespace MissionClassLibrary.Missions
             Level = 2;
             ActionsTaken = new List<int>();
             RewardTable = new int[4] { 25, 75, 0, 0 };
+            TransferTo = "Menu";
         }
     }
 }

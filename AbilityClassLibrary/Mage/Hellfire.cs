@@ -13,6 +13,7 @@ namespace AbilityClassLibrary.Mage
         {
             Name = "Hellfire";
             Description = "Unleash hell on your enemies, burning them with really hot fire. Leaves a DoT on your main target for 3 turns.";
+            Cooldown = 5;
         }
 
         public int Action(int sp, double crit, double multiplier, int increase)

@@ -119,17 +119,15 @@ namespace CharacterClassLibrary.PlayerClasses
         {
             var list = new List<int>();
             var util = new Utils.TargetSetter();
-            if (id == "Laser")
+
+            switch(id)
             {
-                list = util.setTargets(targetPosition, 1, enemyCount);
+                case "Laser": list = util.setTargets(targetPosition, 1, enemyCount); return list;
+                case "Bubble": list = util.setTargets(targetPosition, 1); return list;
+                case "Healing Words": list = util.setTargets(targetPosition, 1); return list;
+                case "Inspire": list = util.setTargets(targetPosition, 4); return list;
+                default: return list;
             }
-            if (id == "Bubble")
-                list = util.setTargets(targetPosition, 1);
-            if (id == "Healing Words")
-                list = util.setTargets(targetPosition, 1);
-            if (id == "Inspire")
-                list = util.setTargets(targetPosition, 4);
-            return list;
         }
 
         public override double setStatusEffect(string id, int targetPosition)

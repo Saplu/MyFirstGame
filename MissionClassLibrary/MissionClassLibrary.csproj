@@ -51,7 +51,10 @@
     <Compile Include="Mission.cs" />
     <Compile Include="Missions\FirstChallenge.cs" />
     <Compile Include="Missions\GettingHarder.cs" />
+    <Compile Include="Missions\Keep.cs" />
     <Compile Include="Missions\NextStep.cs" />
+    <Compile Include="Missions\Outpost.cs" />
+    <Compile Include="Missions\Rampart.cs" />
     <Compile Include="Missions\SomethingNew.cs" />
     <Compile Include="Missions\TankThat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

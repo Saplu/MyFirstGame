@@ -47,6 +47,8 @@ namespace CombatLogicClassLibrary
                 case "Blade Flurry": list.Add(new Statuses.Poison(3, targets, Convert.ToInt32(effect))); return list;
                 case "Holy Ground": list.Add(new Statuses.DoT(3, targets, Convert.ToInt32(effect))); return list;
                 case "Righteous Bane": list.Add(new Statuses.AttackDmgMultiplier(2, targets, effect)); return list;
+                case "BloodPlague": list.Add(new Statuses.DoT(3, targets, Convert.ToInt32(effect))); return list;
+                case "RigorMortis": list.Add(new Statuses.AttackDmgMultiplier(2, targets, effect)); return list;
                 default: return null;
             }
         }

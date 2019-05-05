@@ -29,13 +29,6 @@ namespace Combat
 
                 setPictures();
                 setLabels();
-                /*
-                var rand = new RandomItemGenerator();
-                var item1 = rand.CreateItem(3, ItemQuality.Good);
-                var item2 = rand.CreateItem(3, ItemQuality.Great);
-                var item3 = rand.CreateItem(3, ItemQuality.Masterpiece);
-                var item4 = rand.CreateItem(3, ItemQuality.Poor);
-                */
             }
             checkStuns();
         }
@@ -213,19 +206,24 @@ namespace Combat
 
         protected void endButton_Click(object sender, EventArgs e)
         {
-            var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
-            var survivors = new List<string>();
-            var party = new List<string>();
-            foreach (var player in mission.Players)
+            if (endButton.Text == "Return to Menu")
+                Server.Transfer("Menu.aspx");
+            else
             {
-                party.Add(player.Name);
-                if (player.Health > 0)
-                    survivors.Add(player.Name);
+                var mission = (MissionClassLibrary.Mission)ViewState["Mission"];
+                var survivors = new List<string>();
+                var party = new List<string>();
+                foreach (var player in mission.Players)
+                {
+                    party.Add(player.Name);
+                    if (player.Health > 0)
+                        survivors.Add(player.Name);
+                }
+                Context.Items.Add("Survivors", survivors);
+                Context.Items.Add("Party", party);
+                Context.Items.Add("Mission", ViewState["Mission"]);
+                Server.Transfer("VictoryPage.aspx");
             }
-            Context.Items.Add("Survivors", survivors);
-            Context.Items.Add("Party", party);
-            Context.Items.Add("Mission", ViewState["Mission"]);
-            Server.Transfer("VictoryPage.aspx");
         }
 
         private void heal(int player)
@@ -319,6 +317,8 @@ namespace Combat
                 player4ImageButton.Enabled = false;
                 attackDone();
                 endTurnButton.Enabled = false;
+                endButton.Visible = true;
+                endButton.Text = "Return to Menu";
             }
         }
 

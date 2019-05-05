@@ -55,8 +55,10 @@
     <Compile Include="Mage\Hellfire.cs" />
     <Compile Include="Mage\LavaField.cs" />
     <Compile Include="NPC\Bite.cs" />
+    <Compile Include="NPC\BloodPlague.cs" />
     <Compile Include="NPC\Execute.cs" />
     <Compile Include="NPC\Kick.cs" />
+    <Compile Include="NPC\RigorMortis.cs" />
     <Compile Include="NPC\Whirlwind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protector\ChallengingShout.cs" />

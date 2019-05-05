@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace CharacterClassLibrary.Enums
 {
-    public enum MissionList { Tutorial, NextStep, FirstChallenge, SomethingNew, TankThat, GettingHarder}
+    public enum MissionList { Tutorial, NextStep, FirstChallenge, SomethingNew, TankThat, GettingHarder, Outpost, Rampart, Keep}
 }

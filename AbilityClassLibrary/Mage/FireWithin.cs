@@ -18,7 +18,7 @@ namespace AbilityClassLibrary.Mage
 
         public int Action(int spellpower, double crit, double multiplier, int increase)
         {
-            var dmg = 10 + spellpower;
+            var dmg = 10 + Convert.ToInt32(spellpower * 1.4);
             return AttackLogic.CalculateAttackDamage(dmg, crit, multiplier, increase);
         }
     }

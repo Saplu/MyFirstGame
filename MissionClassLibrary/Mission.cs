@@ -37,6 +37,9 @@ namespace MissionClassLibrary
                 case MissionList.SomethingNew: return new Missions.SomethingNew(players);
                 case MissionList.TankThat: return new Missions.TankThat(players);
                 case MissionList.GettingHarder: return new Missions.GettingHarder(players);
+                case MissionList.Outpost: return new Missions.Outpost(players);
+                case MissionList.Rampart: return new Missions.Rampart(players);
+                case MissionList.Keep: return new Missions.Keep(players);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -88,6 +91,7 @@ namespace MissionClassLibrary
                             if (Utils.TrueDamageAbilities.IsTrueDmg(id))
                                 players[target - 1].TrueDmgDefend(dmg);
                             else players[target - 1].Defend(dmg);
+                            SetStatuses(enemyIndex + 5, id, target);
                         }
                     }
                 }
@@ -122,7 +126,9 @@ namespace MissionClassLibrary
 
         public void SetStatuses(int playerIndex, string id, int targetPosition)
         {
-            Players[playerIndex - 1].SetStatuses(id, players, enemies, targetPosition);
+            if (playerIndex <= 4)
+                Players[playerIndex - 1].SetStatuses(id, players, enemies, targetPosition);
+            else Enemies[playerIndex - 5].SetStatuses(id, players, enemies, targetPosition);
         }
 
         public bool isAlive(int index)

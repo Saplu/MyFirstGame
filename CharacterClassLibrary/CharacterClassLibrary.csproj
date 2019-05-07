@@ -55,6 +55,7 @@
     <Compile Include="NPC.cs" />
     <Compile Include="NPCClasses\Goblin.cs" />
     <Compile Include="NPCClasses\KeepKeeper.cs" />
+    <Compile Include="NPCClasses\Medic.cs" />
     <Compile Include="NPCClasses\Necromancer.cs" />
     <Compile Include="NPCClasses\Pirate.cs" />
     <Compile Include="NPCClasses\Rabbit.cs" />

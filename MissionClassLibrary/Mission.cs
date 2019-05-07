@@ -40,6 +40,8 @@ namespace MissionClassLibrary
                 case MissionList.Outpost: return new Missions.Outpost(players);
                 case MissionList.Rampart: return new Missions.Rampart(players);
                 case MissionList.Keep: return new Missions.Keep(players);
+                case MissionList.Gate: return new Missions.Gate(players);
+                case MissionList.Castle: return new Missions.Castle(players);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -76,32 +78,10 @@ namespace MissionClassLibrary
             if (enemies[enemyIndex].Health > 0 && enemies[enemyIndex].isStunned() == false)
             {
                 var id = enemies[enemyIndex].ChooseAbility();
-                var targetCount = enemies[enemyIndex].GetTargets(id);
-                var dmg = enemies[enemyIndex].UseAbility(id);
-                var defender = enemies[enemyIndex].ChooseEnemy();
-                if (players[defender - 1].Health > 0)
-                {
-                    var util = new Utils.TargetSetter();
-                    var targets = util.setTargets(defender, targetCount);
 
-                    foreach (var target in targets)
-                    {
-                        if (players[target - 1].Health > 0)
-                        {
-                            if (Utils.TrueDamageAbilities.IsTrueDmg(id))
-                                players[target - 1].TrueDmgDefend(dmg);
-                            else players[target - 1].Defend(dmg);
-                            SetStatuses(enemyIndex + 5, id, target);
-                        }
-                    }
-                }
-                else if (CheckLoss())
-                    return;
-                else
-                {
-                    enemies[enemyIndex].ManageThreat(defender - 1);
-                    PlayerDefend(enemyIndex);
-                }
+                if (Utils.HealAbilities.IsHeal(id))
+                    enemyHeal(id, enemyIndex);
+                else enemyAttack(id, enemyIndex);
             }
         }
 
@@ -237,5 +217,57 @@ namespace MissionClassLibrary
                 default: return 0;
             }
         }
+
+        private void enemyHeal(string id, int enemyIndex)
+        {
+            var targetCount = enemies[enemyIndex].GetTargets(id);
+            var heal = enemies[enemyIndex].UseAbility(id);
+            var healths = getHealthPercents();
+            var targetIndex = enemies[enemyIndex].ChooseAlly(healths);
+            enemies[targetIndex].RecieveHeal(heal);
+            SetStatuses(enemyIndex + 5, id, targetIndex + 5);
+        }
+
+        private void enemyAttack(string id, int enemyIndex)
+        {
+            var targetCount = enemies[enemyIndex].GetTargets(id);
+            var dmg = enemies[enemyIndex].UseAbility(id);
+            var defender = enemies[enemyIndex].ChooseEnemy();
+            if (players[defender - 1].Health > 0)
+            {
+                var util = new Utils.TargetSetter();
+                var targets = util.setTargets(defender, targetCount);
+
+                foreach (var target in targets)
+                {
+                    if (players[target - 1].Health > 0)
+                    {
+                        if (Utils.TrueDamageAbilities.IsTrueDmg(id))
+                            players[target - 1].TrueDmgDefend(dmg);
+                        else players[target - 1].Defend(dmg);
+                        SetStatuses(enemyIndex + 5, id, target);
+                    }
+                }
+            }
+            else if (CheckLoss())
+                return;
+            else
+            {
+                enemies[enemyIndex].ManageThreat(defender - 1);
+                enemies[enemyIndex].RemoveTaunt();
+                PlayerDefend(enemyIndex);
+            }
+        }
+
+        private double[] getHealthPercents()
+        {
+            double first = enemies[0].GetHealthPercent();
+            double second = enemies[1].GetHealthPercent();
+            double third = enemies[2].GetHealthPercent();
+            double fourth = enemies[3].GetHealthPercent();
+            var result = new double[4] { first, second, third, fourth };
+            return result;
+        }
+
     }
 }

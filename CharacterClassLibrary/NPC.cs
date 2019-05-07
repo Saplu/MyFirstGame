@@ -39,6 +39,34 @@ namespace CharacterClassLibrary
             Threat.ManageThreat(index, -Threat.ThreatTable[index]);
         }
 
+        public int ChooseAlly(double[] percents)
+        {
+            var lowestIndex = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                var lowest = percents.Min();
+                lowestIndex = Array.IndexOf(percents, percents.Min());
+                if (lowest > 0)
+                    break;
+                else
+                {
+                    percents[lowestIndex] += 1;
+                }
+            }
+            return lowestIndex;
+        }
+
+        public void RemoveTaunt()
+        {
+            var keeplist = new List<Status>();
+            foreach (var status in Statuses)
+            {
+                if (status is CombatLogicClassLibrary.Statuses.Taunt) ;
+                else keeplist.Add(status);
+            }
+            Statuses = keeplist;
+        }
+
         protected double typeMultiplier()
         {
             switch (Type)

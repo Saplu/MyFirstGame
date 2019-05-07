@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.102
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstGame", "Combat\MyFirstGame.csproj", "{07E02095-28D3-4C4A-9019-94A47CFCDAA6}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{3BB55DAF-B0AB-4E60-990F-7593AC25D5FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopClassLibrary", "ShopClassLibrary\ShopClassLibrary.csproj", "{823EA572-99D6-48EF-B52F-8D727641A85F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests2", "UnitTests2\UnitTests2.csproj", "{363FC8F7-90B0-43AB-97DB-C6C5649AF641}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{823EA572-99D6-48EF-B52F-8D727641A85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{823EA572-99D6-48EF-B52F-8D727641A85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{823EA572-99D6-48EF-B52F-8D727641A85F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363FC8F7-90B0-43AB-97DB-C6C5649AF641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363FC8F7-90B0-43AB-97DB-C6C5649AF641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363FC8F7-90B0-43AB-97DB-C6C5649AF641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363FC8F7-90B0-43AB-97DB-C6C5649AF641}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

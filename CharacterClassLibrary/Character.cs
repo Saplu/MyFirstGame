@@ -111,22 +111,34 @@ namespace CharacterClassLibrary
 
         public virtual void ApplyDoT()
         {
-            foreach (var status in Statuses)
+            if (Health > 0)
             {
-                if (status is CombatLogicClassLibrary.Statuses.Poison)
-                    TrueDmgDefend(Convert.ToInt32(status.Effect));
-                else if (status is CombatLogicClassLibrary.Statuses.DoT)
-                    Defend(Convert.ToInt32(status.Effect));
+                foreach (var status in Statuses)
+                {
+                    if (status is CombatLogicClassLibrary.Statuses.Poison)
+                        TrueDmgDefend(Convert.ToInt32(status.Effect));
+                    else if (status is CombatLogicClassLibrary.Statuses.DoT)
+                        Defend(Convert.ToInt32(status.Effect));
+                }
             }
         }
 
         public void ApplyHoT()
         {
-            foreach ( var status in Statuses)
+            if (Health > 0)
             {
-                if (status is CombatLogicClassLibrary.Statuses.HoT)
-                    RecieveHeal(Convert.ToInt32(status.Effect));
+                foreach (var status in Statuses)
+                {
+                    if (status is CombatLogicClassLibrary.Statuses.HoT)
+                        RecieveHeal(Convert.ToInt32(status.Effect));
+                }
             }
+        }
+
+        public double GetHealthPercent()
+        {
+            double value = (double)Health / (double)MaxHealth;
+            return value;
         }
 
         protected double getAttackMultiplier()

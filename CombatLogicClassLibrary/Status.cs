@@ -49,6 +49,9 @@ namespace CombatLogicClassLibrary
                 case "Righteous Bane": list.Add(new Statuses.AttackDmgMultiplier(2, targets, effect)); return list;
                 case "BloodPlague": list.Add(new Statuses.DoT(3, targets, Convert.ToInt32(effect))); return list;
                 case "RigorMortis": list.Add(new Statuses.AttackDmgMultiplier(2, targets, effect)); return list;
+                case "Stunning Blow": list.Add(new Statuses.Stun(Convert.ToInt32(effect), targets)); return list;
+                case "Life Leech": list.Add(new Statuses.HoT(1, targets, Convert.ToInt32(effect))); return list;
+                case "Holy Shock": list.Add(new Statuses.Taunt(1, targets, Convert.ToInt32(effect))); return list;
                 default: return null;
             }
         }

@@ -91,9 +91,9 @@ namespace CharacterClassLibrary.PlayerClasses
             switch(id)
             {
                 case "Laser": return laser();
-                case "Bubble": return 0;
+                case "Bubble": return bubble();
                 case "Healing Words": return healingWords();
-                case "Inspire": return 0;
+                case "Inspire": return inspire();
                 default: return 1;
             }
         }

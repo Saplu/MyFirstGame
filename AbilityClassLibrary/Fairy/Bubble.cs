@@ -12,13 +12,13 @@ namespace AbilityClassLibrary.Fairy
         public Bubble()
         {
             Name = "Bubble";
-            Description = "Create a protecting bubble on a friendly player that absorbs some damage. Lasts maximum of 3 turns.";
-            Cooldown = 3;
+            Description = "Heal the target and create a protecting bubble on a that absorbs same amount of damage. Lasts maximum of 3 turns.";
+            Cooldown = 2;
         }
 
         public int Action(int spellPower, double crit, double multiplier, int increase)
         {
-            var value = spellPower * 2;
+            var value = Convert.ToInt32(spellPower * 1.4);
             return AttackLogic.CalculateAttackDamage(value, crit, multiplier, increase);
         }
     }

@@ -144,7 +144,7 @@ namespace DAO
                 case 6: value = "Rogue. Level: " + player.Level + " Tricky fighter. Abilities cost energy, apply poison to the target " +
                         "and gain combo points consumed by ultimate."; break;
                 case 7: value = "Templar. Level: " + player.Level + " Magetank. Permanently reduced taken damage. " +
-                        "High threat aoe abilities, but no taunt."; break;
+                        "High threat aoe abilities, only one taunt every now and then."; break;
             }
             return value;
         }

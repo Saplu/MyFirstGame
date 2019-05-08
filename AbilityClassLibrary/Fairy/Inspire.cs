@@ -11,7 +11,8 @@ namespace AbilityClassLibrary.Fairy
         public Inspire()
         {
             Name = "Inspire";
-            Description = "Read a chapter of \"The Lord of the Rings\" to greatly increase all combat stats of your party for 2 turns.";
+            Description = "Read a chapter of \"The Lord of the Rings\" to greatly increase all combat stats of your party for 2 turns." +
+                " Also heals them for a small amount when cast.";
             Cooldown = 5;
         }
 

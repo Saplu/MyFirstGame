@@ -12,7 +12,7 @@ namespace AbilityClassLibrary.Templar
         public HolyShock()
         {
             Name = "Holy Shock";
-            Description = "Send a Shockwave of pure holy power to burn up to three evil minds and increase threat.";
+            Description = "Send a Shockwave of pure holy power to burn up to three evil minds and increase threat. Taunts the main target for 1 turn.";
             Cooldown = 3;
         }
 

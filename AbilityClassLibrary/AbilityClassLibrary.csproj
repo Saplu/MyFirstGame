@@ -59,6 +59,7 @@
     <Compile Include="NPC\Execute.cs" />
     <Compile Include="NPC\Kick.cs" />
     <Compile Include="NPC\RigorMortis.cs" />
+    <Compile Include="NPC\StunningBlow.cs" />
     <Compile Include="NPC\Whirlwind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protector\ChallengingShout.cs" />

@@ -33,7 +33,7 @@ namespace CharacterClassLibrary.PlayerClasses
             var increase = getAttackModifier();
             var leech = new LifeLeech();
             Cooldowns[0] = leech.Cooldown;
-            RecieveHeal(leech.Action(SpellPower, Crit, multi, increase));
+            //RecieveHeal(leech.Action(SpellPower, Crit, multi, increase));
             return leech.Action(SpellPower, Crit, multi, increase);
         }
 
@@ -123,30 +123,25 @@ namespace CharacterClassLibrary.PlayerClasses
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)
         {
             var list = new List<int>();
-            if (id == "Weaken Blood")
+            var util = new Utils.TargetSetter();
+            switch(id)
             {
-                var util = new Utils.TargetSetter();
-                list = util.setTargets(targetPosition, 1, enemyCount);
+                case "Life Leech": list = util.setTargets(1, 4); return list;
+                case "Weaken Blood": list = util.setTargets(targetPosition, 1, enemyCount); return list;
+                case "Sacrifice": list = util.setTargets(targetPosition, 1); return list;
+                default: return list;
             }
-            if (id == "Sacrifice")
-            {
-                var util = new Utils.TargetSetter();
-                list = util.setTargets(targetPosition, 1);
-            }
-            return list;
         }
 
         public override double setStatusEffect(string id, int targetPosition)
         {
-            if (id == "Weaken Blood")
+            switch(id)
             {
-                return Convert.ToInt32(SpellPower * .4);
+                case "Life Leech": return Convert.ToInt32(lifeLeech() / 3);
+                case "Weaken Blood": return Convert.ToInt32(SpellPower * .4);
+                case "Sacrifice": return .7;
+                default: return 0;
             }
-            if (id == "Sacrifice")
-            {
-                return .7;
-            }
-            else return 0;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MissionClassLibrary.Missions
             var Enemy1 = new CharacterClassLibrary.NPCClasses.Medic(5, 3);
             var Enemy2 = new CharacterClassLibrary.NPCClasses.Pirate(6, 3);
             var Enemy3 = new CharacterClassLibrary.NPCClasses.Pirate(6, 2);
-            var Enemy4 = new CharacterClassLibrary.NPCClasses.Necromancer(5, 2);
+            var Enemy4 = new CharacterClassLibrary.NPCClasses.Necromancer(6, 3);
             Enemies = new List<NPC>() { Enemy1, Enemy2, Enemy3, Enemy4 };
             foreach (var enemy in Enemies)
             {
@@ -34,7 +34,7 @@ namespace MissionClassLibrary.Missions
             Level = 5;
             ActionsTaken = new List<int>();
             RewardTable = new int[4] { 0, 60, 40, 0 };
-            TransferTo = "Menu";
+            TransferTo = "ThroneRoom";
         }
     }
 }

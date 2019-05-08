@@ -42,6 +42,7 @@ namespace MissionClassLibrary
                 case MissionList.Keep: return new Missions.Keep(players);
                 case MissionList.Gate: return new Missions.Gate(players);
                 case MissionList.Castle: return new Missions.Castle(players);
+                case MissionList.ThroneRoom: return new Missions.ThroneRoom(players);
                 default: throw new ArgumentOutOfRangeException();
             }
         }
@@ -261,11 +262,11 @@ namespace MissionClassLibrary
 
         private double[] getHealthPercents()
         {
-            double first = enemies[0].GetHealthPercent();
-            double second = enemies[1].GetHealthPercent();
-            double third = enemies[2].GetHealthPercent();
-            double fourth = enemies[3].GetHealthPercent();
-            var result = new double[4] { first, second, third, fourth };
+            var result = new double[4] { 1, 1, 1, 1 };
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                result[i] = enemies[i].GetHealthPercent();
+            }
             return result;
         }
 

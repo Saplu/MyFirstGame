@@ -127,6 +127,7 @@ namespace CharacterClassLibrary.PlayerClasses
             switch(id)
             {
                 case "Holy Ground": list = util.setTargets(targetPosition, 4, enemyCount); return list;
+                case "Holy Shock": list = util.setTargets(targetPosition, 1, enemyCount); return list;
                 case "Righteous Bane": list = util.setTargets(targetPosition, 1, enemyCount); return list;
                 default: return list;
             }
@@ -137,6 +138,7 @@ namespace CharacterClassLibrary.PlayerClasses
             switch(id)
             {
                 case "Holy Ground": return holyGround();
+                case "Holy Shock": return this.Position;
                 case "Righteous Bane": return .5;
                 default: return 0;
             }

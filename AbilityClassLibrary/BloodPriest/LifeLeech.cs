@@ -12,7 +12,7 @@ namespace AbilityClassLibrary.BloodPriest
         public LifeLeech()
         {
             Name = "Life Leech";
-            Description = "Steal some life from the enemy to yourself";
+            Description = "Deal damage to a single enemy. Every party member gains a HoT for a part of damage dealt for 1 turn.";
             Cooldown = 1;
         }
 

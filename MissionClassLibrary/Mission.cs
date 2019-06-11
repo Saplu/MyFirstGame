@@ -47,25 +47,25 @@ namespace MissionClassLibrary
             }
         }
 
-        public void EnemyDefend(int enemyIndex, int playerIndex, string id)
+        public void EnemyDefend(int enemyPosition, int playerPosition, string id)
         {
-            if (players[playerIndex - 1].isStunned() == false)
+            if (players[playerPosition - 1].isStunned() == false)
             {
-                var targetCount = players[playerIndex - 1].GetTargets(id);
+                var targetCount = players[playerPosition - 1].GetTargets(id);
                 var util = new Utils.TargetSetter();
-                var targets = util.setTargets(enemyIndex, targetCount, Enemies.Count);
-                if (enemies[enemyIndex - 5].Health > 0)
+                var targets = util.setTargets(enemyPosition, targetCount, Enemies.Count);
+                if (enemies[enemyPosition - 5].Health > 0)
                 {
                     foreach (var target in targets)
                     {
                         if (enemies[target - 5].Health > 0)
                         {
-                            var dmg = players[playerIndex - 1].UseAbility(id);
-                            var threat = players[playerIndex - 1].GetThreat(id);
+                            var dmg = players[playerPosition - 1].UseAbility(id);
+                            var threat = players[playerPosition - 1].GetThreat(id);
                             if (Utils.TrueDamageAbilities.IsTrueDmg(id))
                                 enemies[target - 5].TrueDmgDefend(dmg);
                             else enemies[target - 5].Defend(dmg);
-                            enemies[target - 5].ManageThreat(playerIndex - 1, threat);
+                            enemies[target - 5].ManageThreat(playerPosition - 1, threat);
                         }
                     }
                 }
@@ -86,18 +86,18 @@ namespace MissionClassLibrary
             }
         }
 
-        public void PlayerHeal(int targetIndex, int playerIndex, string id)
+        public void PlayerHeal(int targetPosition, int playerPosition, string id)
         {
-            if (players[targetIndex - 1].Health > 0)
+            if (players[targetPosition - 1].Health > 0)
             {
-                var targetCount = players[playerIndex - 1].GetTargets(id);
+                var targetCount = players[playerPosition - 1].GetTargets(id);
                 var util = new Utils.TargetSetter();
-                var targets = util.setTargets(targetIndex, targetCount, Enemies.Count);
+                var targets = util.setTargets(targetPosition, targetCount, Enemies.Count);
                 foreach (var player in targets)
                 {
                     if (players[player - 1].Health > 0)
                     {
-                        var heal = players[playerIndex - 1].UseAbility(id);
+                        var heal = players[playerPosition - 1].UseAbility(id);
                         players[player - 1].RecieveHeal(heal);
                     }
                 }
@@ -205,6 +205,15 @@ namespace MissionClassLibrary
             {
                 player.AfterCombatReset();
             }
+        }
+
+        public void EndTurn()
+        {
+            for (int i = 0; i < Enemies.Count; i++)
+            {
+                PlayerDefend(i);
+            }
+            ModifyLength();
         }
 
         private int typeWeight(int type)

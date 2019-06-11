@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mission.cs" />
+    <Compile Include="MissionStatus.cs" />
     <Compile Include="Missions\Castle.cs" />
     <Compile Include="Missions\FirstChallenge.cs" />
     <Compile Include="Missions\Gate.cs" />

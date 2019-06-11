@@ -19,7 +19,7 @@ namespace CombatLogicClassLibrary.Statuses
 
         public override string ToString()
         {
-            return "<br/>Shielded";
+            return "\r\nShielded";
         }
     }
 }

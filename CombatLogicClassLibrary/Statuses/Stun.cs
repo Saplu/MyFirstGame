@@ -18,7 +18,7 @@ namespace CombatLogicClassLibrary.Statuses
 
         public override string ToString()
         {
-            return "<br/>Stunned";
+            return "\r\nStunned";
         }
     }
 }

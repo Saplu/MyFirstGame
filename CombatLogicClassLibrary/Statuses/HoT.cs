@@ -19,7 +19,7 @@ namespace CombatLogicClassLibrary.Statuses
 
         public override string ToString()
         {
-            return "<br/>HoT rolling";
+            return "\r\nHoT rolling";
         }
     }
 }

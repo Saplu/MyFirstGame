@@ -82,7 +82,7 @@ namespace CharacterClassLibrary.NPCClasses
 
         public override string setPic()
         {
-            return "Pictures\\keeper.png";
+            return "keeper";
         }
 
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)

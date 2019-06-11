@@ -97,7 +97,7 @@ namespace CharacterClassLibrary.NPCClasses
 
         public override string setPic()
         {
-            return "Pictures\\kunkku.jpg";
+            return "kunkku";
         }
 
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)

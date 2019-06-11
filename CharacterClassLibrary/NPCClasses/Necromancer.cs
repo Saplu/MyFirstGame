@@ -66,7 +66,7 @@ namespace CharacterClassLibrary.NPCClasses
 
         public override string setPic()
         {
-            return "Pictures\\necro.jpg";
+            return "necro";
         }
 
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)

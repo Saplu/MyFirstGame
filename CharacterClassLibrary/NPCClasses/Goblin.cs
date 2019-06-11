@@ -69,7 +69,7 @@ namespace CharacterClassLibrary.NPCClasses
 
         public override string setPic()
         {
-            return "Pictures\\Goblin.jpg";
+            return "Goblin";
         }
 
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)

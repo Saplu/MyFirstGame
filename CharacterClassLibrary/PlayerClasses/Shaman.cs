@@ -115,7 +115,7 @@ namespace CharacterClassLibrary.PlayerClasses
 
         public override string setPic()
         {
-            return "Pictures\\shamaani.jpg";
+            return "shamaani";
         }
 
         public override List<int> setStatusTargets(string id, int targetPosition, int enemyCount)

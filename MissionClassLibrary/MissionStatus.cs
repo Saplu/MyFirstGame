@@ -49,5 +49,10 @@ namespace MissionClassLibrary
                 targetSide = 1;
             else targetSide = 2;
         }
+
+        public void asd()
+        {
+
+        }
     }
 }

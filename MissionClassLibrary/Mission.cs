@@ -163,7 +163,7 @@ namespace MissionClassLibrary
             var cdarr = Players[index].Cooldowns;
             return cdarr;
         }
-
+        /*
         public int CalculateXp()
         {
             var playerLevel = 0;
@@ -181,12 +181,12 @@ namespace MissionClassLibrary
                 return value;
             else return 0;
         }
-
+        */
         public void ActionDone(int place)
         {
             ActionsTaken.Add(place);
         }
-
+        /*
         public ItemQuality RewardItemQuality()
         {
             var rand = Utils.RandomProvider.GetRandom(1, 100);
@@ -198,7 +198,7 @@ namespace MissionClassLibrary
                 return ItemQuality.Great;
             else return ItemQuality.Masterpiece;
         }
-
+        */
         public void EndOfMissionReset()
         {
             foreach(var player in Players)
@@ -215,7 +215,7 @@ namespace MissionClassLibrary
             }
             ModifyLength();
         }
-
+        /*
         private int typeWeight(int type)
         {
             switch (type)
@@ -227,7 +227,7 @@ namespace MissionClassLibrary
                 default: return 0;
             }
         }
-
+        */
         private void enemyHeal(string id, int enemyIndex)
         {
             var targetCount = enemies[enemyIndex].GetTargets(id);

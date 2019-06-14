@@ -61,8 +61,8 @@ namespace CharacterClassLibrary
 
         public override string ToString()
         {
-            return name + "<br/>Health: " + health + "<br/>Strength: " + strength + "<br/>Spellpower: " + spellpower +
-                "<br/>Armor: " + armor + "<br/>Crit: " + crit + "<br/><br/>" + itemType.ToString() + " " + itemPlace.ToString() + 
+            return name + "\r\nHealth: " + health + "\r\nStrength: " + strength + "\r\nSpellpower: " + spellpower +
+                "\r\nArmor: " + armor + "\r\nCrit: " + crit + "\r\n\r\n" + itemType.ToString() + " " + itemPlace.ToString() + 
                 " of " + Quality.ToString() + " quality.";
         }
     }
